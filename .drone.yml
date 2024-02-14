@@ -13,7 +13,7 @@ environment:
   IMAGE_URL: quay.io/ukhomeofficedigital
   IMAGE_REPO: coa
   GIT_REPO: UKHomeOffice/coa
-  HOF_CONFIG: hof-services-config/Landlords_Make_A_Report
+  HOF_CONFIG: hof-services-config/Change_Of_Address
   NON_PROD_AVAILABILITY: Mon-Sun 08:00-23:00 Europe/London
   READY_FOR_TEST_DELAY: 20s
 
@@ -117,6 +117,26 @@ steps:
     when:
       branch: master
       event: [push, pull_request]
+
+  # Trivy Security Scannner
+  - name: scan-image
+    pull: always
+    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/trivy/client:latest
+    resources:
+      limits:
+        cpu: 1000
+        memory: 1024Mi
+    environment:
+      IMAGE_NAME: coa:${DRONE_COMMIT_SHA}
+      SEVERITY: MEDIUM,HIGH,CRITICAL
+      FAIL_ON_DETECTION: false
+      IGNORE_UNFIXED: true
+      ALLOW_CVE_LIST_FILE: hof-services-config/Change_Of_Address/trivy-cve-exceptions.txt
+    when:
+      event:
+      - pull_request
+      - push
+      - tag
 
   # Deploy to pull request UAT environment
   - name: deploy_to_branch
@@ -266,6 +286,59 @@ steps:
     when:
       cron: tear_down_pr_envs
       event: cron
+
+    # CRON job steps that runs security scans using Snyk & Trivy
+  - name: cron_clone_repos
+    image: alpine/git
+    environment:
+      DRONE_GIT_USERNAME:
+        from_secret: drone_git_username
+      DRONE_GIT_TOKEN:
+        from_secret: drone_git_token
+    commands:
+      - git clone https://$${DRONE_GIT_USERNAME}:$${DRONE_GIT_TOKEN}@github.com/UKHomeOfficeForms/hof-services-config.git
+    when:
+      cron: security_scans
+      event: cron
+
+  - name: cron_build_image
+    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
+    commands:
+      - docker build --no-cache -t $${IMAGE_REPO}:$${DRONE_COMMIT_SHA} .
+    volumes:
+      - name: dockersock
+        path: /var/run
+    when:
+      cron: security_scans
+      event: cron
+
+  - name: cron_snyk_scan
+    pull: if-not-exists
+    image: node:18
+    environment:
+      SNYK_TOKEN:
+        from_secret: snyk_token
+    commands:
+      - yarn install --frozen-lockfile
+      - yarn run postinstall
+      - yarn run test:snyk
+    when:
+      cron: security_scans
+      event: cron
+
+  - name: cron_trivy_scan
+    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/trivy/client:latest
+    pull: always
+    environment:
+        IMAGE_NAME: coa:${DRONE_COMMIT_SHA}
+        SEVERITY: MEDIUM,HIGH,CRITICAL
+        FAIL_ON_DETECTION: false
+        IGNORE_UNFIXED: true
+        ALLOW_CVE_LIST_FILE: hof-services-config/Change_Of_Address/trivy-cve-exceptions.txt
+    when:
+      cron: security_scans
+      event: cron
+ 
 
   # Slack notification upon a CRON job fail
   - name: cron_notify_slack_tear_down_pr_envs
