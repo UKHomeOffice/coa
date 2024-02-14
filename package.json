@@ -1,7 +1,7 @@
 {
-  "name": "asylum-contact-questionnaire",
+  "name": "change-of-address",
   "version": "1.0.0",
-  "description": "A service for getting asylum contact information",
+  "description": "A service for changing address",
   "main": "index.js",
   "engines": {
     "node": ">=18.12.1"
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/UKHomeOffice/asylum-contact-questionnaire.git"
+    "url": "git+https://github.com/UKHomeOffice/coa.git"
   },
   "author": "HOF",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/UKHomeOffice/asylum-contact-questionnaire/issues"
+    "url": "https://github.com/UKHomeOffice/coa/issues"
   },
-  "homepage": "https://github.com/UKHomeOffice/asylum-contact-questionnaire#readme",
+  "homepage": "https://github.com/UKHomeOffice/coa#readme",
   "dependencies": {
     "accessible-autocomplete": "^2.0.4",
     "hof": "^20.3.5",
