@@ -1,0 +1,33 @@
+{
+  "name": "asylum-contact-questionnaire",
+  "version": "1.0.0",
+  "description": "A service for getting asylum contact information",
+  "main": "index.js",
+  "engines": {
+    "node": ">=18.12.1"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "start:dev": "hof-build watch",
+    "build": "hof-build",
+    "postinstall": "hof-build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UKHomeOffice/asylum-contact-questionnaire.git"
+  },
+  "author": "HOF",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UKHomeOffice/asylum-contact-questionnaire/issues"
+  },
+  "homepage": "https://github.com/UKHomeOffice/asylum-contact-questionnaire#readme",
+  "dependencies": {
+    "accessible-autocomplete": "^2.0.4",
+    "hof": "^20.3.5",
+    "jquery": "^3.6.3",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "ms-nationalities": "^1.0.1"
+  }
+}
