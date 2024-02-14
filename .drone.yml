@@ -61,7 +61,7 @@ steps:
 
   - name: setup_deploy
     pull: if-not-exists
-    image: node:18.12.0
+    image: node:18.12.1
     environment:
       NOTIFY_KEY: USE_MOCK
     commands:
