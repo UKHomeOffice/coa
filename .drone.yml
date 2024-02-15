@@ -21,6 +21,7 @@ trigger:
   branch:
     - feature/*
     - master
+    - TLF-*
 
 linting: &linting
   pull: if-not-exists
@@ -57,6 +58,7 @@ steps:
         include:
         - master
         - feature/*
+        - TLF-*
       event: [push, pull_request]
 
   - name: setup_deploy
@@ -167,6 +169,7 @@ steps:
         include:
           - master
           - feature/*
+          - TLF-*
       event: pull_request
 
   - name: linting_branch
@@ -176,6 +179,7 @@ steps:
         include:
           - master
           - feature/*
+          - TLF-*
       event: pull_request
 
   - name: unit_tests_branch
@@ -185,6 +189,7 @@ steps:
         include:
           - master
           - feature/*
+          - TLF-*
       event: pull_request
 
   - name: acceptance_tests_branch
