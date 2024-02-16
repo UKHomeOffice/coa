@@ -1,0 +1,16 @@
+{
+  "appName": "Change of Address",
+  "theme": "govUK",
+  "behaviours": [
+    "hof/components/clear-session"
+  ],
+  "translations": "./apps/coa/translations",
+  "routes": [
+    "./apps/coa"
+  ],
+  "session": {
+    "name": "coa.hof.sid"
+  },
+  "getAccessibility": true,
+  "emailerFallback": true
+}
