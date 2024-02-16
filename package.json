@@ -1,0 +1,38 @@
+{
+  "name": "change-of-address",
+  "version": "1.0.0",
+  "description": "A service for changing address",
+  "main": "index.js",
+  "engines": {
+    "node": ">=18.12.1"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "start:dev": "hof-build watch",
+    "build": "hof-build",
+    "postinstall": "hof-build",
+    "test:lint": "eslint . --config ./node_modules/eslint-config-hof/default.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UKHomeOffice/coa.git"
+  },
+  "author": "HOF",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UKHomeOffice/coa/issues"
+  },
+  "homepage": "https://github.com/UKHomeOffice/coa#readme",
+  "dependencies": {
+    "accessible-autocomplete": "^2.0.4",
+    "hof": "^20.3.5",
+    "jquery": "^3.6.3",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "ms-nationalities": "^1.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-config-hof": "^1.3.4"
+  }
+}
