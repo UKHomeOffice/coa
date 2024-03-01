@@ -8,7 +8,6 @@
   },
   "scripts": {
     "start": "node server.js",
-    "start:dbg": "node --inspect server.js",
     "start:dev": "hof-build watch",
     "build": "hof-build",
     "postinstall": "hof-build",
