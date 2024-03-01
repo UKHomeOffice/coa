@@ -1,3 +1,51 @@
 {
-  
+    "applicant-full-name": {
+        "required": "Enter the applicant's full name",
+        "notUrl": "Please do not enter a link/url into your answers"
+    },
+    "applicant-dob": {
+        "required": "Enter the applicant's date of birth",
+        "notUrl": "Please do not enter a link/URL into your answers",
+        "date": "Please enter a valid date",
+        "after": "Enter a real date of birth",
+        "before": "Date of birth must be in the past"
+    },
+    "applicant-nationality": {
+        "required": "Enter a country of nationality",
+        "excludeUK": "You do not need to use this service if you are a British citizen",
+        "notUrl": "Please do not enter a link/URL into your answers"
+    },
+    "applicant-unique-number": {
+        "minlength": "Unique application number must be more than 15 numbers",
+        "maxlength": "Unique application number must be less than 23 numbers",
+        "notUrl": "Please do not enter a link/url into your answers",
+        "regex":"Unique application number must not include letters",
+        "UANRef":"Unique application number must match the format"
+    },
+    "who-are-you": {
+        "required": "Tell us who you are",
+        "notUrl": "Please do not enter a link/URL into your answers"
+    },
+    "legal-representative-name": {
+        "required": "Enter the name of the legal representative",
+        "notUrl": "Please do not enter a link/URL into your answers"
+    },
+    "someone-else-name": {
+        "required": "Enter your full name",
+        "notUrl": "Please do not enter a link/URL into your answers"
+    },
+    "email": {
+        "required": "Enter an email address",
+        "email": "Enter a valid email address"
+    },
+    "telephone": {
+        "ukPhoneNumber": "Enter a valid UK telephone number"
+    },
+    "client-email": {
+        "email": "Enter a valid email address"
+    },
+    "client-telephone": {
+        "ukPhoneNumber": "Enter a valid UK telephone number"
+    }
+    
 }

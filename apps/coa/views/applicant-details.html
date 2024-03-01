@@ -1,0 +1,13 @@
+{{<partials-page}}
+  {{$page-content}}
+    <p>{{#t}}pages.applicant-details.p1{{/t}}</p>
+
+    {{#input-text}}applicant-full-name{{/input-text}}
+    {{#renderField}}applicant-dob{{/renderField}}
+    {{#select}}applicant-nationality{{/select}}
+    {{#renderField}}applicant-unique-number{{/renderField}}
+
+    {{#input-submit}}continue{{/input-submit}}
+
+  {{/page-content}}
+{{/partials-page}}
