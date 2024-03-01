@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "node server.js",
+    "start:dbg": "node --inspect server.js",
     "start:dev": "hof-build watch",
     "build": "hof-build",
     "postinstall": "hof-build",
@@ -25,7 +26,7 @@
   "homepage": "https://github.com/UKHomeOffice/coa#readme",
   "dependencies": {
     "accessible-autocomplete": "^2.0.4",
-    "hof": "^20.3.5",
+    "hof": "^20.4.0",
     "jquery": "^3.6.3",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
