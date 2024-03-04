@@ -1,4 +1,3 @@
-// const Submit = require('./behaviours/submit');
 const SummaryPageBehaviour = require('hof').components.summary;
 
 module.exports = {
@@ -23,7 +22,7 @@ module.exports = {
             value: 'legal-representative'
           }
         }
-      ],
+      ]
     },
     '/contact-details': {
       fields: ['email', 'telephone'],

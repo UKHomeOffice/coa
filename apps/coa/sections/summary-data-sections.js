@@ -1,6 +1,5 @@
 'use strict';
 
-const { detailsSummary } = require('hof/frontend/toolkit');
 const moment = require('moment');
 const PRETTY_DATE_FORMAT = 'DD MMMM YYYY';
 
