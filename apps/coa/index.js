@@ -3,6 +3,7 @@ const SummaryPageBehaviour = require('hof').components.summary;
 module.exports = {
   name: 'coa',
   baseUrl: '/',
+  confirmStep: '/check-answers',
   steps: {
     '/overview': {
       next: '/applicant-details'
