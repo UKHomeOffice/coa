@@ -1,0 +1,59 @@
+{{<partials-page}}
+{{$page-content}}
+
+{{> partials-overview-header}}
+
+<h2 class="govuk-heading-m">{{#t}}pages.overview.guidanceHeading{{/t}}</h2>
+
+{{> partials-content-links}}
+
+<h2 class="govuk-heading-m">Update your details</h2>
+
+<p class="govuk-body">Unless further information is required, we will aim to update
+  your details within 5 working days. This may take slightly longer at peak times. </p>
+  <p class="govuk-body">If you do not do anything for 20 minutes, your progress will not be saved.
+    Your progress is only saved when you submit the form. </p>
+
+    <a href="/applicant-details" role="button" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button">
+      Start now
+      <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+      </svg>
+    </a>
+
+  <details class="govuk-details">
+    <summary class="govuk-details__summary">
+      <span class="govuk-details__summary-text">
+        Updating your details by post instead
+      </span>
+    </summary>
+    <div class="govuk-details__text">
+      <p>
+        If you are unable to submit a change of address request online, you can submit a postal application.
+        However, if your request is urgent, please use the online service.
+      </p>
+      <p>
+        If you submit your notification by post, it will take up to 5 working days from receipt of correspondence.
+      </p>
+    </div>
+  </details>
+
+
+<nav class="govuk-pagination govuk-pagination--block" role="navigation" aria-label="Pagination">
+  <div class="govuk-pagination__prev">
+    <a class="govuk-link--no-visited-state govuk-link--no-underline govuk-pagination__link" href="/proof-of-address" rel="prev">
+      <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+        <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
+      </svg>
+      <span class="govuk-pagination__link-title">
+        Previous<span class="govuk-visually-hidden"> page</span>
+      </span>
+      <span class="govuk-visually-hidden">:</span>
+      <span class="govuk-pagination__link-label">Proof of address</span>
+    </a>
+  </div>
+</nav>
+
+
+{{/page-content}}
+{{/partials-page}}
