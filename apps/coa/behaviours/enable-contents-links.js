@@ -1,7 +1,7 @@
 module.exports = superclass => class extends superclass {
   locals(req, res) {
     const locals = super.locals(req, res);
-    const currentUrl = locals.route
+    const currentUrl = locals.route;
 
     // enable contents links if user is not on current page
     if (currentUrl === 'overview') {
@@ -31,4 +31,4 @@ module.exports = superclass => class extends superclass {
 
     return locals;
   }
-}
+};

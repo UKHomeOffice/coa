@@ -2,7 +2,6 @@
 // Usually we would use h1 to check the page, but h1 here is the same across all intro pages
 describe('the journey of the coa app', () => {
   let testApp;
-  let passStep;
   let initSession;
   let parseHtml;
 
@@ -26,7 +25,6 @@ describe('the journey of the coa app', () => {
 
     header.html().should.match(/Update your details without an account/);
   });
-  
 
   it('goes to the what-you-need page', async () => {
     const URI = '/what-you-need';
@@ -71,5 +69,4 @@ describe('the journey of the coa app', () => {
 
     header.html().should.match(/Update your details without an account/);
   });
-
 });

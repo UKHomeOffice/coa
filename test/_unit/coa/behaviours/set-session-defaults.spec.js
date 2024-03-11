@@ -23,7 +23,7 @@ describe('#getValues', () => {
     Base.prototype.getValues = superGetValuesStub;
     sessionDefaults = {
       testSteps: ['/firststep', '/secondstep', '/thirdstep', '/fourthstep', '/fiftstep']
-    }
+    };
     Behaviour = setSessionDefaults;
     Behaviour = Behaviour(Base);
     behaviour = new Behaviour();
@@ -31,16 +31,15 @@ describe('#getValues', () => {
 
   describe('initialisation', () => {
     it('should be an instance', () => {
-      expect(behaviour).to.be.an.instanceOf(Base)
-    })
+      expect(behaviour).to.be.an.instanceOf(Base);
+    });
     it('should call super.getValues', () => {
       behaviour.getValues(req, res, next);
       superGetValuesStub.should.be.calledOnce;
     });
     it('sets session with default steps', () => {
-      req.sessionModel.set('steps', sessionDefaults.testSteps)
-      req.sessionModel.get('steps').should.eql(sessionDefaults.testSteps)
+      req.sessionModel.set('steps', sessionDefaults.testSteps);
+      req.sessionModel.get('steps').should.eql(sessionDefaults.testSteps);
     });
-  })
-
-}) 
+  });
+});

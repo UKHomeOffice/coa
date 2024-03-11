@@ -2,7 +2,7 @@ const _ = require('lodash');
 
 module.exports = (appName, overridenPages) => {
   const appIndex = require('../../../../apps/coa/index');
-  const possibleSteps = (Object.keys(appIndex.steps))
+  const possibleSteps = (Object.keys(appIndex.steps));
 
   return (stepOrData, data) => {
     const props = {};
