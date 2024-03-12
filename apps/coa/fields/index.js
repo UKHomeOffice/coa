@@ -73,17 +73,21 @@ module.exports = {
     mixin: 'radio-group',
     validate: ['required'],
     isPageHeading: true,
-    options: [{
-      value: 'applicant'
-    }, {
-      value: 'legal-representative',
-      toggle: 'legal-representative-name-toggle-content',
-      child: 'partials/legal-representative-name'
-    }, {
-      value: 'someone-else',
-      toggle: 'someone-else-name-toggle-content',
-      child: 'partials/someone-else-name'
-    }]
+    options: [
+      {
+        value: 'applicant'
+      },
+      {
+        value: 'legal-representative',
+        toggle: 'legal-representative-name-toggle-content',
+        child: 'partials/legal-representative-name'
+      },
+      {
+        value: 'someone-else',
+        toggle: 'someone-else-name-toggle-content',
+        child: 'partials/someone-else-name'
+      }
+    ]
   },
   'legal-representative-name': {
     mixin: 'input-text',
