@@ -20,7 +20,7 @@
         "maxlength": "Unique application number must be less than 23 numbers",
         "notUrl": "Your answer must not contain URLs or links",
         "regex":"Unique application number must not include letters",
-        "UANRef":"Unique application number must match the format"
+        "UANRef":"Enter a unique application number in the correct format"
     },
     "who-are-you": {
         "required": "Tell us who you are",
