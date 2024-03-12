@@ -4,7 +4,7 @@ const moment = require('moment');
 const PRETTY_DATE_FORMAT = 'DD MMMM YYYY';
 
 module.exports = {
-  'applicant-information': {
+  'applicant-details': {
     steps: [
       {
         step: '/applicant-details',

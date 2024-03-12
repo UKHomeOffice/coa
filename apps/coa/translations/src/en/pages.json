@@ -25,16 +25,29 @@
     },
     "confirm": {
         "sections": {
-            "applicant-information": {
-                "header": "Applicant information",
-                "fields": {
-                    "applicant-name": "Applicant name",
-                    "applicant-dob": "Date of birth"
-                }
-                
+            "applicant-details": {
+                "header": "Applicant information"
             },
             "your-details": {
                 "header": "Your details"
+            }
+        },
+        "fields": {
+            "applicant-nationality": {
+                "label": "Nationality"
+            },
+            "applicant-unique-number": {
+                "label": "Unique application number"
+            },
+            "telephone": {
+                "label": "Telephone number"
+            },
+            "client-email": {
+                "label": "Client’s email address"
+        
+            },
+            "client-telephone": {
+                "label": "Client’s telephone number"
             }
         }
     }
