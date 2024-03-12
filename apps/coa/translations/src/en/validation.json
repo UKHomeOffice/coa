@@ -5,8 +5,8 @@
     },
     "applicant-dob": {
         "required": "Enter the applicant's date of birth",
-        "notUrl": "Please do not enter a link/URL into your answers",
-        "date": "Please enter a valid date",
+        "notUrl": "Your answer must not contain URLs or links",
+        "date": "Enter a real date of birth",
         "after": "Enter a real date of birth",
         "before": "Date of birth must be in the past"
     },
@@ -18,7 +18,7 @@
     "applicant-unique-number": {
         "minlength": "Unique application number must be more than 15 numbers",
         "maxlength": "Unique application number must be less than 23 numbers",
-        "notUrl": "Please do not enter a link/url into your answers",
+        "notUrl": "Your answer must not contain URLs or links",
         "regex":"Unique application number must not include letters",
         "UANRef":"Unique application number must match the format"
     },
