@@ -1,56 +1,54 @@
 {
-    "applicant-full-name": {
-        "label": "Full name"
-    },
-    "applicant-dob": {
-        "legend": "Date of birth",
-        "hint": "For example 31 7 1985"
-    },
-    "applicant-nationality": {
-        "label": "Country of nationality",
-        "options": {
-            "null": "Select a country"
-        }
-    },
-    "applicant-unique-number": {
-        "label": "Unique application number (optional)",
-        "hint": "UANs are shown on letters from the Home Office. For example, 1234-1234-1234-1234/00"
-    },
-    "who-are-you": {
-        "legend": "Who are you?",
-        "options": {
-            "applicant": {
-                "label": "{{values.applicant-full-name}}"
-            },
-            "legal-representative": {
-                "label": "{{values.applicant-full-name}}’s legal representative"
-            },
-            "someone-else": {
-                "label": "Someone else",
-                "hint": "For example, someone helping {{values.applicant-full-name}}"
-            }
-        }
-    },
-    "legal-representative-name": {
-        "label": "Legal representative’s full name"
-    },
-    "someone-else-name": {
-        "label": "Your full name"
-    },
-    "email": {
-        "label": "Email address",
-        "hint": "Where we will contact you about your request"
-    },
-    "telephone": {
-        "label": "Telephone number (optional)",
-        "hint": "For international numbers include + and the country code. For example, +39 1 33 45 70 90"
-
-    },
-    "client-email": {
-        "label": "Client’s email address (optional)"
-
-    },
-    "client-telephone": {
-        "label": "Client’s telephone number (optional)"
+  "applicant-full-name": {
+    "label": "Full name"
+  },
+  "applicant-dob": {
+    "legend": "Date of birth",
+    "hint": "For example 31 7 1985"
+  },
+  "applicant-nationality": {
+    "label": "Country of nationality",
+    "options": {
+      "null": "Select a country"
     }
+  },
+  "applicant-unique-number": {
+    "label": "Unique application number (optional)",
+    "hint": "UANs are shown on letters from the Home Office. For example, 1234-1234-1234-1234/00"
+  },
+  "who-are-you": {
+    "legend": "Who are you?",
+    "options": {
+      "applicant": {
+        "label": "{{values.applicant-full-name}}"
+      },
+      "legal-representative": {
+        "label": "{{values.applicant-full-name}}’s legal representative"
+      },
+      "someone-else": {
+        "label": "Someone else",
+        "hint": "For example, someone helping {{values.applicant-full-name}}"
+      }
+    }
+  },
+  "legal-representative-name": {
+    "label": "Legal representative’s full name"
+  },
+  "someone-else-name": {
+    "label": "Your full name"
+  },
+  "email": {
+    "label": "Email address",
+    "hint": "Where we will contact you about your request"
+  },
+  "telephone": {
+    "label": "Telephone number (optional)",
+    "hint": "For international numbers include + and the country code. For example, +39 1 33 45 70 90"
+  },
+  "client-email": {
+    "label": "Client’s email address (optional)"
+  },
+  "client-telephone": {
+    "label": "Client’s telephone number (optional)"
+  }
 }
