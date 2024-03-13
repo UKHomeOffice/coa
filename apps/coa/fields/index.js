@@ -5,7 +5,7 @@ const dateComponent = require('hof').components.date;
 const countries = require('hof').utils.countries();
 
 module.exports = {
-  'change-dependant-details' : {
+  'change-dependant-details': {
     isPageHeading: 'true',
     mixin: 'radio-group',
     validate: 'required',
@@ -41,5 +41,5 @@ module.exports = {
       label: 'fields.dependant-country-of-nationality.options.none'
     }].concat(_.sortBy(countries, o => o.label)),
     labelClassName: 'govuk-label--s'
-  },
+  }
 };

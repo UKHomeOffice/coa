@@ -47,5 +47,5 @@ module.exports = {
       behaviours: [Summary, ModifyChangeURL],
       sections: require('./sections/summary-data-sections')
     }
-  },
+  }
 };
