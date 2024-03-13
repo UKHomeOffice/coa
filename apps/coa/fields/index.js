@@ -30,6 +30,7 @@ module.exports = {
     labelClassName: 'govuk-label--s',
     className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
+
   'applicant-dob': dateComponent('applicant-dob', {
     mixin: 'input-date',
     isPageHeading: false,
@@ -43,6 +44,7 @@ module.exports = {
       className: 'govuk-label--s'
     }
   }),
+
   'applicant-nationality': {
     mixin: 'select',
     className: ['typeahead'],
@@ -56,6 +58,7 @@ module.exports = {
     }].concat(countries),
     labelClassName: 'govuk-label--s'
   },
+
   'applicant-unique-number': {
     mixin: 'input-text',
     validate: [
@@ -89,6 +92,7 @@ module.exports = {
       }
     ]
   },
+
   'legal-representative-name': {
     mixin: 'input-text',
     validate: ['required', 'notUrl'],
@@ -97,8 +101,8 @@ module.exports = {
       value: 'legal-representative'
     },
     className: ['govuk-input', 'govuk-!-width-two-thirds']
-
   },
+
   'someone-else-name': {
     mixin: 'input-text',
     validate: ['required', 'notUrl'],
@@ -113,20 +117,21 @@ module.exports = {
     mixin: 'input-text',
     validate: ['required', 'email'],
     labelClassName: 'govuk-label--s'
-
   },
+
   telephone: {
     mixin: 'input-text',
     validate: ['ukPhoneNumber'],
     labelClassName: 'govuk-label--s',
     className: ['govuk-input', 'govuk-!-width-two-thirds']
-
   },
+
   'client-email': {
     mixin: 'input-text',
     validate: ['email'],
     labelClassName: 'govuk-label--s'
   },
+
   'client-telephone': {
     mixin: 'input-text',
     validate: ['ukPhoneNumber'],
