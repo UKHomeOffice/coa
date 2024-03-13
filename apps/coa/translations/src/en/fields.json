@@ -1,3 +1,26 @@
 {
-  
+  "change-dependant-details": {
+    "legend": "Do you want to make the same changes to your dependant's details",
+    "options": {
+      "yes": {
+        "label": "Yes"
+      },
+      "no": {
+        "label": "No"
+      }
+    }
+  },
+  "dependant-full-name": {
+    "label": "Full name"
+  },
+  "dependant-date-of-birth": {
+    "legend": "Date of Birth",
+    "hint": "For example 31 7 1985"
+  },
+  "dependant-country-of-nationality": {
+    "label": "Country of nationality",
+    "options": {
+      "none": "Select an option"
+    }
+  }
 }

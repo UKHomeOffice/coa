@@ -1,3 +1,21 @@
 {
-  
+  "dependant-summary": {
+    "header": "Which dependant would you like to make the same changes to?"
+  },
+  "dependant-details": {
+    "header": "Which dependant would you like to make the same changes to?"
+  },
+  "confirm": {
+    "header": "Check your answers",
+    "sections": {
+      "change-details": {
+        "header": "Change details"
+      }
+    },
+    "fields": {
+      "dependants": {
+        "label": "Which dependant(s) would you like to make the same changes to?"
+      }
+    }
+  }
 }

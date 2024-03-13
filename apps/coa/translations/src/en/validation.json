@@ -1,3 +1,14 @@
 {
-  
+  "change-dependant-details": {
+    "default": "Select an option"
+  },
+  "dependant-full-name": {
+    "default": "Enter a full name"
+  },
+  "dependant-date-of-birth": {
+    "default": "Enter your date of birth in the correct format; for example, 31 3 1980" 
+  },
+  "dependant-country-of-nationality": {
+    "default": "Enter a nationality"
+  }
 }
