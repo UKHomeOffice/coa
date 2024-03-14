@@ -1,5 +1,3 @@
-// Need a better way to check the correct page is loaded, but can't use h2 because there are more than h2s
-// Usually we would use h1 to check the page, but h1 here is the same across all intro pages
 describe('the journey of the coa app', () => {
   let testApp;
   let initSession;
@@ -21,9 +19,9 @@ describe('the journey of the coa app', () => {
     const res = await getUrl(URI);
     const docu = await parseHtml(res);
 
-    const header = docu.find('h1');
+    const header = docu.find('form h2');
 
-    header.html().should.match(/Update your details without an account/);
+    header.html().should.match(/Overview/);
   });
 
   it('goes to the what-you-need page', async () => {
@@ -32,9 +30,9 @@ describe('the journey of the coa app', () => {
     const res = await getUrl(URI);
     const docu = await parseHtml(res);
 
-    const header = docu.find('h1');
+    const header = docu.find('form h2');
 
-    header.html().should.match(/Update your details without an account/);
+    header.html().should.match(/What you will need/);
   });
 
   it('goes to the what-you-need page', async () => {
@@ -43,9 +41,9 @@ describe('the journey of the coa app', () => {
     const res = await getUrl(URI);
     const docu = await parseHtml(res);
 
-    const header = docu.find('h1');
+    const header = docu.find('form h2');
 
-    header.html().should.match(/Update your details without an account/);
+    header.html().should.match(/Proof of identity/);
   });
 
   it('goes to the proof-of-address page', async () => {
@@ -54,9 +52,9 @@ describe('the journey of the coa app', () => {
     const res = await getUrl(URI);
     const docu = await parseHtml(res);
 
-    const header = docu.find('h1');
+    const header = docu.find('form h2');
 
-    header.html().should.match(/Update your details without an account/);
+    header.html().should.match(/Proof of address/);
   });
 
   it('goes to the update-details page', async () => {
@@ -65,8 +63,8 @@ describe('the journey of the coa app', () => {
     const res = await getUrl(URI);
     const docu = await parseHtml(res);
 
-    const header = docu.find('h1');
+    const header = docu.find('form h2');
 
-    header.html().should.match(/Update your details without an account/);
+    header.html().should.match(/Update your details/);
   });
 });
