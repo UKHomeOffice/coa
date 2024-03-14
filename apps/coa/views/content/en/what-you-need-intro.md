@@ -3,7 +3,7 @@
 <h3 class="govuk-heading-s">If you are updating your own details</h3>
 <p class="govuk-body">You will need to provide: </p>
 <ul class="govuk-list govuk-list--bullet">
-  <li>photographic  -link -proof of your identity -link -</li>
+  <li>photographic  <a class="govuk-link" href="/proof-of-identity">proof of your identity</a></li>
   <li>an identity document number (biometric residence permit, asylum registration card or passport number)</li>
   <li>proof of your updated details (for example, proof of address)</li>
 </ul>
@@ -28,7 +28,7 @@
 <h3 class="govuk-heading-s">If you are updating a someone else's details</h3>
 <p class="govuk-body">You will need to provide: </p>
 <ul class="govuk-list govuk-list--bullet">
-  <li>photographic -link - proof of identity -link-</li>
+  <li>photographic  <a class="govuk-link" href="/proof-of-identity">proof of their identity</a></li>
   <li>their personal details (full name, date of birth and nationality)</li>
   <li>an identity document number (biometric residence permit, asylum registration card or passport number)</li>
   <li>proof of their updated details</li>

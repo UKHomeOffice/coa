@@ -17,4 +17,6 @@
 <h3 class="govuk-heading-s">Who can use this service</h3>
 <p class="govuk-body">Applicants, authorised legal representatives and helpers can use this service.</p>
 <p class="govuk-body">If you are an accession state worker or in the UK under the Workers Registration Scheme, you do not need to tell us about an address change.</p>
-<p class="govuk-body">If you applied under the EU Settlement Scheme, or you are a British national(overseas), you can  </p>
+<p class="govuk-body">If you applied under the EU Settlement Scheme, or you are a British national(overseas), you can <a class="govuk-link" href="https://www.gov.uk/update-uk-visas-immigration-account-details/update-your-ukvi-account">update your address using a different service</a>.</p>
+
+

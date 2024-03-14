@@ -6,7 +6,7 @@
   <li>biometric residence permit</li>
   <li>BAIL201 form</li>
   <li>EEA national identity card</li>
-  <a class="govuk-link" href="https://www.gov.uk/apply-home-office-travel-document"><li>Home Office travel document</li></a>
+  <li> <a class="govuk-link" href="https://www.gov.uk/apply-home-office-travel-document"> Home Office travel document</a></li>
   <li>national passport</li>
   <li>official photographic identity letters issued by the Home Office</li>
   <li>UK driving licence (photocard only)</li>
