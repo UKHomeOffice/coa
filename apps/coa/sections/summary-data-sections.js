@@ -31,13 +31,7 @@ module.exports = {
         step: '/who',
         field: 'who-are-you',
         parse: (val, req) => {
-          if (req.sessionModel.get('who-are-you') ===  'applicant') {
-            return req.sessionModel.get('applicant-full-name');
-          }
-          if (req.sessionModel.get('who-are-you') ===  'legal-representative') {
-            return val.replace( '{{values.applicant-full-name}}', req.sessionModel.get('applicant-full-name') );
-          }
-          return val;
+          return val.replace( '{{values.applicant-full-name}}', req.sessionModel.get('applicant-full-name') );
         }
       },
       {
