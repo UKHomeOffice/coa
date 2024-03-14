@@ -33,7 +33,6 @@ module.exports = {
 
   'applicant-dob': dateComponent('applicant-dob', {
     mixin: 'input-date',
-    isPageHeading: false,
     validate: [
       'required',
       'date',
