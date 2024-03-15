@@ -4,6 +4,10 @@ const config = require('../../../config');
 const dateComponent = require('hof').components.date;
 const countries = require('hof').utils.countries();
 
+function excludeUK(value) {
+  return value !== 'United Kingdom';
+}
+
 module.exports = {
   'change-dependant-details': {
     isPageHeading: 'true',
@@ -35,7 +39,10 @@ module.exports = {
   'dependant-country-of-nationality': {
     mixin: 'select',
     className: ['typeahead'],
-    validate: ['required'],
+    validate: [
+      'required', 
+      excludeUK
+    ],
     options: [{
       value: '',
       label: 'fields.dependant-country-of-nationality.options.none'
