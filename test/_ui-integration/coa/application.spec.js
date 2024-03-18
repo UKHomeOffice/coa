@@ -1,6 +1,6 @@
 // There are more than one h2 headers in coa intro pages and the first one in the form is visually hidden
 // This tries to select the visually hidden header in the form
-// Is there a better way to do this test?  
+// Is there a better way to do this test?
 describe('the journey of the coa app', () => {
   let testApp;
   let initSession;
