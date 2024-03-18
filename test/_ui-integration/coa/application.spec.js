@@ -1,3 +1,6 @@
+// There are more than one h2 headers in coa intro pages and the first one in the form is visually hidden
+// This tries to select the visually hidden header in the form
+// Is there a better way to do this test?  
 describe('the journey of the coa app', () => {
   let testApp;
   let initSession;
@@ -21,7 +24,7 @@ describe('the journey of the coa app', () => {
 
     const header = docu.find('form h2');
 
-    header.html().should.match(/Overview/);
+    header.html().should.match(/Guidance pages in this service/);
   });
 
   it('goes to the what-you-need page', async () => {
@@ -32,7 +35,7 @@ describe('the journey of the coa app', () => {
 
     const header = docu.find('form h2');
 
-    header.html().should.match(/What you will need/);
+    header.html().should.match(/Guidance pages in this service/);
   });
 
   it('goes to the what-you-need page', async () => {
@@ -43,7 +46,7 @@ describe('the journey of the coa app', () => {
 
     const header = docu.find('form h2');
 
-    header.html().should.match(/Proof of identity/);
+    header.html().should.match(/Guidance pages in this service/);
   });
 
   it('goes to the proof-of-address page', async () => {
@@ -54,7 +57,7 @@ describe('the journey of the coa app', () => {
 
     const header = docu.find('form h2');
 
-    header.html().should.match(/Proof of address/);
+    header.html().should.match(/Guidance pages in this service/);
   });
 
   it('goes to the update-details page', async () => {
@@ -65,6 +68,6 @@ describe('the journey of the coa app', () => {
 
     const header = docu.find('form h2');
 
-    header.html().should.match(/Update your details/);
+    header.html().should.match(/Guidance pages in this service/);
   });
 });

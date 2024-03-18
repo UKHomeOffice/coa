@@ -1,9 +1,9 @@
-<h2 class="govuk-heading-m">Update your details</h2>
+## Update your details
 
-<p class="govuk-body">Unless further information is required, we will aim to update
-  your details within 5 working days. This may take slightly longer at peak times. </p>
-  <p class="govuk-body">If you do not do anything for 20 minutes, your progress will not be saved.
-    Your progress is only saved when you submit the form. </p>
+Unless further information is required, we will aim to update your details within 5 working days. This may take slightly longer at peak times.
+<br>
+
+If you do not do anything for 20 minutes, your progress will not be saved. Your progress is only saved when you submit the form.
 
   <a href="/applicant-details" role="button" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button">
     Start now
@@ -19,12 +19,8 @@
       </span>
     </summary>
     <div class="govuk-details__text">
-      <p>
-        If you are unable to submit a change of address request online, you can submit a postal application.
-        However, if your request is urgent, please use the online service.
-      </p>
-      <p>
-        If you submit your notification by post, it will take up to 5 working days from receipt of correspondence.
-      </p>
+      If you are unable to submit a change of address request online, you can submit a postal application.
+      However, if your request is urgent, please use the online service. <br> <br>
+      If you submit your notification by post, it will take up to 5 working days from receipt of correspondence.
     </div>
   </details>
