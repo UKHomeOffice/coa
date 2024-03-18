@@ -1,18 +1,42 @@
+const SummaryPageBehaviour = require('hof').components.summary;
+
 module.exports = {
   name: 'coa',
   baseUrl: '/',
+  confirmStep: '/check-answers',
   steps: {
     '/overview': {
-      next: '/what-you-need'
+      next: '/applicant-details'
     },
-    '/what-you-need': {
-      next: '/proof-of-identity'
+    '/applicant-details': {
+      fields: ['applicant-full-name', 'applicant-dob', 'applicant-nationality', 'applicant-unique-number'],
+      next: '/who'
     },
-    '/proof-of-identity': {
-      next: '/proof-of-address'
+    '/who': {
+      fields: ['who-are-you', 'legal-representative-name', 'someone-else-name'],
+      next: '/contact-details',
+      forks: [
+        {
+          target: '/legal-representative',
+          condition: {
+            field: 'who-are-you',
+            value: 'legal-representative'
+          }
+        }
+      ]
     },
-    '/proof-of-address': {
-      next: '/update-details'
+    '/contact-details': {
+      fields: ['email', 'telephone'],
+      next: '/check-answers'
+    },
+    '/legal-representative': {
+      fields: ['email', 'telephone', 'client-email', 'client-telephone'],
+      next: '/check-answers'
+    },
+    '/check-answers': {
+      behaviours: [SummaryPageBehaviour],
+      template: 'summary',
+      sections: require('./sections/summary-data-sections')
     }
   }
 };
