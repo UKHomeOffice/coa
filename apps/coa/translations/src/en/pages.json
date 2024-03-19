@@ -5,8 +5,11 @@
   "dependant-details": {
     "header": "Which dependant would you like to make the same changes to?"
   },
-  "confirm": {
+  "check-answers": {
     "header": "Check your answers",
+    "check-answers-intro": "Check these details carefully before continuing. If any of the details are incorrect, change them."
+  },
+  "confirm": {
     "sections": {
       "change-details": {
         "header": "Change details"

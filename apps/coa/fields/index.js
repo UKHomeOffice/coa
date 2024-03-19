@@ -40,7 +40,7 @@ module.exports = {
     mixin: 'select',
     className: ['typeahead'],
     validate: [
-      'required', 
+      'required',
       excludeUK
     ],
     options: [{

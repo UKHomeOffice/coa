@@ -8,6 +8,7 @@ module.exports = {
   name: 'coa',
   baseUrl: '/',
   params: '/:action?/:id?/:edit?',
+  confirmStep: '/check-answers',
   steps: {
     '/update-dependant': {
       fields: ['change-dependant-details'],
@@ -18,7 +19,7 @@ module.exports = {
           value: 'yes'
         }
       }],
-      next: '/confirm'
+      next: '/check-answers'
     },
     '/dependant-details': {
       fields: [
@@ -40,12 +41,12 @@ module.exports = {
       addStep: 'dependant-details',
       template: 'dependant-summary',
       addAnotherLinkText: 'dependant',
-      next: '/confirm'
+      next: '/check-answers'
     },
-    // Change this to /check-answers
-    '/confirm': {
+    '/check-answers': {
       behaviours: [Summary, ModifyChangeURL],
-      sections: require('./sections/summary-data-sections')
+      sections: require('./sections/summary-data-sections'),
+      template: 'summary'
     }
   }
 };

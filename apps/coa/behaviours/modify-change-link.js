@@ -6,7 +6,7 @@ module.exports = superclass => class extends superclass {
   locals(req, res) {
     const locals = super.locals(req, res);
     // set change link for dependants field to /dependant-summary page
-    if (locals.route === 'confirm') {
+    if (locals.route === 'check-answers') {
       _.forEach(locals.rows, fields => {
         locals.rows = locals.rows.map(row => {
           if (row.section === 'Change details') {
