@@ -8,7 +8,7 @@ Acceptable proof of photographic identity documents are:
   - biometric residence permit
   - BAIL201 form
   - EEA national identity card
-  - [Home Office travel document](https://www.gov.uk/apply-home-office-travel-document) 
+  - <a class="list-link" href="https://www.gov.uk/apply-home-office-travel-document">Home Office travel document</a>
   - national passport
   - official photographic identity letters issued by the Home Office
   - UK driving licence (photocard only)

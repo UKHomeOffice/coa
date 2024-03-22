@@ -3,7 +3,7 @@
 
 ### If you are updating your own details
 You will need to provide:
-  - photographic [proof of your identity](/proof-of-identity)
+  - photographic <a class="list-link" href="/proof-of-identity">proof of identity</a>
   - an identity document number (biometric residence permit, asylum registration card or passport number)
   - proof of your updated details (for example, proof of address)
 
@@ -24,7 +24,7 @@ If you are updating your child dependant's address, you will need to provide:
 
 ### If you are updating a someone else's details
 You will need to provide:
-  - photographic [proof of their identity](/proof-of-identity)
+  - photographic  <a class="list-link" href="/proof-of-identity">proof of identity</a>
   - their personal details (full name, date of birth and nationality)
   - an identity document number (biometric residence permit, asylum registration card or passport number)
   - proof of their updated details
@@ -33,12 +33,12 @@ You will need to provide:
 If you are a legal representative completing this form on someone's behalf, you will need to provide:
   - photographic proof of your client's identity
   - an identity document number for your client (biometric residence permit, asylum registration card or passport number)
-  - a letter of Authority, which must be signed within the last 3 months
+  - a Letter of Authority, which must be signed within the last 3 months
 
 ### If you are updating a legal representative
 If you have changed legal representative you will need to provide:
   - photographic proof of your identity
-  - a letter of Authority, which must be signed within the last 3 months
+  - a Letter of Authority, which must be signed within the last 3 months
 
 The letter of authority must include: 
   - the applicant's full name

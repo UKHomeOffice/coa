@@ -21,7 +21,7 @@ p {
   margin-bottom: 20px;
 }
 
-li a[href] {
+.list-link {
   @extend .govuk-link;
 }
 
@@ -350,3 +350,15 @@ pre.looped-records {
   box-shadow: 0 -2px #fd0, 0 4px #0b0c0c;
   text-decoration: none;
 }
+.govuk-radios{
+  .govuk-hint.govuk-radios__hint {
+    padding-left: 0;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .panel-indent{
+    margin: 20px 15px 20px 20px;
+    padding: 10px 0 10px 30px;
+  }
+} 
