@@ -4,7 +4,7 @@
 const env = process.env.NODE_ENV || 'production';
 
 module.exports = {
-  PRETTY_DATE_FORMAT: 'Do MMMM YYYY',
+  PRETTY_DATE_FORMAT: 'DD MMMM YYYY',
   dateTimeFormat: 'DD MMM YYYY HH:mm:ss',
   env: env,
   govukNotify: {

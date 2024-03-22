@@ -48,29 +48,15 @@ module.exports = superclass => class extends superclass {
     const items = this.getAggregateArray(req);
     const fields = [];
 
-    let itemTitle = '';
-
     req.form.options.aggregateFrom.forEach(aggregateFromElement => {
       const aggregateFromField = aggregateFromElement.field || aggregateFromElement;
       const isTitleField = req.form.options.titleField === aggregateFromField;
       const value = req.sessionModel.get(aggregateFromField);
-      let isRefNumber = false;
-
-      if (isTitleField) {
-        itemTitle = value;
-      }
-
-      if(aggregateFromElement === 'uan-detail') {
-        isRefNumber = true;
-      } else {
-        isRefNumber = false;
-      }
 
       fields.push({
         field: aggregateFromField,
         parsed: this.parseField(aggregateFromField, value, req),
         value,
-        isRefNumber,
         showInSummary: !isTitleField,
         changeField: aggregateFromElement.changeField
       });
@@ -79,7 +65,7 @@ module.exports = superclass => class extends superclass {
       req.sessionModel.unset(aggregateFromField);
     });
 
-    const newItem = { itemTitle, fields };
+    const newItem = { fields };
 
     items.push(newItem);
 

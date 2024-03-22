@@ -3328,11 +3328,6 @@ morgan@^1.10.0:
     on-finished "~2.3.0"
     on-headers "~1.0.2"
 
-ms-nationalities@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/ms-nationalities/-/ms-nationalities-1.0.1.tgz#7dbbc9002ff5c8aef166c268bdf6c031d10cbd69"
-  integrity sha512-jpeVXa7qYYT69ZC3iq59GNihGqFAcjbSYXhFKSFeJSxAvSky9THFXRFQtGm7ZwzBvl+NtfKBomegs3ubRdAOAA==
-
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"

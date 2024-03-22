@@ -302,3 +302,14 @@ pre.looped-records {
 .confirm-label {
   font-weight: normal;
 }
+
+.link-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 45px;
+  margin-bottom: 40px;
+}
+
+.govuk-table {
+  margin-bottom: 15px;
+}
