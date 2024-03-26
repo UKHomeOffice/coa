@@ -1,4 +1,21 @@
 {
+  "overview": {
+    "header": "Update your details without an account"
+  },
+  "applicant-details": {
+    "header": "Applicant details",
+    "application-details-intro": "Enter the details of the person whose details you want to update. Their details must match the identity document that UK Visas and Immigration holds on record."
+  },
+  "contact-details": {
+    "header": "Contact details"
+  },
+  "legal-representative": {
+    "header": "Contact details"
+  },
+  "identity-number": {
+    "header": "Identity document number",
+    "identity-number-intro": "For security, you must provide us with information from an identity document that UK Visas and Immigration has on your client’s record."
+  },
   "dependant-summary": {
     "header": "Dependants"
   },
@@ -11,11 +28,32 @@
   },
   "confirm": {
     "sections": {
+      "applicant-details": {
+        "header": "Applicant information"
+      },
+      "your-details": {
+        "header": "Your details"
+      },
       "change-details": {
         "header": "Change details"
       }
     },
     "fields": {
+      "applicant-nationality": {
+        "label": "Nationality"
+      },
+      "applicant-unique-number": {
+        "label": "Unique application number"
+      },
+      "telephone": {
+        "label": "Telephone number"
+      },
+      "client-email": {
+        "label": "Client’s email address"
+      },
+      "client-telephone": {
+        "label": "Client’s telephone number"
+      },
       "dependants": {
         "label": "Which dependant(s) would you like to make the same changes to?"
       }

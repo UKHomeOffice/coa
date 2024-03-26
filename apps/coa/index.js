@@ -10,6 +10,34 @@ module.exports = {
   params: '/:action?/:id?/:edit?',
   confirmStep: '/check-answers',
   steps: {
+    '/overview': {
+      next: '/applicant-details'
+    },
+    '/applicant-details': {
+      fields: ['applicant-full-name', 'applicant-dob', 'applicant-nationality', 'applicant-unique-number'],
+      next: '/who'
+    },
+    '/who': {
+      fields: ['who-are-you', 'legal-representative-name', 'someone-else-name'],
+      next: '/contact-details',
+      forks: [
+        {
+          target: '/legal-representative',
+          condition: {
+            field: 'who-are-you',
+            value: 'legal-representative'
+          }
+        }
+      ]
+    },
+    '/contact-details': {
+      fields: ['email', 'telephone'],
+      next: '/check-answers'
+    },
+    '/legal-representative': {
+      fields: ['email', 'telephone', 'client-email', 'client-telephone'],
+      next: '/check-answers'
+    },
     '/update-dependant': {
       fields: ['change-dependant-details'],
       forks: [{
