@@ -30,13 +30,37 @@ module.exports = {
         }
       ]
     },
-    '/contact-details': {
-      fields: ['email', 'telephone'],
-      next: '/check-answers'
-    },
     '/legal-representative': {
       fields: ['email', 'telephone', 'client-email', 'client-telephone'],
-      next: '/check-answers'
+      next: '/identity-number'
+    },
+    '/contact-details': {
+      fields: ['email', 'telephone'],
+      next: '/identity-number'
+    },
+    '/identity-number': {
+      next: '/upload-identity'
+    },
+    '/upload-identity': {
+      next: '/upload-identity-summary'
+    },
+    '/upload-identity-summary' : {
+      next: '/which-details'
+    },
+    '/which-details': {
+      next: '/old-address'
+    },
+    '/old-address': {
+      next: '/home-address'
+    },
+    '/home-address': {
+      next: '/upload-address'
+    },
+    '/upload-address': {
+      next: '/upload-address-summary'
+    },
+    '/upload-address-summary': {
+      next: '/update-dependant'
     },
     '/update-dependant': {
       fields: ['change-dependant-details'],
@@ -68,7 +92,6 @@ module.exports = {
       ],
       addStep: 'dependant-details',
       template: 'dependant-summary',
-      addAnotherLinkText: 'dependant',
       next: '/check-answers'
     },
     '/check-answers': {
