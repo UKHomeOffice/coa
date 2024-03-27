@@ -299,6 +299,20 @@ pre.looped-records {
   word-break: break-all;
 }
 
+.confirm-label {
+  font-weight: normal;
+}
+
+.link-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 45px;
+  margin-bottom: 40px;
+}
+
+.govuk-table {
+  margin-bottom: 15px;
+}
 .govuk-radios{
   .govuk-hint.govuk-radios__hint {
     padding-left: 0;

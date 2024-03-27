@@ -46,6 +46,21 @@
     },
     "client-telephone": {
         "ukPhoneNumber": "Enter a valid UK telephone number"
+    },
+    "change-dependant-details": {
+        "default": "Select an option"
+    },
+    "dependant-full-name": {
+        "default": "Enter a full name"
+    },
+    "dependant-date-of-birth": {
+        "default": "Enter the dependant's date of birth in the correct format; for example, 31 3 1980",
+        "after": "Enter a real date of birth",
+        "before": "Date of birth must be in the past",
+        "date": "Enter a real date of birth"
+    },
+    "dependant-country-of-nationality": {
+        "default": "Enter a nationality",
+        "excludeUK": "You do not need to use this service if you are a British citizen"
     }
-    
 }

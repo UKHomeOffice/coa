@@ -16,6 +16,12 @@
     "header": "Identity document number",
     "identity-number-intro": "For security, you must provide us with information from an identity document that UK Visas and Immigration has on your client’s record."
   },
+  "dependant-summary": {
+    "header": "Dependants"
+  },
+  "dependant-details": {
+    "header": "Which dependant would you like to make the same changes to?"
+  },
   "check-answers": {
     "header": "Check your answers",
     "check-answers-intro": "Check these details carefully before continuing. If any of the details are incorrect, change them."
@@ -27,6 +33,9 @@
       },
       "your-details": {
         "header": "Your details"
+      },
+      "change-details": {
+        "header": "Change details"
       }
     },
     "fields": {
@@ -44,6 +53,9 @@
       },
       "client-telephone": {
         "label": "Client’s telephone number"
+      },
+      "dependants": {
+        "label": "Which dependant(s) would you like to make the same changes to?"
       }
     }
   }
