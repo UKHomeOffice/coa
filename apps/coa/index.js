@@ -1,9 +1,14 @@
 const sessionDefaults = require('./behaviours/set-session-defaults');
-const SummaryPageBehaviour = require('hof').components.summary;
+const hof = require('hof');
+const Summary = hof.components.summary;
+const Aggregate = require('./behaviours/aggregator');
+const setDateErrorLink = require('./behaviours/set-date-error-link');
+const ModifyChangeURL = require('./behaviours/modify-change-link');
 
 module.exports = {
   name: 'coa',
   baseUrl: '/',
+  params: '/:action?/:id?/:edit?',
   confirmStep: '/check-answers',
   steps: {
     '/overview': {
@@ -43,18 +48,74 @@ module.exports = {
         }
       ]
     },
-    '/contact-details': {
-      fields: ['email', 'telephone'],
-      next: '/check-answers'
-    },
     '/legal-representative': {
       fields: ['email', 'telephone', 'client-email', 'client-telephone'],
+      next: '/identity-number'
+    },
+    '/contact-details': {
+      fields: ['email', 'telephone'],
+      next: '/identity-number'
+    },
+    '/identity-number': {
+      next: '/upload-identity'
+    },
+    '/upload-identity': {
+      next: '/upload-identity-summary'
+    },
+    '/upload-identity-summary': {
+      next: '/which-details'
+    },
+    '/which-details': {
+      next: '/old-address'
+    },
+    '/old-address': {
+      next: '/home-address'
+    },
+    '/home-address': {
+      next: '/upload-address'
+    },
+    '/upload-address': {
+      next: '/upload-address-summary'
+    },
+    '/upload-address-summary': {
+      next: '/update-dependant'
+    },
+    '/update-dependant': {
+      fields: ['change-dependant-details'],
+      forks: [{
+        target: '/dependant-details',
+        condition: {
+          field: 'change-dependant-details',
+          value: 'yes'
+        }
+      }],
+      next: '/check-answers'
+    },
+    '/dependant-details': {
+      fields: [
+        'dependant-full-name',
+        'dependant-date-of-birth',
+        'dependant-country-of-nationality'
+      ],
+      behaviours: [setDateErrorLink],
+      next: '/dependant-summary'
+    },
+    '/dependant-summary': {
+      behaviours: [Aggregate, hof.components.homeOfficeCountries],
+      aggregateTo: 'dependants',
+      aggregateFrom: [
+        'dependant-full-name',
+        'dependant-date-of-birth',
+        'dependant-country-of-nationality'
+      ],
+      addStep: 'dependant-details',
+      template: 'dependant-summary',
       next: '/check-answers'
     },
     '/check-answers': {
-      behaviours: [SummaryPageBehaviour],
-      template: 'summary',
-      sections: require('./sections/summary-data-sections')
+      behaviours: [Summary, ModifyChangeURL],
+      sections: require('./sections/summary-data-sections'),
+      template: 'summary'
     }
   }
 };

@@ -1,3 +1,6 @@
 {
-    "continue": "Continue"
+  "edit": "Change",
+  "delete": "Remove",
+  "add-another-dependant": "Add another dependant",
+  "continue": "Continue"
 }

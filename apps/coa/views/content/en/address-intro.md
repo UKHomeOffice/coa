@@ -20,7 +20,7 @@ You will need to provide:
   - photographic proof of your identity
   - photographic proof of your friend or relative's identity
   - a signed letter from the friend or relative confirming they are
-  - providing your with accommodation (this must be dated within the last 3 months)
+    providing you with accommodation (this must be dated within the last 3 months)
   - a proof of address document for the friend or relative
 
 
