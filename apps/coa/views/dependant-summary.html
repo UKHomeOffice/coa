@@ -1,0 +1,8 @@
+{{<partials-page}}
+  {{$page-content}}
+    {{> partials-items-table}}
+    <p><a href="{{baseUrl}}/{{addStep}}" class="govuk-link">{{#t}}buttons.add-another-dependant{{/t}}</a></p>
+    <br>
+    {{#input-submit}}continue{{/input-submit}}
+  {{/page-content}}
+{{/partials-page}}
