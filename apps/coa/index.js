@@ -88,9 +88,13 @@ module.exports = {
       next: '/upload-address-summary'
     },
     '/upload-address-summary': {
-      next: '/update-dependant',
+      next: '/check-answers',
       //The conditional check should be performed in reverse order, as the last fork takes over.
       forks: [
+        {
+          target: '/update-dependant',
+          condition: (req, res) => forkCondition(req, 'who-are-you','applicant')
+        },
         {
           target: '/legal-details',
           condition: (req, res) => forkCondition(req, 'which-details-updating','legal-details')
@@ -110,8 +114,13 @@ module.exports = {
       next: '/upload-postal-address-summary'
     },
     '/upload-postal-address-summary': {
-      next: '/update-dependant',
+      next: '/check-answers',
+      //The conditional check should be performed in reverse order, as the last fork takes over.
       forks: [
+        {
+          target: '/update-dependant',
+          condition: (req, res) => forkCondition(req, 'who-are-you','applicant')
+        },
         {
           target: '/legal-details',
           condition: (req, res) => forkCondition(req, 'which-details-updating', 'legal-details')
@@ -120,7 +129,13 @@ module.exports = {
     },
     '/legal-details': {
       fields: [],
-      next: '/update-dependant'
+      next: '/check-answers',
+      forks: [
+        {
+          target: '/update-dependant',
+          condition: (req, res) => forkCondition(req, 'who-are-you','applicant')
+        }
+      ]
     },
     '/update-dependant': {
       fields: ['change-dependant-details'],
