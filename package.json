@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "node server.js",
+    "test:ui-integration": "NODE_ENV=test _mocha \"test/_ui-integration/**/*.spec.js\" --exit",
     "start:dev": "hof-build watch",
     "build": "hof-build",
     "postinstall": "hof-build",
@@ -37,14 +38,22 @@
   "devDependencies": {
     "eslint": "^8.56.0",
     "eslint-config-hof": "^1.3.4",
+    "jsdom": "^16.4.0",
+    "mocha": "^9.2.1",
+    "nyc": "^15.1.0",
+    "sinon": "^11.1.2",
+    "sinon-chai": "^3.7.0",
+    "supertest": "^5.0.0",
+    "supertest-session": "^4.1.0",
     "@cucumber/cucumber": "^7.2.1",
     "@cucumber/pretty-formatter": "^1.0.0-alpha.1",
     "chai": "^4.3.5",
-    "mocha": "^9.2.0",
-    "nyc": "^15.1.0",
     "playwright": "^1.2.3"
   },
   "mocha": {
-    "require": "test/setup.js"
+    "reporter": "spec",
+    "require": "test/setup.js",
+    "recursive": "true",
+    "timeout": "6000"
   }
 }
