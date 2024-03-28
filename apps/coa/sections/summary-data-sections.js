@@ -64,6 +64,13 @@ module.exports = {
   'change-details': {
     steps: [
       {
+        step: '/which-details',
+        field: 'which-details-updating',
+        parse: value => {
+          return Array.isArray(value) ? value.map(option => option).join('\n') : value;
+        }
+      },
+      {
         step: '/dependant-summary',
         field: 'dependants',
         parse: (list, req) => {
