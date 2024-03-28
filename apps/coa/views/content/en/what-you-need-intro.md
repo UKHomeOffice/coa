@@ -9,7 +9,6 @@ You will need to provide:
 
 ### If you are updating a dependant's details
 You can only update dependants that already exist in UKVI's records. This includes child and adult dependants. You cannot add or remove dependants using this service.
-<br>
 
 You can use this service to update a dependant's:
   - home address

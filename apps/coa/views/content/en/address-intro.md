@@ -11,7 +11,7 @@ Examples of acceptable proof of address documents are:
   - rental agreements (this must be the full document, signed by the landloard and tenants)
   - utility bills
 
-<br>
+
 You can upload these as a clear image of a paper copy or digital copy of the document.
 
 ### If you are living with a friend or relative

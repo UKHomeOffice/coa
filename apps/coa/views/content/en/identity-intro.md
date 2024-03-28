@@ -1,7 +1,6 @@
 ## Proof of identity
 
 You will need to provide a recent, specific identity document.
-<br>
 
 Acceptable proof of photographic identity documents are:
   - asylum registration card
