@@ -2,5 +2,14 @@
   "edit": "Change",
   "delete": "Remove",
   "add-another-dependant": "Add another dependant",
-  "continue": "Continue"
+  "continue": "Continue",
+  "next": "Next",
+  "previous": "Previous",
+  "page": "page",
+  "overview": "Overview",
+  "update-your-details": "Update your details",
+  "proof-of-identity": "Proof of identity",
+  "what-you-need": "What you will need",
+  "proof-of-address": "Proof of Address",
+  "start-now": "Start now"
 }

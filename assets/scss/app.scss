@@ -1,4 +1,33 @@
+@use 'pagination';
 @import "hof/frontend/themes/gov-uk/styles/govuk";
+
+h2 {
+  @extend .govuk-heading-m;
+  margin-top: 40px;
+}
+
+h3 {
+  @extend .govuk-heading-s;
+  margin-top: 20px;
+}
+
+ul {
+  @extend .govuk-list--bullet;
+}
+
+p {
+  @extend .govuk-body;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.list-link {
+  @extend .govuk-link;
+}
+
+p a[href] {
+  @extend .govuk-link;
+}
 
 .govuk-label-wrapper {
   margin-bottom: 15px;
@@ -283,6 +312,7 @@ textarea {
 
 .govuk-button {
   margin-right: 0.5rem;
+  margin-top: 30px;
 }
 
 .govuk-hint {
@@ -297,6 +327,28 @@ pre.looped-records {
   white-space: pre-wrap;
   word-wrap: break-word;
   word-break: break-all;
+}
+
+.govuk-link:hover {
+  color: #003078;
+}
+
+.govuk-link--no-underline:focus {
+  outline: 3px solid #0000;
+  background-color: #fd0;
+  box-shadow: 0 -2px #fd0, 0 4px #0b0c0c;
+  text-decoration: none;
+}
+
+.govuk-link--no-visited-state:hover {
+  color: #003078;
+}
+
+.govuk-link--no-visited-state:focus {
+  outline: 3px solid #0000;
+  background-color: #fd0;
+  box-shadow: 0 -2px #fd0, 0 4px #0b0c0c;
+  text-decoration: none;
 }
 
 .confirm-label {
@@ -319,9 +371,9 @@ pre.looped-records {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
   }
+}
 
-  .panel-indent{
-    margin: 20px 15px 20px 20px;
-    padding: 10px 0 10px 30px;
-  }
+.panel-indent{
+  margin: 20px 15px 20px 20px;
+  padding: 10px 0 10px 30px;
 } 

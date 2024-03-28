@@ -155,7 +155,7 @@ module.exports = superclass => class extends superclass {
       items,
       hasItems: items.length > 0,
       addStep: req.form.options.addStep,
-      field: req.form.options.aggregateTo,
+      field: req.form.options.aggregateTo
     });
   }
 };

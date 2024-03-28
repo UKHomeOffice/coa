@@ -26,7 +26,6 @@ function excludeUK(value) {
 }
 
 module.exports = {
-  
   'change-dependant-details': {
     isPageHeading: 'true',
     mixin: 'radio-group',
