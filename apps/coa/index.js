@@ -4,6 +4,14 @@ const Aggregate = require('./behaviours/aggregator');
 const setDateErrorLink = require('./behaviours/set-date-error-link');
 const ModifyChangeURL = require('./behaviours/modify-change-link');
 
+function forkCondition(req, fieldName, conditionalValue) {
+
+  let fieldValue = (req.form.historicalValues && req.form.historicalValues[fieldName])? req.form.historicalValues[fieldName] : req.form.values[fieldName];
+  if (!fieldValue) return false;
+
+  return Array.isArray(fieldValue) ? fieldValue.includes(conditionalValue) : fieldValue === conditionalValue;
+}
+
 module.exports = {
   name: 'coa',
   baseUrl: '/',
@@ -39,27 +47,79 @@ module.exports = {
       next: '/identity-number'
     },
     '/identity-number': {
+      fields: [],
       next: '/upload-identity'
     },
     '/upload-identity': {
+      fields: [],
       next: '/upload-identity-summary'
     },
     '/upload-identity-summary' : {
+      fields: [],
       next: '/which-details'
     },
     '/which-details': {
-      next: '/old-address'
+      fields: ['which-details-updating'],
+      //The conditional check should be performed in reverse order, as the last fork takes over.
+      forks: [
+        {
+          target: '/legal-details',
+          condition: (req, res) => forkCondition(req, 'which-details-updating', 'legal-details')
+        },
+        {
+          target: '/postal-address',
+          condition: (req, res) => forkCondition(req, 'which-details-updating', 'postal-address')
+        },
+        {
+          target: '/old-address',
+          condition: (req, res) => forkCondition(req, 'which-details-updating', 'old-address')
+        }
+      ]
     },
     '/old-address': {
+      fields: [],
       next: '/home-address'
     },
     '/home-address': {
+      fields: [],
       next: '/upload-address'
     },
     '/upload-address': {
       next: '/upload-address-summary'
     },
     '/upload-address-summary': {
+      next: '/update-dependant',
+      //The conditional check should be performed in reverse order, as the last fork takes over.
+      forks: [
+        {
+          target: '/legal-details',
+          condition: (req, res) => forkCondition(req, 'which-details-updating','legal-details')
+        },
+        {
+          target: '/postal-address',
+          condition: (req, res) => forkCondition(req, 'which-details-updating', 'postal-address')
+        }
+      ]
+    },
+    '/postal-address': {
+      fields: [],
+      next: '/upload-postal-address',
+    },
+    '/upload-postal-address': {
+      fields: [],
+      next: '/upload-postal-address-summary'
+    },
+    '/upload-postal-address-summary': {
+      next: '/update-dependant',
+      forks: [
+        {
+          target: '/legal-details',
+          condition: (req, res) => forkCondition(req, 'which-details-updating', 'legal-details')
+        }
+      ]
+    },
+    '/legal-details': {
+      fields: [],
       next: '/update-dependant'
     },
     '/update-dependant': {

@@ -62,5 +62,8 @@
     "dependant-country-of-nationality": {
         "default": "Enter a nationality",
         "excludeUK": "You do not need to use this service if you are a British citizen"
+    },
+    "which-details-updating": {
+        "default": "Tell us which details you want to update"
     }
 }

@@ -16,6 +16,36 @@
     "header": "Identity document number",
     "identity-number-intro": "For security, you must provide us with information from an identity document that UK Visas and Immigration has on your client’s record."
   },
+  "upload-identity": {
+    "header": "Upload proof of identity"
+  },
+  "upload-identity-summary": {
+    "header": "Proof of identity"
+  },
+  "old-address": {
+    "header": "Is your old home address in the UK?"
+  },
+  "home-address": {
+    "header": "What is your new home address?"
+  },
+  "upload-address": {
+    "header": "Upload proof of address"
+  },
+  "upload-address-summary": {
+    "header": "Proof of address"
+  },
+  "postal-address": {
+    "header": "What is your new postal address?"
+  },
+  "upload-postal-address": {
+    "header": "Upload proof of address"
+  },
+  "upload-postal-address-summary": {
+    "header": "Proof of address"
+  },
+  "legal-details": {
+    "header": "Enter your legal representative’s details"
+  },
   "dependant-summary": {
     "header": "Dependants"
   },
