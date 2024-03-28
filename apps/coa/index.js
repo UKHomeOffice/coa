@@ -5,6 +5,20 @@ const Aggregate = require('./behaviours/aggregator');
 const setDateErrorLink = require('./behaviours/set-date-error-link');
 const ModifyChangeURL = require('./behaviours/modify-change-link');
 
+/**
+ * Checks if a given field value matches a conditional value based on the request object.
+ *
+ * @param {Object} req - The request object.
+ * @param {string} fieldName - The name of the field to check.
+ * @param {string} conditionalValue - The value to compare against the field value.
+ * @returns {boolean} - Returns true if the field value matches the conditional value, false otherwise.
+ */
+function forkCondition(req, fieldName, conditionalValue) {
+  const fieldValue = req.form.historicalValues?.[fieldName] || req.form.values[fieldName];
+  if (!fieldValue) return false;
+  return Array.isArray(fieldValue) ? fieldValue.includes(conditionalValue) : fieldValue === conditionalValue;
+}
+
 module.exports = {
   name: 'coa',
   baseUrl: '/',
@@ -57,28 +71,95 @@ module.exports = {
       next: '/identity-number'
     },
     '/identity-number': {
+      fields: [],
       next: '/upload-identity'
     },
     '/upload-identity': {
+      fields: [],
       next: '/upload-identity-summary'
     },
     '/upload-identity-summary': {
+      fields: [],
       next: '/which-details'
     },
     '/which-details': {
-      next: '/old-address'
+      fields: ['which-details-updating'],
+      // The conditional check should be performed in reverse order, as the last fork takes over.
+      forks: [
+        {
+          target: '/legal-details',
+          condition: req => forkCondition(req, 'which-details-updating', 'legal-details')
+        },
+        {
+          target: '/postal-address',
+          condition: req => forkCondition(req, 'which-details-updating', 'postal-address')
+        },
+        {
+          target: '/old-address',
+          condition: req => forkCondition(req, 'which-details-updating', 'old-address')
+        }
+      ]
     },
     '/old-address': {
+      fields: [],
       next: '/home-address'
     },
     '/home-address': {
+      fields: [],
       next: '/upload-address'
     },
     '/upload-address': {
       next: '/upload-address-summary'
     },
     '/upload-address-summary': {
-      next: '/update-dependant'
+      next: '/check-answers',
+      // The conditional check should be performed in reverse order, as the last fork takes over.
+      forks: [
+        {
+          target: '/update-dependant',
+          condition: req => forkCondition(req, 'who-are-you', 'applicant')
+        },
+        {
+          target: '/legal-details',
+          condition: req => forkCondition(req, 'which-details-updating', 'legal-details')
+        },
+        {
+          target: '/postal-address',
+          condition: req => forkCondition(req, 'which-details-updating', 'postal-address')
+        }
+      ]
+    },
+    '/postal-address': {
+      fields: [],
+      next: '/upload-postal-address'
+    },
+    '/upload-postal-address': {
+      fields: [],
+      next: '/upload-postal-address-summary'
+    },
+    '/upload-postal-address-summary': {
+      next: '/check-answers',
+      // The conditional check should be performed in reverse order, as the last fork takes over.
+      forks: [
+        {
+          target: '/update-dependant',
+          condition: req => forkCondition(req, 'who-are-you', 'applicant')
+        },
+        {
+          target: '/legal-details',
+          condition: req => forkCondition(req, 'which-details-updating', 'legal-details')
+        }
+      ]
+    },
+    '/legal-details': {
+      fields: [],
+      next: '/check-answers',
+      forks: [
+        {
+          target: '/update-dependant',
+          condition: req => forkCondition(req, 'who-are-you', 'applicant')
+        }
+      ]
     },
     '/update-dependant': {
       fields: ['change-dependant-details'],

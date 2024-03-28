@@ -74,5 +74,20 @@
   },
   "client-telephone": {
     "label": "Client’s telephone number (optional)"
+  },
+  "which-details-updating": {
+    "legend": "Which details are you updating?",
+    "options": {
+      "old-address": {
+        "label": "Home address"
+      },
+      "postal-address": {
+        "label": "Postal address"
+      },
+      "legal-details": {
+        "label": "Legal representative",
+        "hint": "If you legal representative or their deeeails changed"
+      }
+    }
   }
 }

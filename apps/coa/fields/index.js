@@ -182,5 +182,22 @@ module.exports = {
     validate: ['ukPhoneNumber'],
     labelClassName: 'govuk-label--s',
     className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+
+  'which-details-updating': {
+    mixin: 'checkbox-group',
+    validate: ['required'],
+    isPageHeading: true,
+    options: [
+      {
+        value: 'old-address'
+      },
+      {
+        value: 'postal-address'
+      },
+      {
+        value: 'legal-details'
+      }
+    ]
   }
 };
