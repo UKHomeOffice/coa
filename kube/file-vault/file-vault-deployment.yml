@@ -111,8 +111,8 @@ spec:
             - name: AWS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: ses
-                  key: smtp_password
+                  name: filevault-encryption-key
+                  key: filevault-encryption-key
             - name: ALLOW_GENERATE_LINK_ROUTE
               value: "yes"
           securityContext:
