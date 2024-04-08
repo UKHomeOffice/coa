@@ -111,7 +111,8 @@ spec:
             - name: AWS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: filevault-encryption-key
+                  name: file-vault
+#encryption_key is randomly generated password used to encrypt the params that are returned by file-vault
                   key: filevault-encryption-key
             - name: ALLOW_GENERATE_LINK_ROUTE
               value: "yes"
