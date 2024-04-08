@@ -112,8 +112,8 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: file-vault
-#encryption_key is randomly generated password used to encrypt the params that are returned by file-vault
-                  key: filevault-encryption-key
+                  # encryption_key is randomly generated password used to encrypt the params that are returned by file-vault
+                  key: encryption_key
             - name: ALLOW_GENERATE_LINK_ROUTE
               value: "yes"
           securityContext:
