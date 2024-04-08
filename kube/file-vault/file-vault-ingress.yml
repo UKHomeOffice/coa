@@ -15,11 +15,11 @@ spec:
     - fv-{{ .DRONE_BUILD_NUMBER }}.branch.sas-notprod.homeoffice.gov.uk
     - fv-{{ .DRONE_SOURCE_BRANCH }}.branch.sas-notprod.homeoffice.gov.uk
     {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
-    - fv-coa.uat.sas-notprod.homeoffice.gov.uk
+    - fv-{{ .APP_NAME }}.uat.sas-notprod.homeoffice.gov.uk
     {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-    - fv-coa.stg.sas.homeoffice.gov.uk
+    - fv-{{ .APP_NAME }}.stg.sas.homeoffice.gov.uk
     {{ else if eq .KUBE_NAMESPACE .PROD_ENV }}
-    - fv-coa.sas.homeoffice.gov.uk
+    - fv-{{ .APP_NAME }}.sas.homeoffice.gov.uk
     {{ end }}
     {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
     secretName: branch-tls-external
@@ -30,11 +30,11 @@ spec:
   {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
   - host: fv-{{ .DRONE_SOURCE_BRANCH }}.branch.sas-notprod.homeoffice.gov.uk
   {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
-  - host: fv-coa.uat.sas-notprod.homeoffice.gov.uk
+  - host: fv-{{ .APP_NAME }}.uat.sas-notprod.homeoffice.gov.uk
   {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-  - host: fv-coa.stg.sas.homeoffice.gov.uk
+  - host: fv-{{ .APP_NAME }}.stg.sas.homeoffice.gov.uk
   {{ else if eq .KUBE_NAMESPACE .PROD_ENV }}
-  - host: fv-coa.sas.homeoffice.gov.uk
+  - host: fv-{{ .APP_NAME }}.sas.homeoffice.gov.uk
   {{ end }}
     http:
       paths:
