@@ -196,7 +196,19 @@ module.exports = {
     '/check-answers': {
       behaviours: [Summary, ModifyChangeURL],
       sections: require('./sections/summary-data-sections'),
-      template: 'summary'
+      template: 'summary',
+      next: '/privacy-policy'
+    },
+    '/privacy-policy': {
+      behaviours: [Summary],
+      fields: ['privacy-check'],
+      sections: require('./sections/summary-data-sections'),
+      next: '/request-submitted'
+    },
+    '/request-submitted': {
+      behaviours: ['complete'],
+      backLink: false,
+      clearSession: true
     }
   }
 };

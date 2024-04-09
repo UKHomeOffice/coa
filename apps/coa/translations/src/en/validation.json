@@ -65,5 +65,8 @@
     },
     "which-details-updating": {
         "default": "Tell us which details you want to update"
+    },
+    "privacy-check": {
+      "required": "Confirm you have read the Data Protection statement"
     }
 }

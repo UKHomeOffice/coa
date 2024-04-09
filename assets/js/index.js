@@ -11,3 +11,12 @@ $('.typeahead').each(function applyTypeahead() {
     selectElement: this
   });
 });
+
+$(function () {
+  if ($('#loader-container')) {
+    $('.govuk-button').on('click', function () {
+      $('#loader-container').addClass('spinner-loader');
+      $('#report-submit').addClass('visuallyhidden');
+    });
+  }
+});
