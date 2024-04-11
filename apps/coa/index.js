@@ -200,9 +200,7 @@ module.exports = {
       next: '/privacy-policy'
     },
     '/privacy-policy': {
-      behaviours: [Summary],
       fields: ['privacy-check'],
-      sections: require('./sections/summary-data-sections'),
       next: '/request-submitted'
     },
     '/request-submitted': {

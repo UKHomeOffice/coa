@@ -2,21 +2,24 @@
 'use strict';
 
 require('hof/frontend/themes/gov-uk/client-js');
-var $ = require('jquery');
 
-var accessibleAutocomplete = require('accessible-autocomplete');
-$('.typeahead').each(function applyTypeahead() {
+const accessibleAutocomplete = require('accessible-autocomplete');
+
+document.querySelectorAll('.typeahead').forEach(function applyTypeahead(element) {
   accessibleAutocomplete.enhanceSelectElement({
     defaultValue: '',
-    selectElement: this
+    selectElement: element
   });
 });
 
-$(function () {
-  if ($('#loader-container')) {
-    $('.govuk-button').on('click', function () {
-      $('#loader-container').addClass('spinner-loader');
-      $('#report-submit').addClass('visuallyhidden');
+document.addEventListener('DOMContentLoaded', () => {
+  const loaderContainer = document.querySelector('#loader-container');
+  const reportSubmitButton = document.querySelector('#report-submit');
+
+  if (loaderContainer) {
+    document.querySelector('#report-submit .govuk-button').addEventListener('click', () => {
+      loaderContainer.classList.add('spinner-loader');
+      reportSubmitButton.classList.add('visuallyhidden');
     });
   }
 });
