@@ -199,5 +199,9 @@ module.exports = {
         value: 'legal-details'
       }
     ]
+  },
+  'privacy-check': {
+    mixin: 'checkbox',
+    validate: ['required']
   }
 };
