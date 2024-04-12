@@ -89,5 +89,35 @@
         "hint": "If you legal representative or their deeeails changed"
       }
     }
+  },
+  "identity-type": {
+    "legend": "Which information can you provide?",
+    "options": {
+      "passport": {
+        "label": "Passport number"
+      },
+      "brp": {
+        "label": "Biometric residence permit (BRP) number",
+        "hint": "This is on the BRP card or on any letters we have sent"
+      },
+      "arc": {
+        "label": "Application registration card number"
+        
+      },
+      "none": {
+        "label": "None of these"
+      }
+    }
+  },
+  "passport-number-details": {
+    "label": "What is you passport number?",
+    "hint": "For example, 1208297A"
+  },
+  "brp-details" : {
+    "label": "What is your Biometric residence permit (BRP) number?"
+  },
+  "arc-details" : {
+    "label": "What is your Application registration card number?"
   }
+
 }

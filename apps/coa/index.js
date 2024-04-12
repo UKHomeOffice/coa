@@ -71,7 +71,7 @@ module.exports = {
       next: '/identity-number'
     },
     '/identity-number': {
-      fields: [],
+      fields: ['identity-type', 'passport-number-details', 'brp-details', 'arc-details'],
       next: '/upload-identity'
     },
     '/upload-identity': {

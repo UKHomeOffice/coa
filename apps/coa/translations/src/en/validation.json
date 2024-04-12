@@ -65,5 +65,21 @@
     },
     "which-details-updating": {
         "default": "Tell us which details you want to update"
+    },
+    "identity-type": {
+        "default": "Select which identity document number you can provide"
+    },
+    "passport-number-details": {
+        "required": "Enter a passport number",
+        "passportNumber": "Passport number can only have numbers and letters a-z"
+    },
+    "brp-details": {
+        "required": "Enter a BRP number",
+        "brpNumber": "Enter a BRP number in the correct format"
+    },
+    "arc-details": {
+        "required": "Enter a ARC number",
+        "alphanum": "ARC number can only have numbers and letters a-z"
     }
+
 }

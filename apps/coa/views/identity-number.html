@@ -1,8 +1,9 @@
 {{<partials-page}}
   {{$page-content}}
     <p>{{#t}}pages.identity-number.identity-number-intro{{/t}}</p>
-
+    {{#renderField}}identity-type{{/renderField}}
     {{#input-submit}}continue{{/input-submit}}
+
 
   {{/page-content}}
 {{/partials-page}}
