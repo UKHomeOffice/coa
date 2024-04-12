@@ -204,7 +204,6 @@ module.exports = {
       next: '/request-submitted'
     },
     '/request-submitted': {
-      behaviours: ['complete'],
       backLink: false,
       clearSession: true
     }
