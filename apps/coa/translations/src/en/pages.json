@@ -81,6 +81,15 @@
       "client-telephone": {
         "label": "Client’s telephone number"
       },
+      "passport-number-details": {
+        "label": "Passport number"
+      },
+      "brp-details": {
+        "label": "BRP number"
+      },
+      "arc-details": {
+        "label": "ARC number"
+      },
       "dependants": {
         "label": "Which dependant(s) would you like to make the same changes to?"
       }

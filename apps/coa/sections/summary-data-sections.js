@@ -61,23 +61,17 @@ module.exports = {
       },
       {
         step: '/identity-number',
-        field: 'identity-type',
-
-        parse: (list, req) => {
-          if (!req.sessionModel.get('steps').includes('/identity-number')) {
-           return null;
-          } else if (req.sessionModel.get('identity-type') === 'passport') {
-           return req.sessionModel.get('passport-number-details');
-          } else if (req.sessionModel.get('identity-type') === 'brp') {
-            return req.sessionModel.get('brp-details');
-           } else if (req.sessionModel.get('identity-type') === 'arc') {
-            return req.sessionModel.get('arc-details');
-           } 
-          return list;
-         }
+        field: 'passport-number-details'
+      },
+      {
+        step: '/identity-number',
+        field: 'brp-details'
+      },
+      {
+        step: '/identity-number',
+        field: 'arc-details'
       }
     ]
-
   },
   'change-details': {
     steps: [

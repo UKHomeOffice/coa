@@ -226,7 +226,6 @@ module.exports = {
         value: 'brp',
         toggle: 'brp-details',
         child: 'input-text'
-        
       },
       {
         value: 'arc',
@@ -239,10 +238,10 @@ module.exports = {
     ]
   },
   'passport-number-details': {
-    dependent: { 
+    dependent: {
       field: 'identity-type',
       value: 'passport'
-     },
+    },
     labelClassName: 'govuk-label--s',
     className: ['govuk-input', 'govuk-!-width-two-thirds'],
     validate: ['required', passportNumber]
