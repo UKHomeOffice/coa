@@ -86,7 +86,7 @@
       },
       "legal-details": {
         "label": "Legal representative",
-        "hint": "If you legal representative or their deeeails changed"
+        "hint": "If your legal representative or their details changed"
       }
     }
   },
@@ -98,7 +98,7 @@
       },
       "brp": {
         "label": "Biometric residence permit (BRP) number",
-        "hint": "This is on the BRP card or on any letters we have sent"
+        "hint": "This is on your BRP card or on any letters we've sent you"
       },
       "arc": {
         "label": "Application registration card number"
@@ -110,7 +110,7 @@
     }
   },
   "passport-number-details": {
-    "label": "What is you passport number?",
+    "label": "What is your passport number?",
     "hint": "For example, 1208297A"
   },
   "brp-details" : {
