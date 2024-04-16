@@ -89,5 +89,20 @@
         "hint": "If you legal representative or their deeeails changed"
       }
     }
+  },
+  "postal-address-line-1": {
+    "label": "Address line 1"
+  },
+  "postal-address-line-2": {
+    "label": "Address line 2 (optional)"
+  },
+  "postal-address-town-or-city": {
+    "label": "Town or city"
+  },
+  "postal-address-county": {
+    "label": "County (optional)"
+  },
+  "postal-address-postcode": {
+    "label": "Postcode"
   }
 }

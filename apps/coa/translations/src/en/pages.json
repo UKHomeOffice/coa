@@ -83,6 +83,9 @@
       },
       "dependants": {
         "label": "Which dependant(s) would you like to make the same changes to?"
+      },
+      "postal-address-details": {
+        "label": "What is your new postal address?"
       }
     }
   }

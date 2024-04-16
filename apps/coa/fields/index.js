@@ -199,5 +199,23 @@ module.exports = {
         value: 'legal-details'
       }
     ]
+  },
+  'postal-address-line-1': {
+    validate: ['required', 'notUrl']
+  },
+  'postal-address-line-2': {
+    validate: ['notUrl']
+  },
+  'postal-address-town-or-city': {
+    validate: ['required', 'notUrl'],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'postal-address-county': {
+    validate: ['notUrl'],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'postal-address-postcode': {
+    validate: ['required', 'notUrl', 'postcode'],
+    className: ['govuk-input', 'govuk-input--width-10']
   }
 };

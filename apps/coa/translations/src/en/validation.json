@@ -65,5 +65,24 @@
     },
     "which-details-updating": {
         "default": "Tell us which details you want to update"
+    },
+    "postal-address-line-1": {
+        "required": "Enter your house number or name",
+        "notUrl": "Your answer must not contain URLs or links"
+    },
+    "postal-address-line-2": {
+        "notUrl": "Your answer must not contain URLs or links"
+    },
+    "postal-address-town-or-city": {
+        "required": "Enter your town or city",
+        "notUrl": "Your answer must not contain URLs or links"
+    },
+    "postal-address-county": {
+        "notUrl": "Your answer must not contain URLs or links"
+    },
+    "postal-address-postcode": {
+        "required": "Enter your postcode",
+        "notUrl": "Your answer must not contain URLs or links",
+        "postcode": "Enter a real UK postcode"
     }
 }

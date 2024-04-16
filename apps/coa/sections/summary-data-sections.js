@@ -82,6 +82,20 @@ module.exports = {
               return field.parsed;
             }).join('\n')).join('\n \n');
         }
+      },
+      {
+        step: '/postal-address',
+        field: 'postal-address-details',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/postal-address')) {
+            return null;
+          }
+          return `${req.sessionModel.get('postal-address-line-1')}\n` +
+            `${req.sessionModel.get('postal-address-line-2')}\n` +
+            `${req.sessionModel.get('postal-address-town-or-city')}\n` +
+            `${req.sessionModel.get('postal-address-county')}\n` +
+            `${req.sessionModel.get('postal-address-postcode')}`;
+        }
       }
     ]
   }
