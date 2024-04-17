@@ -4,6 +4,7 @@ const Summary = hof.components.summary;
 const Aggregate = require('./behaviours/aggregator');
 const setDateErrorLink = require('./behaviours/set-date-error-link');
 const ModifyChangeURL = require('./behaviours/modify-change-link');
+const setSecurityMessage = require('./behaviours/identity-number');
 
 /**
  * Checks if a given field value matches a conditional value based on the request object.
@@ -71,6 +72,7 @@ module.exports = {
       next: '/identity-number'
     },
     '/identity-number': {
+      behaviours: [setSecurityMessage],
       fields: ['identity-type', 'passport-number-details', 'brp-details', 'arc-details'],
       next: '/upload-identity'
     },
