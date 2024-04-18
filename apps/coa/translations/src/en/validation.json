@@ -68,17 +68,21 @@
     },
     "postal-address-line-1": {
         "required": "Enter your house number or name",
-        "notUrl": "Your answer must not contain URLs or links"
+        "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "Address line 1 must be 250 characters or less"
     },
     "postal-address-line-2": {
-        "notUrl": "Your answer must not contain URLs or links"
+        "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "Address line 2 must be 250 characters or less"
     },
     "postal-address-town-or-city": {
         "required": "Enter your town or city",
-        "notUrl": "Your answer must not contain URLs or links"
+        "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "Town/City must be 250 characters or less"
     },
     "postal-address-county": {
-        "notUrl": "Your answer must not contain URLs or links"
+        "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "County must be 250 characters or less"
     },
     "postal-address-postcode": {
         "required": "Enter your postcode",

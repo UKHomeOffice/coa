@@ -201,18 +201,18 @@ module.exports = {
     ]
   },
   'postal-address-line-1': {
-    validate: ['required', 'notUrl']
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }]
   },
   'postal-address-line-2': {
-    validate: ['notUrl']
+    validate: ['notUrl', { type: 'maxlength', arguments: [250] }]
   },
   'postal-address-town-or-city': {
     validate: ['required', 'notUrl'],
-    className: ['govuk-input', 'govuk-!-width-two-thirds']
+    className: ['govuk-input', 'govuk-!-width-two-thirds', { type: 'maxlength', arguments: [250] }]
   },
   'postal-address-county': {
     validate: ['notUrl'],
-    className: ['govuk-input', 'govuk-!-width-two-thirds']
+    className: ['govuk-input', 'govuk-!-width-two-thirds', { type: 'maxlength', arguments: [250] }]
   },
   'postal-address-postcode': {
     validate: ['required', 'notUrl', 'postcode'],
