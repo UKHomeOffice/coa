@@ -10,10 +10,7 @@
     "header": "Contact details"
   },
   "identity-number": {
-    "header": "Identity document number",
-    "intro-applicant": "For security, you must provide us with information from an identity document that UK Visas and Immigration has on your record.",
-    "intro-legal-rep": "For security, you must provide us with information from an identity document that UK Visas and Immigration has on your client’s record.",
-    "intro-someone-else": "For security, you must provide us with information from an identity document that UK Visas and Immigration has on [Full name’s] record."
+    "header": "Identity document number"
   },
   "upload-identity": {
     "header": "Upload proof of identity"
