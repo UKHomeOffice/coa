@@ -78,7 +78,7 @@
         "brpNumber": "Enter a BRP number in the correct format"
     },
     "arc-details": {
-        "required": "Enter a ARC number",
+        "required": "Enter an ARC number",
         "alphanum": "ARC number can only have numbers and letters a-z"
     }
 
