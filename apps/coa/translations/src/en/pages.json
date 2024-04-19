@@ -20,7 +20,7 @@
     "header": "Proof of identity"
   },
   "home-address": {
-    "header": "What is {{values.placeHolderForOnBehalfOf}} new home address?"
+    "header": "What is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} new home address?"
   },
   "upload-address": {
     "header": "Upload proof of address"

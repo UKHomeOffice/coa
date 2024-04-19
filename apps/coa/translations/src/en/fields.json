@@ -23,7 +23,7 @@
         "label": "{{values.applicant-full-name}}"
       },
       "legal-representative": {
-        "label": "{{values.applicant-full-name}}’s legal representative"
+        "label": "{{values.nameWithPossession}} legal representative"
       },
       "someone-else": {
         "label": "Someone else",
@@ -91,7 +91,7 @@
     }
   },
   "old-address": {
-    "legend": "Is {{values.placeHolderForOnBehalfOf}} old home address in the UK?",
+    "legend": "Is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} old home address in the UK?",
     "options": {
       "Yes": {
         "label": "Yes"
