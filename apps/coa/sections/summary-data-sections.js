@@ -98,11 +98,23 @@ module.exports = {
           if (!req.sessionModel.get('steps').includes('/home-address')) {
             return null;
           }
-          return `${req.sessionModel.get('home-address-line-1')}\n` +
-                 `${req.sessionModel.get('home-address-line-2')}\n` +
-                 `${req.sessionModel.get('home-address-town-or-city')}\n` +
-                 `${req.sessionModel.get('home-address-county')}\n` +
-                 `${req.sessionModel.get('home-address-postcode')}`;
+          const addressDetails = [];
+          if(req.sessionModel.get('home-address-line-1')) {
+            addressDetails.push(req.sessionModel.get('home-address-line-1'));
+          }
+          if(req.sessionModel.get('home-address-line-2')) {
+            addressDetails.push(req.sessionModel.get('home-address-line-2'));
+          }
+          if(req.sessionModel.get('home-address-town-or-city')) {
+            addressDetails.push(req.sessionModel.get('home-address-town-or-city'));
+          }
+          if(req.sessionModel.get('home-address-county')) {
+            addressDetails.push(req.sessionModel.get('home-address-county'));
+          }
+          if(req.sessionModel.get('home-address-postcode')) {
+            addressDetails.push(req.sessionModel.get('home-address-postcode'));
+          }
+          return addressDetails.join('\n');
         }
       }
     ]
