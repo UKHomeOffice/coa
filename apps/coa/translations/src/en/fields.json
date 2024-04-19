@@ -89,5 +89,34 @@
         "hint": "If you legal representative or their deeeails changed"
       }
     }
+  },
+  "old-address": {
+    "legend": "Is {{values.placeHolderForOnBehalfOf}} old home address in the UK?",
+    "options": {
+      "Yes": {
+        "label": "Yes"
+      },
+      "No": {
+        "label": "No"
+      }
+    }
+  },
+  "old-postcode": {
+    "label": "Old postcode"
+  },
+  "home-address-line-1": {
+    "label": "Address line 1"
+  },
+  "home-address-line-2": {
+    "label": "Address line 2 (optional)"
+  },
+  "home-address-town-or-city": {
+    "label": "Town or city"
+  },
+  "home-address-county": {
+    "label": "County (optional)"
+  },
+  "home-address-postcode": {
+    "label": "Postcode"
   }
 }

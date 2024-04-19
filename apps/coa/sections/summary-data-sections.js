@@ -82,6 +82,28 @@ module.exports = {
               return field.parsed;
             }).join('\n')).join('\n \n');
         }
+      },
+      {
+        step: '/old-address',
+        field: 'old-address'
+      },
+      {
+        step: '/old-address',
+        field: 'old-postcode'
+      },
+      {
+        step: '/home-address',
+        field: 'home-address-details',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/home-address')) {
+            return null;
+          }
+          return `${req.sessionModel.get('home-address-line-1')}\n` +
+                 `${req.sessionModel.get('home-address-line-2')}\n` +
+                 `${req.sessionModel.get('home-address-town-or-city')}\n` +
+                 `${req.sessionModel.get('home-address-county')}\n` +
+                 `${req.sessionModel.get('home-address-postcode')}`;
+        }
       }
     ]
   }
