@@ -72,9 +72,9 @@ module.exports = {
       next: '/identity-number'
     },
     '/identity-number': {
-      behaviours: [setSecurityMessage],
       fields: ['identity-type', 'passport-number-details', 'brp-details', 'arc-details'],
-      next: '/upload-identity'
+      next: '/upload-identity', 
+      isApplicant: (req) => req.form.values['who-are-you'] === 'applicant'
     },
     '/upload-identity': {
       fields: [],
