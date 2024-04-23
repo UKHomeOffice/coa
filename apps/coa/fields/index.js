@@ -264,6 +264,10 @@ module.exports = {
     },
     labelClassName: 'govuk-label--s',
     className: ['govuk-input', 'govuk-!-width-two-thirds'],
-    validate: ['required', 'alphanum']
+    validate: ['required', 'alphanum'],
+  },
+  'privacy-check': {
+    mixin: 'checkbox',
+    validate: ['required']
   }
 };

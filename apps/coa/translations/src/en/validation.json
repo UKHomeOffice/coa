@@ -80,6 +80,8 @@
     "arc-details": {
         "required": "Enter an ARC number",
         "alphanum": "ARC number can only have numbers and letters a-z"
+    },
+    "privacy-check": {
+      "required": "Confirm you have read the Data Protection statement"
     }
-
 }
