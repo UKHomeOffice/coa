@@ -4,6 +4,8 @@ const Summary = hof.components.summary;
 const Aggregate = require('./behaviours/aggregator');
 const setDateErrorLink = require('./behaviours/set-date-error-link');
 const ModifyChangeURL = require('./behaviours/modify-change-link');
+const SaveDocument = require('./behaviours/save-document');
+const RemoveDocument = require('./behaviours/remove-document');
 
 /**
  * Checks if a given field value matches a conditional value based on the request object.
@@ -75,8 +77,10 @@ module.exports = {
       next: '/upload-identity'
     },
     '/upload-identity': {
-      fields: [],
-      next: '/upload-identity-summary'
+      behaviours: [SaveDocument('document-file'), RemoveDocument],
+      fields: ['document-file'],
+      next: '/upload-identity-summary',
+      isApplicant: (req) => req.form.values['who-are-you'] === 'applicant'
     },
     '/upload-identity-summary': {
       fields: [],

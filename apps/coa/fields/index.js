@@ -199,5 +199,11 @@ module.exports = {
         value: 'legal-details'
       }
     ]
+  },
+
+  'document-file': {
+    mixin: 'input-file',
+    validate: ['required'],
+    labelClassName: 'visuallyhidden'
   }
 };

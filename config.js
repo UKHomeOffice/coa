@@ -26,5 +26,30 @@ module.exports = {
   },
   sessionDefaults: {
     steps: ['/overview', '/what-you-need', '/proof-of-identity', '/proof-of-address', '/update-details']
+  },
+  upload: {
+    maxFileSizeInBytes: '26214400', // 25MB in bytes
+    hostname: process.env.FILE_VAULT_URL,
+    allowedMimeTypes: [
+      'application/pdf',
+      'image/jpeg',
+      'image/jpg',
+      'image/png'
+    ]
+  },
+  aws: {
+    bucket: process.env.AWS_BUCKET,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    signatureVersion: process.env.AWS_SIGNATURE_VERSION,
+    kmsKeyId: process.env.AWS_KMS_KEY_ID,
+    region: process.env.AWS_REGION
+  },
+  keycloak: {
+    token: process.env.KEYCLOAK_TOKEN_URL,
+    username: process.env.KEYCLOAK_USERNAME,
+    password: process.env.KEYCLOAK_PASSWORD,
+    clientId: process.env.KEYCLOAK_CLIENT_ID,
+    secret: process.env.KEYCLOAK_SECRET
   }
 };
