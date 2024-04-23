@@ -56,6 +56,12 @@
     "header": "Check your answers",
     "check-answers-intro": "Check these details carefully before continuing. If any of the details are incorrect, change them."
   },
+  "privacy-policy": {
+    "header": "Privacy policy"
+  },
+  "request-submitted": {
+    "confirmed": "Update submitted"
+  },
   "confirm": {
     "sections": {
       "applicant-details": {

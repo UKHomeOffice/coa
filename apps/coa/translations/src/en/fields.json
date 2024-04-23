@@ -89,5 +89,8 @@
         "hint": "If you legal representative or their deeeails changed"
       }
     }
+  },
+  "privacy-check": {
+    "label": "I confirm that I have read and understood the Data Protection statement above."
   }
 }
