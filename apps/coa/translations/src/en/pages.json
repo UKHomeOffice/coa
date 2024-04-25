@@ -11,7 +11,7 @@
   },
   "identity-number": {
     "header": "Identity document number",
-    "intro": "For security, you must provide us with information from an identity document that UK Visas and Immigration has on {{#isApplicant}}your{{/isApplicant}}{{^isApplicant}}{{values.applicant-full-name}}'s{{/isApplicant}} record."
+    "intro": "For security, you must provide us with information from an identity document that UK Visas and Immigration has on {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} record."
   },
   "upload-identity": {
     "header": "Upload proof of identity"
@@ -19,11 +19,8 @@
   "upload-identity-summary": {
     "header": "Proof of identity"
   },
-  "old-address": {
-    "header": "Is your old home address in the UK?"
-  },
   "home-address": {
-    "header": "What is your new home address?"
+    "header": "What is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} new home address?"
   },
   "upload-address": {
     "header": "Upload proof of address"
@@ -98,6 +95,15 @@
       },
       "dependants": {
         "label": "Which dependant(s) would you like to make the same changes to?"
+      },
+      "old-address": {
+        "label": "Is old home address in the UK?"
+      },
+      "old-postcode": {
+        "label": "Old postcode"
+      },
+      "home-address-details": {
+        "label": "New home address"
       }
     }
   }

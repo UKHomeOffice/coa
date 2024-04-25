@@ -32,6 +32,9 @@ module.exports = {
         step: '/who',
         field: 'who-are-you',
         parse: (val, req) => {
+          if(val === '{{values.nameWithPossession}} legal representative') {
+            return val.replace( '{{values.nameWithPossession}}', req.sessionModel.get('nameWithPossession'));
+          }
           return val.replace( '{{values.applicant-full-name}}', req.sessionModel.get('applicant-full-name') );
         }
       },
@@ -93,6 +96,34 @@ module.exports = {
             .map(a => a.fields.map(field => {
               return field.parsed;
             }).join('\n')).join('\n \n');
+        }
+      },
+      {
+        step: '/old-address',
+        field: 'old-address'
+      },
+      {
+        step: '/old-address',
+        field: 'old-postcode'
+      },
+      {
+        step: '/home-address',
+        field: 'home-address-details',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/home-address')) {
+            return null;
+          }
+          const addressDetails = [];
+          addressDetails.push(req.sessionModel.get('home-address-line-1'));
+          if(req.sessionModel.get('home-address-line-2')) {
+            addressDetails.push(req.sessionModel.get('home-address-line-2'));
+          }
+          addressDetails.push(req.sessionModel.get('home-address-town-or-city'));
+          if(req.sessionModel.get('home-address-county')) {
+            addressDetails.push(req.sessionModel.get('home-address-county'));
+          }
+          addressDetails.push(req.sessionModel.get('home-address-postcode'));
+          return addressDetails.join('\n');
         }
       }
     ]

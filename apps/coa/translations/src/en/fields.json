@@ -23,7 +23,7 @@
         "label": "{{values.applicant-full-name}}"
       },
       "legal-representative": {
-        "label": "{{values.applicant-full-name}}’s legal representative"
+        "label": "{{values.nameWithPossession}} legal representative"
       },
       "someone-else": {
         "label": "Someone else",
@@ -118,6 +118,35 @@
   },
   "arc-details" : {
     "label": "What is your Application registration card number?"
+  },
+  "old-postcode": {
+    "label": "Old postcode"
+  },
+  "home-address-line-1": {
+    "label": "Address line 1"
+  },
+  "home-address-line-2": {
+    "label": "Address line 2 (optional)"
+  },
+  "home-address-town-or-city": {
+    "label": "Town or city"
+  },
+  "home-address-county": {
+    "label": "County (optional)"
+  },
+  "home-address-postcode": {
+    "label": "Postcode"
+  },
+  "old-address": {
+    "legend": "Is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} old home address in the UK?",
+    "options": {
+      "Yes": {
+        "label": "Yes"
+      },
+      "No": {
+        "label": "No"
+      }
+    }
   },
   "privacy-check": {
     "label": "I confirm that I have read and understood the Data Protection statement above."
