@@ -96,5 +96,8 @@
         "required": "Enter your UK postcode",
         "notUrl": "Your answer must not contain URLs or links",
         "postcode": "Enter a real UK postcode"
+    },
+    "privacy-check": {
+      "required": "Confirm you have read the Data Protection statement"
     }
 }

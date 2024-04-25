@@ -118,5 +118,8 @@
   },
   "home-address-postcode": {
     "label": "Postcode"
+  },
+  "privacy-check": {
+    "label": "I confirm that I have read and understood the Data Protection statement above."
   }
 }
