@@ -218,7 +218,6 @@ module.exports = {
   },
 
   'old-postcode': {
-    mixin: 'input-text',
     validate: ['required', 'notUrl', 'postcode'],
     formatter: ['ukPostcode'],
     dependent: {

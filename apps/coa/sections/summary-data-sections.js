@@ -102,21 +102,15 @@ module.exports = {
             return null;
           }
           const addressDetails = [];
-          if(req.sessionModel.get('home-address-line-1')) {
-            addressDetails.push(req.sessionModel.get('home-address-line-1'));
-          }
+          addressDetails.push(req.sessionModel.get('home-address-line-1'));
           if(req.sessionModel.get('home-address-line-2')) {
             addressDetails.push(req.sessionModel.get('home-address-line-2'));
           }
-          if(req.sessionModel.get('home-address-town-or-city')) {
-            addressDetails.push(req.sessionModel.get('home-address-town-or-city'));
-          }
+          addressDetails.push(req.sessionModel.get('home-address-town-or-city'));
           if(req.sessionModel.get('home-address-county')) {
             addressDetails.push(req.sessionModel.get('home-address-county'));
           }
-          if(req.sessionModel.get('home-address-postcode')) {
-            addressDetails.push(req.sessionModel.get('home-address-postcode'));
-          }
+          addressDetails.push(req.sessionModel.get('home-address-postcode'));
           return addressDetails.join('\n');
         }
       }
