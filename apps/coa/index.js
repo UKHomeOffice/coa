@@ -4,6 +4,7 @@ const Summary = hof.components.summary;
 const Aggregate = require('./behaviours/aggregator');
 const setDateErrorLink = require('./behaviours/set-date-error-link');
 const ModifyChangeURL = require('./behaviours/modify-change-link');
+const saveDesiredContent = require('./behaviours/save-desired-content.js');
 
 /**
  * Checks if a given field value matches a conditional value based on the request object.
@@ -50,6 +51,7 @@ module.exports = {
       next: '/who'
     },
     '/who': {
+      behaviours: [saveDesiredContent],
       fields: ['who-are-you', 'legal-representative-name', 'someone-else-name'],
       next: '/contact-details',
       forks: [
@@ -101,11 +103,25 @@ module.exports = {
       ]
     },
     '/old-address': {
-      fields: [],
+      fields: ['old-address', 'old-postcode'],
+      forks: [
+        {
+          target: '/home-address',
+          condition: {
+            field: 'old-address',
+            value: 'Yes'
+          }
+        }
+      ],
       next: '/home-address'
     },
     '/home-address': {
-      fields: [],
+      fields: ['home-address-line-1',
+        'home-address-line-2',
+        'home-address-town-or-city',
+        'home-address-county',
+        'home-address-postcode'
+      ],
       next: '/upload-address'
     },
     '/upload-address': {
