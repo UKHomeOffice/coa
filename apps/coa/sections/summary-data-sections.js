@@ -113,6 +113,34 @@ module.exports = {
           addressDetails.push(req.sessionModel.get('home-address-postcode'));
           return addressDetails.join('\n');
         }
+      },
+      {
+        step: '/legal-details',
+        field: 'legal-company-name'
+      },
+      {
+        step: '/legal-details',
+        field: 'oisc-sra-number'
+      },
+      {
+        step: '/legal-details',
+        field: 'legal-address-line-1'
+      },
+      {
+        step: '/legal-details',
+        field: 'legal-address-line-2'
+      },
+      {
+        step: '/legal-details',
+        field: 'legal-address-town-or-city'
+      },
+      {
+        step: '/legal-details',
+        field: 'legal-address-county'
+      },
+      {
+        step: '/legal-details',
+        field: 'legal-address-postcode'
       }
     ]
   }

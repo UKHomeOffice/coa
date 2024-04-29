@@ -248,6 +248,33 @@ module.exports = {
     formatter: ['ukPostcode'],
     className: ['govuk-input', 'govuk-input--width-10']
   },
+  'legal-company-name': {
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'oisc-sra-number': {
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'legal-address-line-1': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'legal-address-line-2': {
+    validate: ['notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'legal-address-town-or-city': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'legal-address-county': {
+    validate: ['notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'legal-address-postcode': {
+    validate: ['required', 'notUrl', 'postcode'],
+    formatter: ['ukPostcode'],
+    className: ['govuk-input', 'govuk-input--width-10']
+  },
   'privacy-check': {
     mixin: 'checkbox',
     validate: ['required']

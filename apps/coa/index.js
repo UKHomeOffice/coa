@@ -116,7 +116,8 @@ module.exports = {
       next: '/home-address'
     },
     '/home-address': {
-      fields: ['home-address-line-1',
+      fields: [
+        'home-address-line-1',
         'home-address-line-2',
         'home-address-town-or-city',
         'home-address-county',
@@ -168,7 +169,15 @@ module.exports = {
       ]
     },
     '/legal-details': {
-      fields: [],
+      fields: [
+        'legal-company-name',
+        'oisc-sra-number',
+        'legal-address-line-1',
+        'legal-address-line-2',
+        'legal-address-town-or-city',
+        'legal-address-county',
+        'legal-address-postcode'
+      ],
       next: '/check-answers',
       forks: [
         {
