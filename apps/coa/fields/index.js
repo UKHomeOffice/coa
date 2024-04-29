@@ -249,9 +249,11 @@ module.exports = {
     className: ['govuk-input', 'govuk-input--width-10']
   },
   'legal-company-name': {
+    validate: ['notUrl'],
     className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
   'oisc-sra-number': {
+    validate: ['notUrl'],
     className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
   'legal-address-line-1': {
