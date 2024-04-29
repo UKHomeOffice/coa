@@ -4,6 +4,7 @@ const Summary = hof.components.summary;
 const Aggregate = require('./behaviours/aggregator');
 const setDateErrorLink = require('./behaviours/set-date-error-link');
 const ModifyChangeURL = require('./behaviours/modify-change-link');
+const saveDesiredContent = require('./behaviours/save-desired-content.js');
 const SaveDocument = require('./behaviours/save-document');
 const RemoveDocument = require('./behaviours/remove-document');
 
@@ -52,6 +53,7 @@ module.exports = {
       next: '/who'
     },
     '/who': {
+      behaviours: [saveDesiredContent],
       fields: ['who-are-you', 'legal-representative-name', 'someone-else-name'],
       next: '/contact-details',
       forks: [
@@ -73,7 +75,7 @@ module.exports = {
       next: '/identity-number'
     },
     '/identity-number': {
-      fields: [],
+      fields: ['identity-type', 'passport-number-details', 'brp-details', 'arc-details'],
       next: '/upload-identity'
     },
     '/upload-identity': {
@@ -105,11 +107,25 @@ module.exports = {
       ]
     },
     '/old-address': {
-      fields: [],
+      fields: ['old-address', 'old-postcode'],
+      forks: [
+        {
+          target: '/home-address',
+          condition: {
+            field: 'old-address',
+            value: 'Yes'
+          }
+        }
+      ],
       next: '/home-address'
     },
     '/home-address': {
-      fields: [],
+      fields: ['home-address-line-1',
+        'home-address-line-2',
+        'home-address-town-or-city',
+        'home-address-county',
+        'home-address-postcode'
+      ],
       next: '/upload-address'
     },
     '/upload-address': {

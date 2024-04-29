@@ -66,6 +66,52 @@
     "which-details-updating": {
         "default": "Tell us which details you want to update"
     },
+    "identity-type": {
+        "default": "Select which identity document number you can provide"
+    },
+    "passport-number-details": {
+        "required": "Enter a passport number",
+        "passportNumber": "Passport number can only have numbers and letters a-z"
+    },
+    "brp-details": {
+        "required": "Enter a BRP number",
+        "brpNumber": "Enter a BRP number in the correct format"
+    },
+    "arc-details": {
+        "required": "Enter an ARC number",
+        "alphanum": "ARC number can only have numbers and letters a-z"
+    },
+    "old-address": {
+        "required": "Tell us whether your old home address is in the UK"
+    },
+    "old-postcode": {
+        "required": "Enter your old UK postcode",
+        "notUrl": "Your answer must not contain URLs or links",
+        "postcode": "Enter a real UK postcode"
+    },
+    "home-address-line-1": {
+        "required": "Enter your house number or name",
+        "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "Address line 1 must be 250 characters or less"
+    },
+    "home-address-line-2": {
+        "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "Address line 2 must be 250 characters or less"
+    },
+    "home-address-town-or-city": {
+        "required": "Enter your town or city",
+        "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "Town/City must be 250 characters or less"
+    },
+    "home-address-county": {
+        "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "County must be 250 characters or less"
+    },
+    "home-address-postcode": {
+        "required": "Enter your UK postcode",
+        "notUrl": "Your answer must not contain URLs or links",
+        "postcode": "Enter a real UK postcode"
+    },
     "privacy-check": {
       "required": "Confirm you have read the Data Protection statement"
     },
