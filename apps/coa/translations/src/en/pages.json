@@ -32,7 +32,7 @@
     "header": "Proof of address"
   },
   "postal-address": {
-    "header": "What is your new postal address?"
+    "header": "What is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} new postal address?"
   },
   "upload-postal-address": {
     "header": "Upload proof of address"

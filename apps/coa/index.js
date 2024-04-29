@@ -4,6 +4,7 @@ const Summary = hof.components.summary;
 const Aggregate = require('./behaviours/aggregator');
 const setDateErrorLink = require('./behaviours/set-date-error-link');
 const ModifyChangeURL = require('./behaviours/modify-change-link');
+const saveDesiredContent = require('./behaviours/save-desired-content.js');
 
 /**
  * Checks if a given field value matches a conditional value based on the request object.
@@ -50,6 +51,7 @@ module.exports = {
       next: '/who'
     },
     '/who': {
+      behaviours: [saveDesiredContent],
       fields: ['who-are-you', 'legal-representative-name', 'someone-else-name'],
       next: '/contact-details',
       forks: [

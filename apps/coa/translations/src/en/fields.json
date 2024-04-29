@@ -23,7 +23,7 @@
         "label": "{{values.applicant-full-name}}"
       },
       "legal-representative": {
-        "label": "{{values.applicant-full-name}}’s legal representative"
+        "label": "{{values.nameWithPossession}} legal representative"
       },
       "someone-else": {
         "label": "Someone else",

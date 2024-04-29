@@ -32,6 +32,9 @@ module.exports = {
         step: '/who',
         field: 'who-are-you',
         parse: (val, req) => {
+          if(val === '{{values.nameWithPossession}} legal representative') {
+            return val.replace( '{{values.nameWithPossession}}', req.sessionModel.get('nameWithPossession'));
+          }
           return val.replace( '{{values.applicant-full-name}}', req.sessionModel.get('applicant-full-name') );
         }
       },
@@ -71,6 +74,10 @@ module.exports = {
         }
       },
       {
+        step: '/update-dependant',
+        field: 'change-dependant-details'
+      },
+      {
         step: '/dependant-summary',
         field: 'dependants',
         parse: (list, req) => {
@@ -90,11 +97,17 @@ module.exports = {
           if (!req.sessionModel.get('steps').includes('/postal-address')) {
             return null;
           }
-          return `${req.sessionModel.get('postal-address-line-1')}\n` +
-            `${req.sessionModel.get('postal-address-line-2')}\n` +
-            `${req.sessionModel.get('postal-address-town-or-city')}\n` +
-            `${req.sessionModel.get('postal-address-county')}\n` +
-            `${req.sessionModel.get('postal-address-postcode')}`;
+          const postalAddressDetails = [];
+          postalAddressDetails.push(req.sessionModel.get('postal-address-line-1'))
+          if (req.sessionModel.get('postal-address-line-2')) {
+            postalAddressDetails.push(req.sessionModel.get('postal-address-line-2'))
+          }
+          postalAddressDetails.push(req.sessionModel.get('postal-address-town-or-city'))
+          if (req.sessionModel.get('postal-address-county')) {
+            postalAddressDetails.push(req.sessionModel.get('postal-address-county'))
+          }
+          postalAddressDetails.push(req.sessionModel.get('postal-address-postcode'))
+          return postalAddressDetails.join('\n')
         }
       }
     ]
