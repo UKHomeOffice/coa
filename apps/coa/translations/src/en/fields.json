@@ -119,6 +119,17 @@
   "arc-details" : {
     "label": "What is your Application registration card number?"
   },
+  "old-address": {
+    "legend": "Is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} old home address in the UK?",
+    "options": {
+      "Yes": {
+        "label": "Yes"
+      },
+      "No": {
+        "label": "No"
+      }
+    }
+  },
   "old-postcode": {
     "label": "Old postcode"
   },
@@ -136,17 +147,6 @@
   },
   "home-address-postcode": {
     "label": "Postcode"
-  },
-  "old-address": {
-    "legend": "Is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} old home address in the UK?",
-    "options": {
-      "Yes": {
-        "label": "Yes"
-      },
-      "No": {
-        "label": "No"
-      }
-    }
   },
   "privacy-check": {
     "label": "I confirm that I have read and understood the Data Protection statement above."
