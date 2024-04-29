@@ -208,7 +208,24 @@ module.exports = {
       }
     ]
   },
-
+  'postal-address-line-1': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }]
+  },
+  'postal-address-line-2': {
+    validate: ['notUrl', { type: 'maxlength', arguments: [250] }]
+  },
+  'postal-address-town-or-city': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'postal-address-county': {
+    validate: ['notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'postal-address-postcode': {
+    validate: ['required', 'notUrl', 'postcode'],
+    className: ['govuk-input', 'govuk-input--width-10']
+  },
   'identity-type': {
     mixin: 'radio-group',
     labelClassName: 'govuk-label--s',

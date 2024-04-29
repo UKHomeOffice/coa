@@ -86,6 +86,10 @@ module.exports = {
         }
       },
       {
+        step: '/update-dependant',
+        field: 'change-dependant-details'
+      },
+      {
         step: '/dependant-summary',
         field: 'dependants',
         parse: (list, req) => {
@@ -96,6 +100,26 @@ module.exports = {
             .map(a => a.fields.map(field => {
               return field.parsed;
             }).join('\n')).join('\n \n');
+        }
+      },
+      {
+        step: '/postal-address',
+        field: 'postal-address-details',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/postal-address')) {
+            return null;
+          }
+          const postalAddressDetails = [];
+          postalAddressDetails.push(req.sessionModel.get('postal-address-line-1'));
+          if (req.sessionModel.get('postal-address-line-2')) {
+            postalAddressDetails.push(req.sessionModel.get('postal-address-line-2'));
+          }
+          postalAddressDetails.push(req.sessionModel.get('postal-address-town-or-city'));
+          if (req.sessionModel.get('postal-address-county')) {
+            postalAddressDetails.push(req.sessionModel.get('postal-address-county'));
+          }
+          postalAddressDetails.push(req.sessionModel.get('postal-address-postcode'));
+          return postalAddressDetails.join('\n');
         }
       },
       {
