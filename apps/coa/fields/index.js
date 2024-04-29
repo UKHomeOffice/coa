@@ -21,11 +21,9 @@ function UANRef(value) {
  * @param {string} value - The value to be checked.
  * @returns {boolean} - Returns true if the value is not 'United Kingdom', otherwise false.
  */
-
 function excludeUK(value) {
   return value !== 'United Kingdom';
 }
-
 
 function passportNumber(value) {
   return value.match(/^[a-zA-Z0-9]{1,9}$/);
@@ -34,7 +32,6 @@ function passportNumber(value) {
 function brpNumber(value) {
   return value.match(/^r[a-z](\d|X)\d{6}$/gi);
 }
-
 
 module.exports = {
   'change-dependant-details': {
