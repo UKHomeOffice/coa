@@ -25,6 +25,14 @@ function excludeUK(value) {
   return value !== 'United Kingdom';
 }
 
+function passportNumber(value) {
+  return value.match(/^[a-zA-Z0-9]{1,9}$/);
+}
+
+function brpNumber(value) {
+  return value.match(/^r[a-z](\d|X)\d{6}$/gi);
+}
+
 module.exports = {
   'change-dependant-details': {
     isPageHeading: 'true',
@@ -201,6 +209,60 @@ module.exports = {
     ]
   },
 
+  'identity-type': {
+    mixin: 'radio-group',
+    labelClassName: 'govuk-label--s',
+    validate: ['required'],
+    options: [
+      {
+        value: 'passport',
+        toggle: 'passport-number-details',
+        child: 'input-text'
+      },
+      {
+        value: 'brp',
+        toggle: 'brp-details',
+        child: 'input-text'
+      },
+      {
+        value: 'arc',
+        toggle: 'arc-details',
+        child: 'input-text'
+      },
+      {
+        value: 'none'
+      }
+    ]
+  },
+  'passport-number-details': {
+    dependent: {
+      field: 'identity-type',
+      value: 'passport'
+    },
+    labelClassName: 'govuk-label--s',
+    className: ['govuk-input', 'govuk-!-width-two-thirds'],
+    validate: ['required', passportNumber]
+  },
+
+  'brp-details': {
+    dependent: {
+      field: 'identity-type',
+      value: 'brp'
+    },
+    labelClassName: 'govuk-label--s',
+    className: ['govuk-input', 'govuk-!-width-two-thirds'],
+    validate: ['required', brpNumber]
+  },
+
+  'arc-details': {
+    dependent: {
+      field: 'identity-type',
+      value: 'arc'
+    },
+    labelClassName: 'govuk-label--s',
+    className: ['govuk-input', 'govuk-!-width-two-thirds'],
+    validate: ['required', 'alphanum']
+  },
   'old-address': {
     mixin: 'radio-group',
     validate: 'required',

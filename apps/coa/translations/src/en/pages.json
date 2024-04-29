@@ -11,7 +11,7 @@
   },
   "identity-number": {
     "header": "Identity document number",
-    "identity-number-intro": "For security, you must provide us with information from an identity document that UK Visas and Immigration has on your client’s record."
+    "intro": "For security, you must provide us with information from an identity document that UK Visas and Immigration has on {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} record."
   },
   "upload-identity": {
     "header": "Upload proof of identity"
@@ -83,6 +83,15 @@
       },
       "client-telephone": {
         "label": "Client’s telephone number"
+      },
+      "passport-number-details": {
+        "label": "Passport number"
+      },
+      "brp-details": {
+        "label": "BRP number"
+      },
+      "arc-details": {
+        "label": "ARC number"
       },
       "dependants": {
         "label": "Which dependant(s) would you like to make the same changes to?"
