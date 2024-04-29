@@ -86,7 +86,7 @@
       },
       "legal-details": {
         "label": "Legal representative",
-        "hint": "If you legal representative or their deeeails changed"
+        "hint": "If your legal representative or their details changed"
       }
     }
   },
@@ -104,6 +104,35 @@
   },
   "postal-address-postcode": {
     "label": "Postcode"
+  },
+  "identity-type": {
+    "legend": "Which information can you provide?",
+    "options": {
+      "passport": {
+        "label": "Passport number"
+      },
+      "brp": {
+        "label": "Biometric residence permit (BRP) number",
+        "hint": "This is on your BRP card or on any letters we've sent you"
+      },
+      "arc": {
+        "label": "Application registration card number"
+        
+      },
+      "none": {
+        "label": "None of these"
+      }
+    }
+  },
+  "passport-number-details": {
+    "label": "What is your passport number?",
+    "hint": "For example, 1208297A"
+  },
+  "brp-details" : {
+    "label": "What is your Biometric residence permit (BRP) number?"
+  },
+  "arc-details" : {
+    "label": "What is your Application registration card number?"
   },
   "old-address": {
     "legend": "Is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} old home address in the UK?",

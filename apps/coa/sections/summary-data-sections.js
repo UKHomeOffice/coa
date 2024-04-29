@@ -61,6 +61,18 @@ module.exports = {
       {
         step: '/contact-details',
         field: 'client-telephone'
+      },
+      {
+        step: '/identity-number',
+        field: 'passport-number-details'
+      },
+      {
+        step: '/identity-number',
+        field: 'brp-details'
+      },
+      {
+        step: '/identity-number',
+        field: 'arc-details'
       }
     ]
   },
