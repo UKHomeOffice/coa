@@ -103,11 +103,25 @@ module.exports = {
       ]
     },
     '/old-address': {
-      fields: [],
+      fields: ['old-address', 'old-postcode'],
+      forks: [
+        {
+          target: '/home-address',
+          condition: {
+            field: 'old-address',
+            value: 'Yes'
+          }
+        }
+      ],
       next: '/home-address'
     },
     '/home-address': {
-      fields: [],
+      fields: ['home-address-line-1',
+        'home-address-line-2',
+        'home-address-town-or-city',
+        'home-address-county',
+        'home-address-postcode'
+      ],
       next: '/upload-address'
     },
     '/upload-address': {
@@ -204,7 +218,16 @@ module.exports = {
     '/check-answers': {
       behaviours: [Summary, ModifyChangeURL],
       sections: require('./sections/summary-data-sections'),
-      template: 'summary'
+      template: 'summary',
+      next: '/privacy-policy'
+    },
+    '/privacy-policy': {
+      fields: ['privacy-check'],
+      next: '/request-submitted'
+    },
+    '/request-submitted': {
+      backLink: false,
+      clearSession: true
     }
   }
 };

@@ -88,5 +88,39 @@
         "required": "Enter your postcode",
         "notUrl": "Your answer must not contain URLs or links",
         "postcode": "Enter a real UK postcode"
+    },
+    "old-address": {
+        "required": "Tell us whether your old home address is in the UK"
+    },
+    "old-postcode": {
+        "required": "Enter your old UK postcode",
+        "notUrl": "Your answer must not contain URLs or links",
+        "postcode": "Enter a real UK postcode"
+    },
+    "home-address-line-1": {
+        "required": "Enter your house number or name",
+        "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "Address line 1 must be 250 characters or less"
+    },
+    "home-address-line-2": {
+        "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "Address line 2 must be 250 characters or less"
+    },
+    "home-address-town-or-city": {
+        "required": "Enter your town or city",
+        "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "Town/City must be 250 characters or less"
+    },
+    "home-address-county": {
+        "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "County must be 250 characters or less"
+    },
+    "home-address-postcode": {
+        "required": "Enter your UK postcode",
+        "notUrl": "Your answer must not contain URLs or links",
+        "postcode": "Enter a real UK postcode"
+    },
+    "privacy-check": {
+      "required": "Confirm you have read the Data Protection statement"
     }
 }

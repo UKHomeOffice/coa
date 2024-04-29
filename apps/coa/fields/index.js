@@ -208,7 +208,7 @@ module.exports = {
   },
   'postal-address-town-or-city': {
     validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
-    className: ['govuk-input','govuk-!-width-two-thirds']
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
   'postal-address-county': {
     validate: ['notUrl', { type: 'maxlength', arguments: [250] }],
@@ -217,5 +217,56 @@ module.exports = {
   'postal-address-postcode': {
     validate: ['required', 'notUrl', 'postcode'],
     className: ['govuk-input', 'govuk-input--width-10']
+  },
+  'old-address': {
+    mixin: 'radio-group',
+    validate: 'required',
+    isPageHeading: true,
+    options: [
+      {
+        value: 'Yes',
+        toggle: 'old-postcode',
+        child: 'input-text'
+      },
+      {
+        value: 'No'
+      }
+    ]
+  },
+
+  'old-postcode': {
+    validate: ['required', 'notUrl', 'postcode'],
+    formatter: ['ukPostcode'],
+    dependent: {
+      field: 'old-address',
+      value: 'Yes'
+    },
+    className: ['govuk-input', 'govuk-input--width-10']
+  },
+
+  'home-address-line-1': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'home-address-line-2': {
+    validate: ['notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'home-address-town-or-city': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'home-address-county': {
+    validate: ['notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'home-address-postcode': {
+    validate: ['required', 'notUrl', 'postcode'],
+    formatter: ['ukPostcode'],
+    className: ['govuk-input', 'govuk-input--width-10']
+  },
+  'privacy-check': {
+    mixin: 'checkbox',
+    validate: ['required']
   }
 };
