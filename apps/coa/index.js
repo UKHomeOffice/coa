@@ -147,7 +147,13 @@ module.exports = {
       ]
     },
     '/postal-address': {
-      fields: [],
+      fields: [
+        'postal-address-line-1',
+        'postal-address-line-2',
+        'postal-address-town-or-city',
+        'postal-address-county',
+        'postal-address-postcode'
+      ],
       next: '/upload-postal-address'
     },
     '/upload-postal-address': {

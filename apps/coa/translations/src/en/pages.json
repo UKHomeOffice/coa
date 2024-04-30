@@ -29,7 +29,7 @@
     "header": "Proof of address"
   },
   "postal-address": {
-    "header": "What is your new postal address?"
+    "header": "What is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} new postal address?"
   },
   "upload-postal-address": {
     "header": "Upload proof of address"
@@ -95,6 +95,9 @@
       },
       "dependants": {
         "label": "Which dependant(s) would you like to make the same changes to?"
+      },
+      "postal-address-details": {
+        "label": "What is your new postal address?"
       },
       "old-address": {
         "label": "Is old home address in the UK?"
