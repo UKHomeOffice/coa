@@ -73,11 +73,6 @@ spec:
                 secretKeyRef:
                   name: notify-key
                   key: notify-key
-            - name: REDIS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: redis
-                  key: pass
             - name: USE_MOCKS
               value: "false"
             - name: AWS_PASSWORD
