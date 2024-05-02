@@ -130,7 +130,7 @@ spec:
           envFrom:
             - configMapRef:
                 {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-                name: configmap-{{ .DRONE_SOURCE_BRANCH }}
+                name: {{ .APP_NAME }}-configmap-{{ .DRONE_SOURCE_BRANCH }}
                 {{ else }}
                 name: configmap
                 {{ end }}
