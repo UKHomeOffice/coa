@@ -35,7 +35,7 @@ module.exports = {
           if(val === '{{values.nameWithPossession}} legal representative') {
             return val.replace( '{{values.nameWithPossession}}', req.sessionModel.get('nameWithPossession'));
           }
-          return val.replace( '{{values.applicant-full-name}}', req.sessionModel.get('applicant-full-name') );
+          return val.replace( '{{values.applicant-full-name}}', req.sessionModel.get('applicant-full-name'));
         }
       },
       {
