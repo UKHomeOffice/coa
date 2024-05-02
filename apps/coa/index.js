@@ -63,7 +63,7 @@ module.exports = {
           }
         }
       ],
-      continueOnEdit: true,
+      continueOnEdit: true
     },
     '/legal-representative': {
       fields: ['email', 'telephone', 'client-email', 'client-telephone'],
