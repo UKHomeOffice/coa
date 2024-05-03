@@ -62,7 +62,8 @@ module.exports = {
             value: 'legal-representative'
           }
         }
-      ]
+      ],
+      continueOnEdit: true
     },
     '/legal-representative': {
       fields: ['email', 'telephone', 'client-email', 'client-telephone'],
