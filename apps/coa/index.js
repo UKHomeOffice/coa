@@ -5,6 +5,8 @@ const Aggregate = require('./behaviours/aggregator');
 const setDateErrorLink = require('./behaviours/set-date-error-link');
 const ModifyChangeURL = require('./behaviours/modify-change-link');
 const saveDesiredContent = require('./behaviours/save-desired-content.js');
+const clearSession = require('./behaviours/clear-session.js');
+const sendNotification = require('./behaviours/submit-notify.js');
 
 /**
  * Checks if a given field value matches a conditional value based on the request object.
@@ -222,12 +224,14 @@ module.exports = {
       next: '/privacy-policy'
     },
     '/privacy-policy': {
+      behaviours: [sendNotification],
       fields: ['privacy-check'],
       next: '/request-submitted'
     },
     '/request-submitted': {
-      backLink: false,
-      clearSession: true
+      behaviours: [Summary, clearSession],
+      sections: require('./sections/changeDetails-data-sections'),
+      backLink: false
     }
   }
 };

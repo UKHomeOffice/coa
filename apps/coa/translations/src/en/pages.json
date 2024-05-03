@@ -54,7 +54,10 @@
     "header": "Privacy policy"
   },
   "request-submitted": {
-    "confirmed": "Update submitted"
+    "confirmed": "Update submitted",
+    "p1": "You should keep this reference number safe as you will need it if you contact us about this update.",
+    "p2": "We have received your new details and have sent a confirmation email to {{values.email}}.",
+    "p3": "Sometimes we will contact you for more information. If we do not contact you, it will take up to 5 working days to update your details."
   },
   "confirm": {
     "sections": {
@@ -66,6 +69,15 @@
       },
       "change-details": {
         "header": "Change details"
+      },
+      "Home address details": {
+        "header": "Your Home address will be"
+      },
+      "Postal address details": {
+        "header": "Your postal address will be"
+      },
+      "Legal representative details": {
+        "header": "Your legal representative details will be"
       }
     },
     "fields": {
@@ -106,7 +118,7 @@
         "label": "Old postcode"
       },
       "home-address-details": {
-        "label": "New home address"
+        "label": "What is your new home address"
       }
     }
   }
