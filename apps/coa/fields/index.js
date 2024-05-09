@@ -30,7 +30,7 @@ function passportNumber(value) {
 }
 
 function brpNumber(value) {
-  return value.match(/^[A-Z][A-Z](\d|X)\d{6}$/gi);
+  return value.match(/^[a-zA-Z][a-zA-Z](\d|X)\d{6}$/gi);
 }
 
 module.exports = {
