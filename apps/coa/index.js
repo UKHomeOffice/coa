@@ -16,7 +16,7 @@ const unsetAddressSteps = require('./behaviours/unset-address-steps');
  * @returns {boolean} - Returns true if the field value matches the conditional value, false otherwise.
  */
 function forkCondition(req, fieldName, conditionalValue) {
-  const fieldValue = req.sessionModel.get(`${fieldName}`);
+  const fieldValue = req.sessionModel.get(fieldName);
   if (!fieldValue) return false;
   return Array.isArray(fieldValue) ? fieldValue.includes(conditionalValue) : fieldValue === conditionalValue;
 }
