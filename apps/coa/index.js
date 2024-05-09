@@ -5,6 +5,7 @@ const Aggregate = require('./behaviours/aggregator');
 const setDateErrorLink = require('./behaviours/set-date-error-link');
 const ModifyChangeURL = require('./behaviours/modify-change-link');
 const saveDesiredContent = require('./behaviours/save-desired-content.js');
+const unsetAddressSteps = require('./behaviours/unset-address-steps');
 
 /**
  * Checks if a given field value matches a conditional value based on the request object.
@@ -15,7 +16,7 @@ const saveDesiredContent = require('./behaviours/save-desired-content.js');
  * @returns {boolean} - Returns true if the field value matches the conditional value, false otherwise.
  */
 function forkCondition(req, fieldName, conditionalValue) {
-  const fieldValue = req.form.historicalValues?.[fieldName] || req.form.values[fieldName];
+  const fieldValue = req.sessionModel.get(`${fieldName}`);
   if (!fieldValue) return false;
   return Array.isArray(fieldValue) ? fieldValue.includes(conditionalValue) : fieldValue === conditionalValue;
 }
@@ -87,6 +88,7 @@ module.exports = {
     },
     '/which-details': {
       fields: ['which-details-updating'],
+      behaviours: [unsetAddressSteps],
       // The conditional check should be performed in reverse order, as the last fork takes over.
       forks: [
         {
