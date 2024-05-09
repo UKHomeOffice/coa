@@ -108,14 +108,8 @@
       "home-address-details": {
         "label": "New home address"
       },
-      "legal-company-name": {
-        "label": "Company name"
-      },
-      "legal-address-line-2": {
-        "label": "Address line 2"
-      },
-      "legal-address-county": {
-        "label": "County"
+      "legal-representative-address-details": {
+        "label": "Legal representative postal address"
       }
     }
   }

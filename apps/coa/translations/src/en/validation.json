@@ -140,7 +140,10 @@
         "notUrl": "Your answer must not contain URLs or links"
     },
     "oisc-sra-number": {
-        "notUrl": "Your answer must not contain URLs or links"
+        "required":"Enter an OISC or SRA number",
+        "notUrl": "Your answer must not contain URLs or links",
+        "checkSRANum":"SRA number should be in length between 5-8 digits. for example 12345 or 12345678",
+        "checkOISCNum":"OISC number should starts with a alphabet followed by 9 digits. for example A123456789"
     },
     "legal-address-line-1": {
         "required": "Enter your house number or name",

@@ -332,7 +332,7 @@ module.exports = {
     className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
   'oisc-sra-number': {
-    validate: ['notUrl'],
+    validate: ['notUrl', 'required'],
     className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
   'legal-address-line-1': {

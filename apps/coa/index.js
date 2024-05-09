@@ -5,6 +5,7 @@ const Aggregate = require('./behaviours/aggregator');
 const setDateErrorLink = require('./behaviours/set-date-error-link');
 const ModifyChangeURL = require('./behaviours/modify-change-link');
 const saveDesiredContent = require('./behaviours/save-desired-content.js');
+const checkOiscSraNumber = require('./behaviours/check-oisc-sra-number.js');
 
 /**
  * Checks if a given field value matches a conditional value based on the request object.
@@ -175,6 +176,7 @@ module.exports = {
       ]
     },
     '/legal-details': {
+      behaviours: [checkOiscSraNumber],
       fields: [
         'legal-company-name',
         'oisc-sra-number',

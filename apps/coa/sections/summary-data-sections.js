@@ -160,23 +160,23 @@ module.exports = {
       },
       {
         step: '/legal-details',
-        field: 'legal-address-line-1'
-      },
-      {
-        step: '/legal-details',
-        field: 'legal-address-line-2'
-      },
-      {
-        step: '/legal-details',
-        field: 'legal-address-town-or-city'
-      },
-      {
-        step: '/legal-details',
-        field: 'legal-address-county'
-      },
-      {
-        step: '/legal-details',
-        field: 'legal-address-postcode'
+        field: 'legal-representative-address-details',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/legal-details')) {
+            return null;
+          }
+          const legalAddressDetails = [];
+          legalAddressDetails.push(req.sessionModel.get('legal-address-line-1'));
+          if(req.sessionModel.get('legal-address-line-2')) {
+            legalAddressDetails.push(req.sessionModel.get('legal-address-line-2'));
+          }
+          legalAddressDetails.push(req.sessionModel.get('legal-address-town-or-city'));
+          if(req.sessionModel.get('legal-address-county')) {
+            legalAddressDetails.push(req.sessionModel.get('legal-address-county'));
+          }
+          legalAddressDetails.push(req.sessionModel.get('legal-address-postcode'));
+          return legalAddressDetails.join('\n');
+        }
       }
     ]
   }
