@@ -70,13 +70,13 @@
       "change-details": {
         "header": "Change details"
       },
-      "Home address details": {
+      "home-address-details": {
         "header": "Your Home address will be"
       },
-      "Postal address details": {
+      "postal-address-details": {
         "header": "Your postal address will be"
       },
-      "Legal representative details": {
+      "legal-representative-details": {
         "header": "Your legal representative details will be"
       }
     },

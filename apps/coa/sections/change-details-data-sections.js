@@ -1,5 +1,5 @@
 module.exports = {
-  'Home address details': {
+  'home-address-details': {
     steps: [
       {
         step: '/home-address',
@@ -24,7 +24,7 @@ module.exports = {
       }
     ]
   },
-  'Postal address details': {
+  'postal-address-details': {
     steps: [
       {
         step: '/postal-address',

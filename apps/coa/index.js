@@ -4,9 +4,9 @@ const Summary = hof.components.summary;
 const Aggregate = require('./behaviours/aggregator');
 const setDateErrorLink = require('./behaviours/set-date-error-link');
 const ModifyChangeURL = require('./behaviours/modify-change-link');
-const saveDesiredContent = require('./behaviours/save-desired-content.js');
-const clearSession = require('./behaviours/clear-session.js');
-const sendNotification = require('./behaviours/submit-notify.js');
+const saveDesiredContent = require('./behaviours/save-desired-content');
+const clearSession = require('./behaviours/clear-session');
+const sendNotification = require('./behaviours/submit-notify');
 
 /**
  * Checks if a given field value matches a conditional value based on the request object.
@@ -230,7 +230,7 @@ module.exports = {
     },
     '/request-submitted': {
       behaviours: [Summary, clearSession],
-      sections: require('./sections/changeDetails-data-sections'),
+      sections: require('./sections/change-details-data-sections'),
       backLink: false
     }
   }
