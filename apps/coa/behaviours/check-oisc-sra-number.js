@@ -5,22 +5,14 @@ module.exports = superclass => class extends superclass {
     const oiscOrSraNumber = req.form.values['oisc-sra-number'];
     const maxLength = 8;
     const minLength = 5;
-    if (validators.numeric(oiscOrSraNumber) &&
-        (oiscOrSraNumber.length < minLength || oiscOrSraNumber.length > maxLength )) {
+    if ((validators.numeric(oiscOrSraNumber) &&
+            (oiscOrSraNumber.length < minLength || oiscOrSraNumber.length > maxLength )) ||
+          (!validators.numeric(oiscOrSraNumber) && !validators.regex(oiscOrSraNumber.toUpperCase(), /^[A-Z]\d{9}$/))) {
       return next({
         'oisc-sra-number': new this.ValidationError(
           'oisc-sra-number',
           {
-            type: 'checkSRANum'
-          })
-      });
-    }
-    if(!validators.numeric(oiscOrSraNumber) && !validators.regex(oiscOrSraNumber.toUpperCase(), /^[A-Z]\d{9}$/)) {
-      return next({
-        'oisc-sra-number': new this.ValidationError(
-          'oisc-sra-number',
-          {
-            type: 'checkOISCNum'
+            type: 'OISCSRANum'
           })
       });
     }

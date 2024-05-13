@@ -209,10 +209,12 @@ module.exports = {
     ]
   },
   'postal-address-line-1': {
-    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }]
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
   'postal-address-line-2': {
-    validate: ['notUrl', { type: 'maxlength', arguments: [250] }]
+    validate: ['notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
   'postal-address-town-or-city': {
     validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
