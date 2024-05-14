@@ -119,6 +119,18 @@
       },
       "home-address-details": {
         "label": "What is your new home address"
+      },
+      "legal-company-name": {
+        "label": "Company name"
+      },
+      "legal-representative-address-details": {
+        "label": "Legal representative postal address"
+      },
+      "legal-representative-email": {
+        "label": "Rep’/IA’s main email address"
+      },
+      "legal-rep-address-details": {
+        "label": "Address"
       }
     }
   }

@@ -35,7 +35,7 @@ module.exports = {
           if(val === '{{values.nameWithPossession}} legal representative') {
             return val.replace( '{{values.nameWithPossession}}', req.sessionModel.get('nameWithPossession'));
           }
-          return val.replace( '{{values.applicant-full-name}}', req.sessionModel.get('applicant-full-name') );
+          return val.replace( '{{values.applicant-full-name}}', req.sessionModel.get('applicant-full-name'));
         }
       },
       {
@@ -148,6 +148,34 @@ module.exports = {
           }
           postalAddressDetails.push(req.sessionModel.get('postal-address-postcode'));
           return postalAddressDetails.join('\n');
+        }
+      },
+      {
+        step: '/legal-details',
+        field: 'legal-company-name'
+      },
+      {
+        step: '/legal-details',
+        field: 'oisc-sra-number'
+      },
+      {
+        step: '/legal-details',
+        field: 'legal-representative-address-details',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/legal-details')) {
+            return null;
+          }
+          const legalAddressDetails = [];
+          legalAddressDetails.push(req.sessionModel.get('legal-address-line-1'));
+          if(req.sessionModel.get('legal-address-line-2')) {
+            legalAddressDetails.push(req.sessionModel.get('legal-address-line-2'));
+          }
+          legalAddressDetails.push(req.sessionModel.get('legal-address-town-or-city'));
+          if(req.sessionModel.get('legal-address-county')) {
+            legalAddressDetails.push(req.sessionModel.get('legal-address-county'));
+          }
+          legalAddressDetails.push(req.sessionModel.get('legal-address-postcode'));
+          return legalAddressDetails.join('\n');
         }
       }
     ]
