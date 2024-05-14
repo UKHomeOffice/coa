@@ -8,7 +8,6 @@ const saveDesiredContent = require('./behaviours/save-desired-content');
 const clearSession = require('./behaviours/clear-session');
 const sendNotification = require('./behaviours/submit-notify');
 const checkOiscSraNumber = require('./behaviours/check-oisc-sra-number');
-
 /**
  * Checks if a given field value matches a conditional value based on the request object.
  *
