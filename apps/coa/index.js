@@ -5,6 +5,7 @@ const Aggregate = require('./behaviours/aggregator');
 const setDateErrorLink = require('./behaviours/set-date-error-link');
 const ModifyChangeURL = require('./behaviours/modify-change-link');
 const saveDesiredContent = require('./behaviours/save-desired-content.js');
+const checkOiscSraNumber = require('./behaviours/check-oisc-sra-number.js');
 const SaveDocument = require('./behaviours/save-document');
 const RemoveDocument = require('./behaviours/remove-document');
 
@@ -64,7 +65,8 @@ module.exports = {
             value: 'legal-representative'
           }
         }
-      ]
+      ],
+      continueOnEdit: true
     },
     '/legal-representative': {
       fields: ['email', 'telephone', 'client-email', 'client-telephone'],
@@ -121,7 +123,8 @@ module.exports = {
       next: '/home-address'
     },
     '/home-address': {
-      fields: ['home-address-line-1',
+      fields: [
+        'home-address-line-1',
         'home-address-line-2',
         'home-address-town-or-city',
         'home-address-county',
@@ -151,7 +154,13 @@ module.exports = {
       ]
     },
     '/postal-address': {
-      fields: [],
+      fields: [
+        'postal-address-line-1',
+        'postal-address-line-2',
+        'postal-address-town-or-city',
+        'postal-address-county',
+        'postal-address-postcode'
+      ],
       next: '/upload-postal-address'
     },
     '/upload-postal-address': {
@@ -173,7 +182,16 @@ module.exports = {
       ]
     },
     '/legal-details': {
-      fields: [],
+      behaviours: [checkOiscSraNumber],
+      fields: [
+        'legal-company-name',
+        'oisc-sra-number',
+        'legal-address-line-1',
+        'legal-address-line-2',
+        'legal-address-town-or-city',
+        'legal-address-county',
+        'legal-address-postcode'
+      ],
       next: '/check-answers',
       forks: [
         {

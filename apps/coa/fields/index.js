@@ -30,7 +30,7 @@ function passportNumber(value) {
 }
 
 function brpNumber(value) {
-  return value.match(/^r[a-z](\d|X)\d{6}$/gi);
+  return value.match(/^[a-zA-Z][a-zA-Z](\d|X)\d{6}$/gi);
 }
 
 module.exports = {
@@ -208,7 +208,26 @@ module.exports = {
       }
     ]
   },
-
+  'postal-address-line-1': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'postal-address-line-2': {
+    validate: ['notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'postal-address-town-or-city': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'postal-address-county': {
+    validate: ['notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'postal-address-postcode': {
+    validate: ['required', 'notUrl', 'postcode'],
+    className: ['govuk-input', 'govuk-input--width-10']
+  },
   'identity-type': {
     mixin: 'radio-group',
     labelClassName: 'govuk-label--s',
@@ -306,6 +325,35 @@ module.exports = {
     className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
   'home-address-postcode': {
+    validate: ['required', 'notUrl', 'postcode'],
+    formatter: ['ukPostcode'],
+    className: ['govuk-input', 'govuk-input--width-10']
+  },
+  'legal-company-name': {
+    validate: ['notUrl', { type: 'maxlength', arguments: 200 }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'oisc-sra-number': {
+    validate: ['notUrl', 'required'],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'legal-address-line-1': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'legal-address-line-2': {
+    validate: ['notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'legal-address-town-or-city': {
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'legal-address-county': {
+    validate: ['notUrl', { type: 'maxlength', arguments: [250] }],
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+  'legal-address-postcode': {
     validate: ['required', 'notUrl', 'postcode'],
     formatter: ['ukPostcode'],
     className: ['govuk-input', 'govuk-input--width-10']

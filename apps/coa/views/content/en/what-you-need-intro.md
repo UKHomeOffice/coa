@@ -19,7 +19,7 @@ You can use this service to update a dependant's:
 If you are updating your child dependant's address, you will need to provide:
   - photographic proof of identity for the child, or a copy of their birth certificate
   - photographic proof of identity for the parents
-  - proof of address for the paretns, dated within the last 3 months
+  - proof of address for the parents, dated within the last 3 months
 
 ### If you are updating a someone else's details
 You will need to provide:

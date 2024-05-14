@@ -42,7 +42,7 @@ module.exports = {
           if(val === '{{values.nameWithPossession}} legal representative') {
             return val.replace( '{{values.nameWithPossession}}', req.sessionModel.get('nameWithPossession'));
           }
-          return val.replace( '{{values.applicant-full-name}}', req.sessionModel.get('applicant-full-name') );
+          return val.replace( '{{values.applicant-full-name}}', req.sessionModel.get('applicant-full-name'));
         }
       },
       {
@@ -93,6 +93,10 @@ module.exports = {
         }
       },
       {
+        step: '/update-dependant',
+        field: 'change-dependant-details'
+      },
+      {
         step: '/dependant-summary',
         field: 'dependants',
         parse: (list, req) => {
@@ -103,6 +107,26 @@ module.exports = {
             .map(a => a.fields.map(field => {
               return field.parsed;
             }).join('\n')).join('\n \n');
+        }
+      },
+      {
+        step: '/postal-address',
+        field: 'postal-address-details',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/postal-address')) {
+            return null;
+          }
+          const postalAddressDetails = [];
+          postalAddressDetails.push(req.sessionModel.get('postal-address-line-1'));
+          if (req.sessionModel.get('postal-address-line-2')) {
+            postalAddressDetails.push(req.sessionModel.get('postal-address-line-2'));
+          }
+          postalAddressDetails.push(req.sessionModel.get('postal-address-town-or-city'));
+          if (req.sessionModel.get('postal-address-county')) {
+            postalAddressDetails.push(req.sessionModel.get('postal-address-county'));
+          }
+          postalAddressDetails.push(req.sessionModel.get('postal-address-postcode'));
+          return postalAddressDetails.join('\n');
         }
       },
       {
@@ -131,6 +155,34 @@ module.exports = {
           }
           addressDetails.push(req.sessionModel.get('home-address-postcode'));
           return addressDetails.join('\n');
+        }
+      },
+      {
+        step: '/legal-details',
+        field: 'legal-company-name'
+      },
+      {
+        step: '/legal-details',
+        field: 'oisc-sra-number'
+      },
+      {
+        step: '/legal-details',
+        field: 'legal-representative-address-details',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/legal-details')) {
+            return null;
+          }
+          const legalAddressDetails = [];
+          legalAddressDetails.push(req.sessionModel.get('legal-address-line-1'));
+          if(req.sessionModel.get('legal-address-line-2')) {
+            legalAddressDetails.push(req.sessionModel.get('legal-address-line-2'));
+          }
+          legalAddressDetails.push(req.sessionModel.get('legal-address-town-or-city'));
+          if(req.sessionModel.get('legal-address-county')) {
+            legalAddressDetails.push(req.sessionModel.get('legal-address-county'));
+          }
+          legalAddressDetails.push(req.sessionModel.get('legal-address-postcode'));
+          return legalAddressDetails.join('\n');
         }
       }
     ]
