@@ -137,7 +137,8 @@
     },
 
     "legal-company-name": {
-        "notUrl": "Your answer must not contain URLs or links"
+        "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "Company name must be 200 characters or less"
     },
     "oisc-sra-number": {
         "required":"Enter an OISC or SRA number",
