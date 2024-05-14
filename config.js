@@ -28,7 +28,7 @@ module.exports = {
     steps: ['/overview', '/what-you-need', '/proof-of-identity', '/proof-of-address', '/update-details']
   },
   upload: {
-    maxFileSizeInBytes: '26214400', // 25MB in bytes
+    maxFileSizeInBytes: 25 * 1024 * 1024, // 25MiB in bytes
     hostname: process.env.FILE_VAULT_URL,
     allowedMimeTypes: [
       'application/pdf',

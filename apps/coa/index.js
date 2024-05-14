@@ -79,13 +79,14 @@ module.exports = {
       next: '/upload-identity'
     },
     '/upload-identity': {
-      behaviours: [SaveDocument('document-file'), RemoveDocument],
+      behaviours: [SaveDocument('identity-documents', 'document-file')],
       fields: ['document-file'],
-      next: '/upload-identity-summary',
-      isApplicant: (req) => req.form.values['who-are-you'] === 'applicant'
+      next: '/upload-identity-summary'
     },
     '/upload-identity-summary': {
+      behaviours: [RemoveDocument('identity-documents')],
       fields: [],
+      uploadPage: 'upload-identity',
       next: '/which-details'
     },
     '/which-details': {

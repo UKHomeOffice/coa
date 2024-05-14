@@ -1,12 +1,12 @@
 'use strict';
 
-module.exports = superclass => class extends superclass {
+module.exports = documentCategory => superclass => class extends superclass {
   configure(req, res, next) {
     if (req.query.delete) {
-      const images = req.sessionModel.get('images') || [];
-      const remaining = images.filter(i => i.id !== req.query.delete);
+      const documents = req.sessionModel.get(documentCategory) || [];
+      const remaining = documents.filter(d => d.id !== req.query.delete);
       req.log('info', `Removing document: ${req.query.delete}`);
-      req.sessionModel.set('images', remaining);
+      req.sessionModel.set(documentCategory, remaining);
       return res.redirect(`${req.baseUrl}${req.path}`);
     }
     return super.configure(req, res, next);

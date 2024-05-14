@@ -107,6 +107,9 @@
       },
       "home-address-details": {
         "label": "New home address"
+      },
+      "identity-documents": {
+        "label": "Proof of identity"
       }
     }
   }

@@ -3,12 +3,9 @@
 const config = require('../../../config');
 const Model = require('../models/file-upload');
 
-module.exports = name => superclass => class extends superclass {
+module.exports = (documentCategory, name) => superclass => class extends superclass {
   process(req) {
     if (req.files && req.files[name]) {
-      // set document name on values for filename extension validation
-      // N:B validation controller gets values from
-      // req.form.values and not on req.files
       req.form.values[name] = req.files[name].name;
       req.log('info', `Processing document: ${req.form.values[name]}`);
     }
@@ -22,7 +19,6 @@ module.exports = name => superclass => class extends superclass {
       if (fileUpload) {
         const uploadSize = fileUpload.size;
         const mimetype = fileUpload.mimetype;
-        
         const uploadSizeTooBig = uploadSize > config.upload.maxFileSizeInBytes;
         const uploadSizeBeyondServerLimits = uploadSize === null;
         const invalidMimetype = !config.upload.allowedMimeTypes.includes(mimetype);
@@ -46,19 +42,18 @@ module.exports = name => superclass => class extends superclass {
 
   saveValues(req, res, next) {
     if (req.body['upload-file']) {
-
-      const documentCategory = req.body['upload-file'];
       const documentsByCategory = req.sessionModel.get(documentCategory) || [];
 
       if (req.files[name]) {
         req.log('info', `Saving document: ${req.files[name].name} in ${documentCategory} category`);
-        
+
         const document = {
           name: req.files[name].name,
           data: req.files[name].data,
           mimetype: req.files[name].mimetype
         };
         const model = new Model(document);
+
         return model.save()
           .then(() => {
             req.sessionModel.set(documentCategory, [...documentsByCategory, model.toJSON()]);

@@ -1,3 +1,4 @@
+/* eslint-disable node/no-deprecated-api */
 'use strict';
 
 const url = require('url');
@@ -17,7 +18,7 @@ module.exports = class UploadModel extends Model {
       const attributes = {
         url: config.upload.hostname
       };
-      const reqConf = new URL(this.url(attributes));
+      const reqConf = url.parse(this.url(attributes));
       reqConf.formData = {
         document: {
           value: this.get('data'),
@@ -37,7 +38,7 @@ module.exports = class UploadModel extends Model {
     })
       .then(result => {
         return this.set({
-          url: result.url.replace('/file/', '/file/generate-link/').split('?')[0]
+          url: result.url
         });
       })
       .then(() => {
@@ -45,36 +46,36 @@ module.exports = class UploadModel extends Model {
       });
   }
 
-  // auth() {
-  //   if (!config.keycloak.token) {
-  //     // eslint-disable-next-line no-console
-  //     console.error('keycloak token url is not defined');
-  //     return Promise.resolve({
-  //       bearer: 'abc123'
-  //     });
-  //   }
-  //   const tokenReq = {
-  //     url: config.keycloak.token,
-  //     form: {
-  //       username: config.keycloak.username,
-  //       password: config.keycloak.password,
-  //       grant_type: 'password',
-  //       client_id: config.keycloak.clientId,
-  //       client_secret: config.keycloak.secret
-  //     },
-  //     method: 'POST'
-  //   };
+  auth() {
+    if (!config.keycloak.token) {
+      // eslint-disable-next-line no-console
+      console.error('keycloak token url is not defined');
+      return Promise.resolve({
+        bearer: 'abc123'
+      });
+    }
+    const tokenReq = {
+      url: config.keycloak.token,
+      form: {
+        username: config.keycloak.username,
+        password: config.keycloak.password,
+        grant_type: 'password',
+        client_id: config.keycloak.clientId,
+        client_secret: config.keycloak.secret
+      },
+      method: 'POST'
+    };
 
-  //   return new Promise((resolve, reject) => {
-  //     return this._request(tokenReq, (err, response) => {
-  //       if (err) {
-  //         return reject(err);
-  //       }
+    return new Promise((resolve, reject) => {
+      return this._request(tokenReq, (err, response) => {
+        if (err) {
+          return reject(err);
+        }
 
-  //       return resolve({
-  //         bearer: JSON.parse(response.body).access_token
-  //       });
-  //     });
-  //   });
-  // }
+        return resolve({
+          bearer: JSON.parse(response.body).access_token
+        });
+      });
+    });
+  }
 };

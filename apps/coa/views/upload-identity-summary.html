@@ -1,0 +1,27 @@
+{{<partials-page}}
+  {{$page-content}}
+
+    {{^values.identity-documents}}
+      <h2 class="govuk-heading-m">No documents uploaded</h2>
+    {{/values.identity-documents}}
+
+    {{#values.identity-documents.length}}
+      <h2 class="govuk-heading-m">You have uploaded {{values.identity-documents.length}} file</h2>
+      <table class="loop-summary-table">
+        <tbody class="govuk-table__body">
+        {{#values.identity-documents}}
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">{{name}}</td>
+            <td><a href="?delete={{id}}" class="govuk-link">{{#t}}buttons.delete{{/t}}</a></td>
+          </tr>
+        {{/values.identity-documents}}
+        </tbody>
+      </table>
+    {{/values.identity-documents.length}}
+
+    <p class="govuk-!-margin-top-8"><a href="{{baseUrl}}/{{uploadPage}}" class="govuk-link">{{values.test}}{{#t}}buttons.upload-another-file{{/t}}</a></p>
+
+    {{#input-submit}}continue{{/input-submit}}
+
+  {{/page-content}}
+{{/partials-page}}
