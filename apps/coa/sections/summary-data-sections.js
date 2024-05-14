@@ -149,6 +149,34 @@ module.exports = {
           addressDetails.push(req.sessionModel.get('home-address-postcode'));
           return addressDetails.join('\n');
         }
+      },
+      {
+        step: '/legal-details',
+        field: 'legal-company-name'
+      },
+      {
+        step: '/legal-details',
+        field: 'oisc-sra-number'
+      },
+      {
+        step: '/legal-details',
+        field: 'legal-representative-address-details',
+        parse: (list, req) => {
+          if (!req.sessionModel.get('steps').includes('/legal-details')) {
+            return null;
+          }
+          const legalAddressDetails = [];
+          legalAddressDetails.push(req.sessionModel.get('legal-address-line-1'));
+          if(req.sessionModel.get('legal-address-line-2')) {
+            legalAddressDetails.push(req.sessionModel.get('legal-address-line-2'));
+          }
+          legalAddressDetails.push(req.sessionModel.get('legal-address-town-or-city'));
+          if(req.sessionModel.get('legal-address-county')) {
+            legalAddressDetails.push(req.sessionModel.get('legal-address-county'));
+          }
+          legalAddressDetails.push(req.sessionModel.get('legal-address-postcode'));
+          return legalAddressDetails.join('\n');
+        }
       }
     ]
   }
