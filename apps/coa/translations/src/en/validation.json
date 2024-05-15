@@ -135,6 +135,39 @@
         "notUrl": "Your answer must not contain URLs or links",
         "postcode": "Enter a real UK postcode"
     },
+
+    "legal-company-name": {
+        "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "Company name must be 200 characters or less"
+    },
+    "oisc-sra-number": {
+        "required":"Enter an OISC or SRA number",
+        "notUrl": "Your answer must not contain URLs or links",
+        "OISCSRANum":"Enter an OISC or SRA number in the correct format, for example F123456789 or 123456"
+    },
+    "legal-address-line-1": {
+        "required": "Enter your house number or name",
+        "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "Address line 1 must be 250 characters or less"
+    },
+    "legal-address-line-2": {
+        "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "Address line 2 must be 250 characters or less"
+    },
+    "legal-address-town-or-city": {
+        "required": "Enter your town or city",
+        "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "Town/City must be 250 characters or less"
+    },
+    "legal-address-county": {
+        "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "County must be 250 characters or less"
+    },
+    "legal-address-postcode": {
+        "required": "Enter your UK postcode",
+        "notUrl": "Your answer must not contain URLs or links",
+        "postcode": "Enter a real UK postcode"
+    },
     "privacy-check": {
       "required": "Confirm you have read the Data Protection statement"
     }

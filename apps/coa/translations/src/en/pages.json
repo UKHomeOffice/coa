@@ -107,6 +107,9 @@
       },
       "home-address-details": {
         "label": "New home address"
+      },
+      "legal-representative-address-details": {
+        "label": "Legal representative postal address"
       }
     }
   }
