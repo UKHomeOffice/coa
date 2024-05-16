@@ -73,6 +73,7 @@ steps:
       branch:
         include:
         - master
+        - feature/*
       event: [push, pull_request]
 
   - name: linting_deploy
@@ -81,6 +82,7 @@ steps:
       branch:
         include:
           - master
+          - feature/*
       event: push
 
   - name: unit_tests_deploy
@@ -89,6 +91,7 @@ steps:
       branch:
         include:
           - master
+          - feature/*
       event: push
 
   - name: build_image
