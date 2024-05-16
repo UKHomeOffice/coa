@@ -132,7 +132,7 @@ module.exports = {
     },
     '/home-address': {
       continueOnEdit: true,
-      fields:[
+      fields: [
         'home-address-line-1',
         'home-address-line-2',
         'home-address-town-or-city',

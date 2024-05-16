@@ -50,15 +50,16 @@ spec:
           envFrom:
             - configMapRef:
                 {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-                name: configmap-{{ .DRONE_SOURCE_BRANCH }}
+                name: {{ .APP_NAME }}-configmap-{{ .DRONE_SOURCE_BRANCH }}
                 {{ else }}
-                name: configmap
+                name: {{ .APP_NAME }}-configmap
                 {{ end }}
           env:
             # because some internal services have self signed certs
-            # SERVICE_URL is temporary, can be removed once forwarded headers through keycloak work
             - name: TZ
               value: Europe/London
+            - name: NODE_TLS_REJECT_UNAUTHORIZED
+              value: "0"
             - name: REDIS_PORT
               value: "6379"
             - name: REDIS_HOST
@@ -67,48 +68,54 @@ spec:
               {{ else }}
               value: redis
               {{ end }}
-            - name: TZ
-              value: Europe/London
-            - name: NODE_TLS_REJECT_UNAUTHORIZED
-              value: "0"
-            - name: SERVICE_URL
-              {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-              value: lmr-{{ .DRONE_SOURCE_BRANCH }}.internal.sas-lmr-branch.homeoffice.gov.uk
-              {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
-              value: lmr.uat.sas-notprod.homeoffice.gov.uk
-              {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-              value: lmr.internal.stg.sas-notprod.homeoffice.gov.uk
-              {{ else }}
-              value: {{ .PRODUCTION_URL }}
-              {{ end }}
-            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-            - name: DATASERVICE_SERVICE_HOST
-              value: dataservice-{{ .DRONE_SOURCE_BRANCH }}
-            - name: DATASERVICE_SERVICE_PORT_HTTPS
-              value: "10443"
-            {{ end }}
-            {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
-            - name: ALLOW_SKIP
-              value: "true"
-            - name: SKIP_EMAIL
-              value: "sas-hof-test@digital.homeoffice.gov.uk"
-            {{ end }}
-            - name: SESSION_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: session-secret
-                  key: session-secret
             - name: NOTIFY_KEY
               valueFrom:
                 secretKeyRef:
                   name: notify-key
                   key: notify-key
-            - name: PDF_CONVERTER_URL
-              {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-              value: https://html-pdf-converter-{{ .DRONE_SOURCE_BRANCH }}:10443/convert
-              {{ else }}
-              value: https://html-pdf-converter:10443/convert
-              {{ end }}
+            - name: USE_MOCKS
+              value: "false"
+            - name: AWS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: file-vault
+                  #encryption_key is randomly generated password used to encrypt the params that are returned by file-vault
+                  key: encryption_key
+            - name: KEYCLOAK_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-client
+                  key: secret
+            - name: KEYCLOAK_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-client
+                  key: id
+            - name: KEYCLOAK_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-user
+                  key: username
+            - name: KEYCLOAK_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-user
+                  key: password
+            - name: SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: session-secret
+                  key: session-secret
+            - name: FILE_VAULT_URL
+            {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
+              value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk/file
+            {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+              value: https://fv-stg.prod.{{ .APP_NAME }}.homeoffice.gov.uk/file
+            {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
+              value: https://fv-uat.notprod.{{ .APP_NAME }}.homeoffice.gov.uk/file
+            {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+              value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk/file
+            {{ end }}
           {{ if not (eq .KUBE_NAMESPACE .BRANCH_ENV) }}
           livenessProbe:
             httpGet:
@@ -125,15 +132,14 @@ spec:
           {{ end }}
           resources:
             requests:
-              memory: 20Mi
-              cpu: 20m
+              memory: 30Mi
+              cpu: 30m
             limits:
-              memory: 256Mi
-              cpu: 300m
+              memory: 512Mi
+              cpu: 600m
           volumeMounts:
             - mountPath: /public
               name: public
-
 
         - name: nginx-proxy
           # nginx-proxy-govuk:v4
@@ -143,36 +149,17 @@ spec:
               memory: 10Mi
               cpu: 10m
             limits:
-              cpu: 250m
               memory: 256Mi
+              cpu: 300m
           env:
 {{ file .NGINX_SETTINGS | indent 12 }}
           ports:
             - containerPort: 10443
-          securityContext:
-            runAsNonRoot: true
           volumeMounts:
             - mountPath: /public
               name: public
-            - mountPath: /certs
-              name: certs
-              readOnly: true
-            - name: bundle
-              mountPath: /etc/ssl/certs
-              readOnly: true
+          securityContext:
+            runAsNonRoot: true
       volumes:
         - name: public
           emptyDir: {}
-        - name: certs
-          secret:
-            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-            secretName: branch-tls-external
-            {{ else if not (eq .KUBE_NAMESPACE .PROD_ENV) }}
-            secretName: ingress-internal
-            {{ else }}
-            secretName: cert-cmio
-            {{ end }}
-        - name: bundle
-          configMap:
-            name: bundle
-            #trigger build
