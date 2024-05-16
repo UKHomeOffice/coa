@@ -106,7 +106,10 @@ steps:
       - name: dockersock
         path: /var/run
     when:
-      branch: master
+      branch:
+        include:
+          - master
+          - feature/*
       event: [push, pull_request]
 
   - name: image_to_quay
@@ -120,7 +123,10 @@ steps:
     - docker tag $${IMAGE_REPO}:$${DRONE_COMMIT_SHA} $${IMAGE_URL}/$${IMAGE_REPO}:$${DRONE_COMMIT_SHA}
     - docker push $${IMAGE_URL}/$${IMAGE_REPO}:$${DRONE_COMMIT_SHA}
     when:
-      branch: master
+      branch:
+        include:
+          - master
+          - feature/*
       event: [push, pull_request]
 
   # Trivy Security Scannner
@@ -156,7 +162,11 @@ steps:
     commands:
       - bin/deploy.sh $${BRANCH_ENV}
     when:
-      branch: master
+      branch:
+        include:
+          - master
+          - feature/*
+
       event: pull_request
 
   - name: setup_branch
@@ -183,7 +193,7 @@ steps:
           - master
           - feature/*
          
-      event: pull_request
+      event: [push, pull_request]
 
   - name: unit_tests_branch
     <<: *unit_tests
@@ -193,7 +203,7 @@ steps:
           - master
           - feature/*
          
-      event: pull_request
+      event: [push, pull_request]
 
   - name: acceptance_tests_branch
     <<: *acceptance_tests
@@ -202,8 +212,12 @@ steps:
       - npx playwright install
       - npm run test:acceptance
     when:
-      branch: master
-      event: pull_request
+      branch:
+        include:
+          - master
+          - feature/*
+
+      event: [push, pull_request]
 
   - name: deploy_to_uat
     pull: if-not-exists
