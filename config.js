@@ -8,8 +8,10 @@ module.exports = {
   dateTimeFormat: 'DD MMM YYYY HH:mm:ss',
   env: env,
   govukNotify: {
-    notifyApiKey: process.env.NOTIFY_KEY,
-    submissionTemplateId: process.env.SUBMISSION_TEMPLATE_ID
+    notifyApiKey: process.env.NOTIFY_STUB === 'true' ? 'USE_MOCK' : process.env.NOTIFY_KEY,
+    caseworkerEmail: process.env.CASEWORKER_EMAIL,
+    userConfirmationTemplateId: process.env.USER_CONFIRMATION_TEMPLATE_ID,
+    caseworkerConfirmationTemplateId: process.env.BUISNESS_CONFIRMATION_TEMPLATE_ID
   },
   survey: {
     urls: {
