@@ -17,7 +17,7 @@ const checkOiscSraNumber = require('./behaviours/check-oisc-sra-number');
  * @returns {boolean} - Returns true if the field value matches the conditional value, false otherwise.
  */
 function forkCondition(req, fieldName, conditionalValue) {
-  const fieldValue = req.form.historicalValues?.[fieldName] || req.form.values[fieldName];
+  const fieldValue = req.sessionModel.get(fieldName);
   if (!fieldValue) return false;
   return Array.isArray(fieldValue) ? fieldValue.includes(conditionalValue) : fieldValue === conditionalValue;
 }
@@ -69,26 +69,32 @@ module.exports = {
     },
     '/legal-representative': {
       fields: ['email', 'telephone', 'client-email', 'client-telephone'],
-      next: '/identity-number'
+      next: '/identity-number',
+      continueOnEdit: true
     },
     '/contact-details': {
       fields: ['email', 'telephone'],
-      next: '/identity-number'
+      next: '/identity-number',
+      continueOnEdit: true
     },
     '/identity-number': {
       fields: ['identity-type', 'passport-number-details', 'brp-details', 'arc-details'],
-      next: '/upload-identity'
+      next: '/upload-identity',
+      continueOnEdit: true
     },
     '/upload-identity': {
       fields: [],
-      next: '/upload-identity-summary'
+      next: '/upload-identity-summary',
+      continueOnEdit: true
     },
     '/upload-identity-summary': {
       fields: [],
-      next: '/which-details'
+      next: '/which-details',
+      continueOnEdit: true
     },
     '/which-details': {
       fields: ['which-details-updating'],
+      continueOnEdit: true,
       // The conditional check should be performed in reverse order, as the last fork takes over.
       forks: [
         {
@@ -106,6 +112,7 @@ module.exports = {
       ]
     },
     '/old-address': {
+      continueOnEdit: true,
       fields: ['old-address', 'old-postcode'],
       forks: [
         {
@@ -119,7 +126,8 @@ module.exports = {
       next: '/home-address'
     },
     '/home-address': {
-      fields: [
+      continueOnEdit: true,
+      fields:[
         'home-address-line-1',
         'home-address-line-2',
         'home-address-town-or-city',
@@ -129,9 +137,11 @@ module.exports = {
       next: '/upload-address'
     },
     '/upload-address': {
+      continueOnEdit: true,
       next: '/upload-address-summary'
     },
     '/upload-address-summary': {
+      continueOnEdit: true,
       next: '/check-answers',
       // The conditional check should be performed in reverse order, as the last fork takes over.
       forks: [
@@ -150,6 +160,7 @@ module.exports = {
       ]
     },
     '/postal-address': {
+      continueOnEdit: true,
       fields: [
         'postal-address-line-1',
         'postal-address-line-2',
@@ -160,10 +171,12 @@ module.exports = {
       next: '/upload-postal-address'
     },
     '/upload-postal-address': {
+      continueOnEdit: true,
       fields: [],
       next: '/upload-postal-address-summary'
     },
     '/upload-postal-address-summary': {
+      continueOnEdit: true,
       next: '/check-answers',
       // The conditional check should be performed in reverse order, as the last fork takes over.
       forks: [
