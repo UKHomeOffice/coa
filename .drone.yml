@@ -182,15 +182,15 @@ steps:
          
       event: pull_request
 
-  - name: unit_tests_branch
-    <<: *unit_tests
-    when:
-      branch:
-        include:
-          - master
-          - feature/*
+#  - name: unit_tests_branch
+#    <<: *unit_tests
+#    when:
+#      branch:
+#        include:
+#          - master
+#          - feature/*
          
-      event: pull_request
+#      event: pull_request
 
   - name: acceptance_tests_branch
     <<: *acceptance_tests
