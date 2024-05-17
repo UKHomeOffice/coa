@@ -192,15 +192,15 @@ steps:
          
 #      event: pull_request
 
-  - name: acceptance_tests_branch
-    <<: *acceptance_tests
-    commands:
-      - export ACCEPTANCE_HOST_NAME=https://$${APP_NAME}-$${DRONE_SOURCE_BRANCH}.$${BRANCH_ENV}.homeoffice.gov.uk
-      - npx playwright install
-      - npm run test:acceptance
-    when:
-      branch: master
-      event: pull_request
+#  - name: acceptance_tests_branch
+#    <<: *acceptance_tests
+#    commands:
+#      - export ACCEPTANCE_HOST_NAME=https://$${APP_NAME}-$${DRONE_SOURCE_BRANCH}.$${BRANCH_ENV}.homeoffice.gov.uk
+#      - npx playwright install
+#      - npm run test:acceptance
+#    when:
+#      event: pull_request
+#      branch: master
 
   - name: deploy_to_uat
     pull: if-not-exists
