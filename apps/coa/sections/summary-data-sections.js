@@ -28,7 +28,7 @@ module.exports = {
         step: '/upload-identity-summary',
         field: 'identity-documents',
         parse: documents => {
-          return Array.isArray(documents) && documents.length > 0  ? document.map(doc => doc.name).join('\n') : null;
+          return Array.isArray(documents) && documents.length > 0  ? documents.map(doc => doc.name).join('\n') : null;
         }
       }
     ]
