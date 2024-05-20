@@ -92,7 +92,6 @@ module.exports = {
     },
     '/upload-identity-summary': {
       behaviours: [RemoveDocument('identity-documents')],
-      fields: [],
       uploadPage: 'upload-identity',
       next: '/which-details',
       continueOnEdit: true
