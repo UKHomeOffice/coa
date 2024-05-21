@@ -8,6 +8,8 @@ const saveDesiredContent = require('./behaviours/save-desired-content');
 const clearSession = require('./behaviours/clear-session');
 const sendNotification = require('./behaviours/submit-notify');
 const checkOiscSraNumber = require('./behaviours/check-oisc-sra-number');
+const SaveDocument = require('./behaviours/save-document');
+const RemoveDocument = require('./behaviours/remove-document');
 /**
  * Checks if a given field value matches a conditional value based on the request object.
  *
@@ -83,12 +85,14 @@ module.exports = {
       continueOnEdit: true
     },
     '/upload-identity': {
-      fields: [],
+      behaviours: [SaveDocument('identity-documents', 'document-file')],
+      fields: ['document-file'],
       next: '/upload-identity-summary',
       continueOnEdit: true
     },
     '/upload-identity-summary': {
-      fields: [],
+      behaviours: [RemoveDocument('identity-documents')],
+      uploadPage: 'upload-identity',
       next: '/which-details',
       continueOnEdit: true
     },
