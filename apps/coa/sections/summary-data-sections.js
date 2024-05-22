@@ -30,14 +30,7 @@ module.exports = {
         parse: documents => {
           return Array.isArray(documents) && documents.length > 0  ? documents.map(doc => doc.name).join('\n') : null;
         }
-      },
-      {
-        step: '/upload-postal-address-summary',
-        field: 'postal-address-documents',
-        parse: documents => {
-          return Array.isArray(documents) && documents.length > 0  ? documents.map(doc => doc.name).join('\n') : null;
-        }
-      },
+      }
     ]
   },
   'your-details': {
@@ -162,6 +155,13 @@ module.exports = {
           }
           postalAddressDetails.push(req.sessionModel.get('postal-address-postcode'));
           return postalAddressDetails.join('\n');
+        }
+      },
+      {
+        step: '/upload-postal-address-summary',
+        field: 'postal-address-documents',
+        parse: documents => {
+          return Array.isArray(documents) && documents.length > 0  ? documents.map(doc => doc.name).join('\n') : null;
         }
       },
       {

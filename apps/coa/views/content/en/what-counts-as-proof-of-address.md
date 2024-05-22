@@ -1,10 +1,11 @@
 <details class="govuk-details">
   <summary class="govuk-details__summary">
     <span class="govuk-details__summary-text">
-      What counts as proof of identity?
+      What counts as proof of address?
     </span>
   </summary>
   <div class="govuk-details__text">
+      Acceptable proof of address documents include:
     <ul>
       <li>Mortgage statements</li>
       <li>Bank statements</li>
