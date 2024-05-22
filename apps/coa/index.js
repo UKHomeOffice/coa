@@ -176,11 +176,14 @@ module.exports = {
       next: '/upload-postal-address'
     },
     '/upload-postal-address': {
+      behaviours: [SaveDocument('postal-address-documents', 'document-file')],
+      fields: ['document-file'],
       continueOnEdit: true,
-      fields: [],
       next: '/upload-postal-address-summary'
     },
     '/upload-postal-address-summary': {
+      behaviours: [RemoveDocument('postal-address-documents', 'document-file')],
+      uploadPage: 'upload-postal-address',
       continueOnEdit: true,
       next: '/check-answers',
       // The conditional check should be performed in reverse order, as the last fork takes over.

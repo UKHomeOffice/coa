@@ -1,0 +1,22 @@
+{{<partials-page}}
+{{$encoding}}enctype="multipart/form-data"{{/encoding}}
+  {{$page-content}}
+
+    <p>{{#t}}pages.upload-postal-address.upload-postal-intro{{/t}} {{#t}}pages.upload-postal-address.upload-postal-instructions{{/t}}</p>
+    <p>{{#t}}pages.upload-postal-address.upload-postal-requirements{{/t}}</p>
+
+    <h2 class="govuk-heading-m">Upload a file</h2>
+    {{#fields}}
+      {{#renderField}}{{/renderField}}
+    {{/fields}}
+
+    {{#markdown}}what-file-types{{/markdown}}
+
+    {{#markdown}}what-counts-as-proof-of-address{{/markdown}}
+
+    <button class="govuk-button govuk-button" name="upload-file" value="postal-address-documents">
+      {{#t}}buttons.upload-file{{/t}}
+    </button>
+
+  {{/page-content}}
+{{/partials-page}}
