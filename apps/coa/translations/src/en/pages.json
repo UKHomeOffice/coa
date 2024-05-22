@@ -15,7 +15,7 @@
   },
   "upload-identity": {
     "header": "Upload proof of identity",
-    "upload-identity-intro": "For security, you must prove {{#isApplicant}}your{{/isApplicant}}{{^isApplicant}}{{values.applicant-full-name}}’s{{/isApplicant}} identity.",
+    "upload-identity-intro": "For security, you must prove {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} identity.",
     "upload-identity-instructions": "Upload a scanned copy of an acceptable proof of identity document.",
     "upload-identity-requirements": "The identity document must not be expired and the scan must be clear and easy to read."
   },

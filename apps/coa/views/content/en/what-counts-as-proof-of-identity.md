@@ -5,6 +5,7 @@
     </span>
   </summary>
   <div class="govuk-details__text">
+    Acceptable proof of identity documents include:
     <ul>
       <li>Passport</li>
       <li>EEA national identity card</li>
