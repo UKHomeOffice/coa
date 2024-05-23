@@ -35,7 +35,10 @@ module.exports = {
       'image/jpeg',
       'image/jpg',
       'image/png'
-    ]
+    ],
+    maxIdDocsUploads: 6,
+    maxAddressDocsUploads: 3,
+    maxCertOfAuthorityUploads: 1
   },
   aws: {
     bucket: process.env.AWS_BUCKET,

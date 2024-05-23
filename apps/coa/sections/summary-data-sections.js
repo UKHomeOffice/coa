@@ -138,6 +138,13 @@ module.exports = {
         }
       },
       {
+        step: '/upload-address',
+        field: 'home-address-documents',
+        parse: documents => {
+          return Array.isArray(documents) && documents.length > 0  ? documents.map(doc => doc.name).join('\n') : null;
+        }
+      },
+      {
         step: '/postal-address',
         field: 'postal-address-details',
         parse: (list, req) => {

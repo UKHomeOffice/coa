@@ -176,6 +176,22 @@
         "unsaved": "Your file could not be uploaded – try again",
         "maxFileSize": "Your file must be smaller than 25MB",
         "fileType": "Your file must be a JPG, JPEG, PNG or PDF",
-        "virusCheck": "The file you have uploaded may have a virus. Try a different file"
+        "virusCheck": "The file you have uploaded may have a virus. Try a different file",
+        "maxIdDocsUploads" : "You can only upload a 6 files or less. Remove a file before uploading another",
+        "maxAddressDocsUploads" : "You can only upload a 3 files or less. Remove a file before uploading another",
+        "maxCertOfAuthorityUploads" : "You can only upload 1 file. Remove the file before uploading a different one",
+        "isDuplicateFileName" : "You have already uploaded a file with that name. Change the file name or upload a different file"
+    },
+    "file-upload-1": {
+        "required": "Select a file to upload",
+        "unsaved": "Your file could not be uploaded – try again",
+        "maxFileSize": "Your file must be smaller than 25MB",
+        "fileType": "Your file must be a JPG, JPEG, PNG or PDF",
+        "virusCheck": "The file you have uploaded may have a virus. Try a different file",
+        "maxIdDocsUploads" : "You can only upload a 6 files or less. Remove a file before uploading another",
+        "maxAddressDocsUploads" : "You can only upload a 3 files or less. Remove a file before uploading another",
+        "maxCertOfAuthorityUploads" : "You can only upload 1 file. Remove the file before uploading a different one",
+        "isDuplicateFileName" : "You have already uploaded a file with that name. Change the file name or upload a different file"
     }
 }
+
