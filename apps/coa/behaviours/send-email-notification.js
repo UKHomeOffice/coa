@@ -3,21 +3,23 @@ const config = require('../../../config');
 const utilities = require('../../../lib/utilities');
 const _ = require('lodash');
 const NotifyClient = utilities.NotifyClient;
-
 const userConfirmationTemplateId = config.govukNotify.userConfirmationTemplateId;
 const caseworkerConfirmationTemplateId = config.govukNotify.caseworkerConfirmationTemplateId;
 const caseworkerEmail = config.govukNotify.caseworkerEmail;
 const notifyKey = config.govukNotify.notifyApiKey;
-
+const translation = require('../translations/src/en/fields.json');
 const notifyClient = new NotifyClient(notifyKey);
 
 module.exports = class SendEmailConfirmation {
-  // getUpdatedDetails(value) {
-  //   const getUpdatedDetails = req.sessionModel.get('which-details-updating');
-  // }
+  
   async sendUserEmailNotification(req) {
-    const detailsUpdating = this.getUpdatedDetails(req);
     const personalisations = this.notifyPersonalisations;
+
+    // Retrieve the value from the session model
+    const details_updating_value = req.sessionModel.get('which-details-updating');
+    
+    // Retrieve the corresponding label from the translations file
+    const details_updating_label = translation['which-details-updating'].options[details_updating_value].label;
 
     try {
       if (notifyKey === 'USE_MOCK') {
@@ -49,7 +51,7 @@ module.exports = class SendEmailConfirmation {
         OISC_SRA_number: req.sessionModel.get('oisc-sra-number') ?? '',
         company_name: req.sessionModel.get('legal-company-name') ?? '',
         leg_rep_address: req.sessionModel.get('legalAddressDetails') ?? '',
-        // details_updating: this.getUpdatedDetails(req), //THIS CAUSES ERROR
+        details_updating: details_updating_label,
         has_old_postcode: req.sessionModel.get('steps').includes('/old-address') ? 'yes' : 'no',
         old_postcode: req.sessionModel.get('old-postcode') ?? '',
         has_new_home_address: req.sessionModel.get('steps').includes('/home-address') ? 'yes' : 'no',
@@ -73,6 +75,8 @@ module.exports = class SendEmailConfirmation {
 
   async sendCaseworkerEmailNotification(req) {
     const personalisations = this.notifyPersonalisations;
+        const details_updating_value = req.sessionModel.get('which-details-updating');
+        const details_updating_label = translation['which-details-updating'].options[details_updating_value].label;
 
     try {
       if (notifyKey === 'USE_MOCK') {
@@ -104,7 +108,7 @@ module.exports = class SendEmailConfirmation {
           OISC_SRA_number: req.sessionModel.get('oisc-sra-number') ?? '',
           company_name: req.sessionModel.get('legal-company-name') ?? '',
           leg_rep_address: req.sessionModel.get('legalAddressDetails') ?? '',
-          // details_updating: this.getUpdatedDetails(req), //THIS CAUSES ERROR
+          details_updating: details_updating_label,
           has_old_postcode: req.sessionModel.get('steps').includes('/old-address') ? 'yes' : 'no',
           old_postcode: req.sessionModel.get('old-postcode') ?? '',
           has_new_home_address: req.sessionModel.get('steps').includes('/home-address') ? 'yes' : 'no',
