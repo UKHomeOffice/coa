@@ -14,7 +14,10 @@
     "intro": "For security, you must provide us with information from an identity document that UK Visas and Immigration has on {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} record."
   },
   "upload-identity": {
-    "header": "Upload proof of identity"
+    "header": "Upload proof of identity",
+    "upload-identity-intro": "For security, you must prove {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} identity.",
+    "upload-identity-instructions": "Upload a scanned copy of an acceptable proof of identity document.",
+    "upload-identity-requirements": "The identity document must not be expired and the scan must be clear and easy to read."
   },
   "upload-identity-summary": {
     "header": "Proof of identity"
@@ -131,6 +134,9 @@
       },
       "legal-rep-address-details": {
         "label": "Address"
+      },
+      "identity-documents": {
+        "label": "Proof of identity"
       }
     }
   }

@@ -116,6 +116,10 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk/file
             {{ end }}
+            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+            - name: DEBUG
+              value: "*"
+            {{ end }}
           {{ if not (eq .KUBE_NAMESPACE .BRANCH_ENV) }}
           livenessProbe:
             httpGet:

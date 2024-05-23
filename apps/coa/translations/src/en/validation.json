@@ -170,5 +170,12 @@
     },
     "privacy-check": {
       "required": "Confirm you have read the Data Protection statement"
+    },
+    "document-file": {
+        "default": "Select a file to upload",
+        "unsaved": "Your file could not be uploaded – try again",
+        "maxFileSize": "Your file must be smaller than 25MB",
+        "fileType": "Your file must be a JPG, JPEG, PNG or PDF",
+        "virusCheck": "The file you have uploaded may have a virus. Try a different file"
     }
 }
