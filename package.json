@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node server.js",
     "test:ui-integration": "NODE_ENV=test _mocha \"test/_ui-integration/**/*.spec.js\" --exit",
-    "start:dev": "hof-build watch --env",
+    "start:dev": "hof-build watch",
     "build": "hof-build",
     "postinstall": "hof-build",
     "test:lint": "eslint . --config ./node_modules/eslint-config-hof/default.js",
