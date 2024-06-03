@@ -127,7 +127,7 @@ steps:
         include:
           - master
           - feature/*
-      event: [push, pull_request]
+      event: [push]
 
   # Trivy Security Scannner
   - name: scan-image
@@ -144,10 +144,11 @@ steps:
       IGNORE_UNFIXED: true
       ALLOW_CVE_LIST_FILE: hof-services-config/Change_Of_Address/trivy-cve-exceptions.txt
     when:
-      event:
-      - pull_request
-      - push
-      - tag
+      branch:
+        include:
+          - master
+          - feature/*
+      event: push
 
   # Deploy to pull request UAT environment
   - name: deploy_to_branch
@@ -166,8 +167,8 @@ steps:
         include:
           - master
           - feature/*
+      event: push
 
-      event: pull_request
 
   - name: setup_branch
     pull: if-not-exists
@@ -230,8 +231,12 @@ steps:
     commands:
       - sh bin/deploy.sh $${UAT_ENV}
     when:
-      branch: master
-      event: push
+      branch:
+        include:
+          - master
+          - feature/*
+
+      event: pull_request
 
   # Get pull request branch so correct PR UAT environment is torn down in the tear_down_branch step that follows
   - name: get_pr_branch
@@ -281,9 +286,12 @@ steps:
     commands:
       - bin/deploy.sh $${PROD_ENV}
     when:
-      target: PROD
-      event: promote
+      branch:
+        include:
+          - master
+          - feature/*
 
+      event: pull_request
   - name: acceptance_tests_deploy
     <<: *acceptance_tests
     commands:
