@@ -174,11 +174,11 @@
     "file-upload": {
         "required": "Select a file to upload",
         "unsaved": "Your file could not be uploaded – try again",
-        "maxFileSize": "Your file must be smaller than {{maxFileSize}}",
+        "maxFileSize": "Your file must be smaller than 25MB",
         "fileType": "Your file must be a {{fileType}}",
         "virusCheck": "The file you have uploaded may have a virus. Try a different file",
-        "maxIdDocsUploads" : "You can only upload a {{maxIdDocsUploads}} files or less. Remove a file before uploading another",
-        "maxAddressDocsUploads" : "You can only upload a {{maxAddressDocsUploads}} files or less. Remove a file before uploading another",
+        "maxIdDocsUploads" : "You can only upload upto {{maxIdDocsUploads}} files or less. Remove a file before uploading another",
+        "maxAddressDocsUploads" : "You can only upload upto {{maxAddressDocsUploads}} files or less. Remove a file before uploading another",
         "maxCertOfAuthorityUploads" : "You can only upload {{maxCertOfAuthorityUploads}} file. Remove the file before uploading a different one",
         "isDuplicateFileName" : "You have already uploaded a file named '{{isDuplicateFileName}}'. Change this file's name or upload a different file."
     }

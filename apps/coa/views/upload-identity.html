@@ -2,9 +2,6 @@
 <p>{{#t}}pages.upload-identity.upload-identity-intro{{/t}} {{#t}}pages.upload-identity.upload-identity-instructions{{/t}}</p>
 <p>{{#t}}pages.upload-identity.upload-identity-requirements{{/t}}</p>
 
-{{#markdown}}what-file-types{{/markdown}}
-
-{{#markdown}}what-counts-as-proof-of-identity{{/markdown}}
 
   <div class="govuk-form-group">
     <label class="govuk-label bold" for="file-upload">
@@ -30,8 +27,12 @@
     </tbody>
   </table>
   {{/values.identity-documents.length}}
+
+  {{#markdown}}what-file-types{{/markdown}}
+
+  {{#markdown}}what-counts-as-proof-of-identity{{/markdown}}
   
-    <button class="govuk-button govuk-button" name="Continue" value="identity-documents">
+    <button class="govuk-button govuk-button" name="continueWithoutUpload" value="identity-documents">
       {{#t}}buttons.continue{{/t}}
     </button>
     

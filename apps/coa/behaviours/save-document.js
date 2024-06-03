@@ -16,8 +16,9 @@ module.exports = (documentCategory, name) => superclass => class extends supercl
     const fileToBeValidated = req.files[name];
     const documentsByCategory = req.sessionModel.get(documentCategory) || [];
     const validationErrorFunc = (type, args) => new this.ValidationError(key, { type: type, arguments: [args] });
-    // When click Continue without uploading a file.
-    if (req.body.Continue && documentsByCategory.length === 0) {
+
+    // To check required type, when trying to do continue without upload
+    if (req.body.continueWithoutUpload && documentsByCategory.length === 0) {
       return validationErrorFunc('required');
     } else if (fileToBeValidated) {
       const uploadSize = fileToBeValidated.size;
@@ -34,7 +35,7 @@ module.exports = (documentCategory, name) => superclass => class extends supercl
       const isDuplicateFile = documentsByCategory.some(file => file.name === req.files[name].name);
 
       if (invalidSize) {
-        return validationErrorFunc('maxFileSize', [config.upload.maxFileSizeInBytes]);
+        return validationErrorFunc('maxFileSize');
       } else if (invalidMimetype) {
         return validationErrorFunc('fileType', ['JPG, JPEG, PNG or PDF']);
       } else if (numberOfDocsUploaded >= documentCategoryConfig.limit) {
@@ -49,9 +50,8 @@ module.exports = (documentCategory, name) => superclass => class extends supercl
   saveValues(req, res, next) {
     const documentsByCategory = req.sessionModel.get(documentCategory) || [];
 
-    if (!req.body.Continue && req.files[name]) {
+    if (req.files[name]) {
       req.log('info', `Saving document: ${req.files[name].name} in ${documentCategory} category`);
-
       const document = {
         name: req.files[name].name,
         data: req.files[name].data,
@@ -66,7 +66,6 @@ module.exports = (documentCategory, name) => superclass => class extends supercl
         })
         .catch(next);
     }
-
     return super.saveValues.apply(this, arguments);
   }
 };

@@ -3,10 +3,6 @@
   {{#t}}pages.upload-address.upload-home-address-instructions{{/t}}</p>
   <p>{{#t}}pages.upload-address.upload-home-address-requirements{{/t}}</p>
 
-  {{#markdown}}what-file-types{{/markdown}}
-
-  {{#markdown}}what-counts-as-proof-of-address{{/markdown}}
-
   <div class="govuk-form-group">
     <label class="govuk-label bold" for="file-upload">
       Upload a file
@@ -31,8 +27,12 @@
     </tbody>
   </table>
   {{/values.home-address-documents.length}}
+
+  {{#markdown}}what-file-types{{/markdown}}
+
+  {{#markdown}}what-counts-as-proof-of-address{{/markdown}}
   
-    <button class="govuk-button govuk-button" name="Continue" value="home-address-documents">
+    <button class="govuk-button govuk-button" name="continueWithoutUpload" value="home-address-documents">
       {{#t}}buttons.continue{{/t}}
     </button>
     
