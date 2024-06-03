@@ -1,0 +1,40 @@
+{{<partials-page}} {{$encoding}}enctype="multipart/form-data" name="file-upload-form" {{/encoding}} {{$page-content}}
+  <p>{{#t}}pages.upload-address.upload-home-address-intro{{/t}}
+  {{#t}}pages.upload-address.upload-home-address-instructions{{/t}}</p>
+  <p>{{#t}}pages.upload-address.upload-home-address-requirements{{/t}}</p>
+
+  <div class="govuk-form-group">
+    <label class="govuk-label bold" for="file-upload">
+      Upload a file
+    </label>
+    <input class="govuk-file-upload" id="file-upload" name="file-upload" type="file" value="home-address-documents">
+  </div>
+
+  {{^values.home-address-documents}}
+  <h2 class="govuk-heading-m">No documents uploaded</h2>
+  {{/values.home-address-documents}}
+
+  {{#values.home-address-documents.length}}
+  <h2 class="govuk-heading-m">You have uploaded {{values.home-address-documents.length}} file</h2>
+  <table class="loop-summary-table">
+    <tbody class="govuk-table__body">
+      {{#values.home-address-documents}}
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">{{name}}</td>
+        <td><a href="?delete={{id}}" class="govuk-link">{{#t}}buttons.delete{{/t}}</a></td>
+      </tr>
+      {{/values.home-address-documents}}
+    </tbody>
+  </table>
+  {{/values.home-address-documents.length}}
+
+  {{#markdown}}what-file-types{{/markdown}}
+
+  {{#markdown}}what-counts-as-proof-of-address{{/markdown}}
+  
+    <button class="govuk-button govuk-button" name="continueWithoutUpload" value="home-address-documents">
+      {{#t}}buttons.continue{{/t}}
+    </button>
+    
+  {{/page-content}}
+  {{/partials-page}}

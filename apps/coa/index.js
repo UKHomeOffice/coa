@@ -85,14 +85,8 @@ module.exports = {
       continueOnEdit: true
     },
     '/upload-identity': {
-      behaviours: [SaveDocument('identity-documents', 'document-file')],
-      fields: ['document-file'],
-      next: '/upload-identity-summary',
-      continueOnEdit: true
-    },
-    '/upload-identity-summary': {
-      behaviours: [RemoveDocument('identity-documents')],
-      uploadPage: 'upload-identity',
+      behaviours: [SaveDocument('identity-documents', 'file-upload'), RemoveDocument('identity-documents')],
+      fields: ['file-upload'],
       next: '/which-details',
       continueOnEdit: true
     },
@@ -141,10 +135,8 @@ module.exports = {
       next: '/upload-address'
     },
     '/upload-address': {
-      continueOnEdit: true,
-      next: '/upload-address-summary'
-    },
-    '/upload-address-summary': {
+      behaviours: [SaveDocument('home-address-documents', 'file-upload'), RemoveDocument('home-address-documents')],
+      fields: ['file-upload'],
       continueOnEdit: true,
       next: '/check-answers',
       // The conditional check should be performed in reverse order, as the last fork takes over.
