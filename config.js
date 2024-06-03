@@ -36,9 +36,24 @@ module.exports = {
       'image/jpg',
       'image/png'
     ],
-    maxIdDocsUploads: 6,
-    maxAddressDocsUploads: 3,
-    maxCertOfAuthorityUploads: 1
+    documentCategories: {
+      'identity-documents': {
+        limit: 6,
+        limitValidationError: 'maxIdDocsUploads'
+      },
+      'home-address-documents': {
+        limit: 3,
+        limitValidationError: 'maxAddressDocsUploads'
+      },
+      'postal-address-documents': {
+        limit: 3,
+        limitValidationError: 'maxAddressDocsUploads'
+      },
+      'cert-of-authority-documents': {
+        limit: 1,
+        limitValidationError: 'maxCertOfAuthorityUploads'
+      }
+    }
   },
   aws: {
     bucket: process.env.AWS_BUCKET,

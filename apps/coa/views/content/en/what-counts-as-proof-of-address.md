@@ -6,7 +6,7 @@
   </summary>
   <div class="govuk-details__text">
     Acceptable proof of address documents include:
-      <ul class="upload-document-list">
+      <ul class="govuk-!-margin-top-2 govuk-!-margin-left-2">
         <li>Mortgage statements</li>
         <li>Bank statements</li>
         <li>Credit card statements</li>

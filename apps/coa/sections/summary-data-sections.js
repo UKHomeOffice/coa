@@ -23,13 +23,6 @@ module.exports = {
       {
         step: '/applicant-details',
         field: 'applicant-unique-number'
-      },
-      {
-        step: '/upload-identity-summary',
-        field: 'identity-documents',
-        parse: documents => {
-          return Array.isArray(documents) && documents.length > 0  ? documents.map(doc => doc.name).join('\n') : null;
-        }
       }
     ]
   },
@@ -80,6 +73,13 @@ module.exports = {
       {
         step: '/identity-number',
         field: 'arc-details'
+      },
+      {
+        step: '/upload-identity',
+        field: 'identity-documents',
+        parse: documents => {
+          return Array.isArray(documents) && documents.length > 0  ? documents.map(doc => doc.name).join('\n') : null;
+        }
       }
     ]
   },

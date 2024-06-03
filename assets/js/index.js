@@ -15,7 +15,7 @@ document.querySelectorAll('.typeahead').forEach(function applyTypeahead(element)
 document.addEventListener('DOMContentLoaded', () => {
   const loaderContainer = document.querySelector('#loader-container');
   const reportSubmitButton = document.querySelector('#report-submit');
-  const fileUpload = document.querySelector('#file-upload-1');
+  const fileUpload = document.getElementById('file-upload');
 
   if (loaderContainer) {
     document.querySelector('#report-submit .govuk-button').addEventListener('click', () => {
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if(fileUpload) {
-    document.querySelector('#file-upload-1').addEventListener('change', () => {
+    fileUpload.addEventListener('change', () => {
       document.querySelector('[name=file-upload-form]').submit();
     });
   }

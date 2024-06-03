@@ -6,7 +6,7 @@
   </summary>
   <div class="govuk-details__text">
     Acceptable proof of identity documents include:
-    <ul>
+    <ul class="govuk-!-margin-top-2 govuk-!-margin-left-2">
       <li>Passport</li>
       <li>EEA national identity card</li>
       <li>Travel document</li>
