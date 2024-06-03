@@ -74,7 +74,7 @@ steps:
         include:
         - master
         - feature/*
-      event: [push, pull_request]
+       event: push
 
   - name: linting_deploy
     <<: *linting
@@ -127,7 +127,7 @@ steps:
         include:
           - master
           - feature/*
-      event: [push]
+      event: push
 
   # Trivy Security Scannner
   - name: scan-image
