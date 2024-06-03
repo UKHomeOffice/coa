@@ -181,30 +181,27 @@ steps:
     when:
       branch:
         include:
-          - master
-          - feature/*
-          
-      event: pull_request
+        - master
+        - feature/*
+       event: push
 
   - name: linting_branch
     <<: *linting
     when:
       branch:
         include:
-          - master
-          - feature/*
-         
-      event: [push, pull_request]
+        - master
+        - feature/*
+       event: push
 
   - name: unit_tests_branch
     <<: *unit_tests
     when:
       branch:
         include:
-          - master
-          - feature/*
-         
-      event: [push, pull_request]
+        - master
+        - feature/*
+       event: push
 
   - name: acceptance_tests_branch
     <<: *acceptance_tests
@@ -215,10 +212,9 @@ steps:
     when:
       branch:
         include:
-          - master
-          - feature/*
-
-      event: [push, pull_request]
+        - master
+        - feature/*
+       event: push
 
   - name: deploy_to_uat
     pull: if-not-exists
@@ -233,10 +229,9 @@ steps:
     when:
       branch:
         include:
-          - master
-          - feature/*
-
-      event: pull_request
+        - master
+        - feature/*
+       event: push
 
   # Get pull request branch so correct PR UAT environment is torn down in the tear_down_branch step that follows
   - name: get_pr_branch
