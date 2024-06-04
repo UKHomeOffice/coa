@@ -26,7 +26,10 @@
     "header": "What is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} new home address?"
   },
   "upload-address": {
-    "header": "Upload proof of address"
+    "header": "Upload proof of address",
+    "upload-home-address-intro": "For security, you must prove {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} address.",
+    "upload-home-address-instructions": "Upload a scanned copy of an acceptable proof of address document.",
+    "upload-home-address-requirements": "The document must be dated within the last 3 months. The scan must be clear and easy to read."
   },
   "upload-address-summary": {
     "header": "Proof of address"
@@ -137,6 +140,9 @@
       },
       "identity-documents": {
         "label": "Proof of identity"
+      },
+      "home-address-documents": {
+        "label": "Proof of home address"
       }
     }
   }
