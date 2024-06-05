@@ -19,29 +19,23 @@
     "upload-identity-instructions": "Upload a scanned copy of an acceptable proof of identity document.",
     "upload-identity-requirements": "The identity document must not be expired and the scan must be clear and easy to read."
   },
-  "upload-identity-summary": {
-    "header": "Proof of identity"
-  },
   "home-address": {
     "header": "What is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} new home address?"
   },
   "upload-address": {
-    "header": "Upload proof of address"
-  },
-  "upload-address-summary": {
-    "header": "Proof of address"
+    "header": "Upload proof of address",
+    "upload-home-address-intro": "For security, you must prove {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} address.",
+    "upload-home-address-instructions": "Upload a scanned copy of an acceptable proof of address document.",
+    "upload-home-address-requirements": "The document must be dated within the last 3 months. The scan must be clear and easy to read."
   },
   "postal-address": {
     "header": "What is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} new postal address?"
   },
   "upload-postal-address": {
     "header": "Upload proof of address",
-    "upload-postal-intro": "For security, you must prove {{#isApplicant}}your{{/isApplicant}}{{^isApplicant}}{{values.nameWithPossession}}{{/isApplicant}} address.",
+    "upload-postal-intro": "For security, you must prove {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} address.",
     "upload-postal-instructions": "Upload a scanned copy of an acceptable proof of address document.",
     "upload-postal-requirements": "The document must be dated within the last 3 months. The scan must be clear and easy to read."
-  },
-  "upload-postal-address-summary": {
-    "header": "Proof of address"
   },
   "legal-details": {
     "header": "Enter your legal representative’s details"
@@ -143,6 +137,9 @@
       },
       "postal-address-documents": {
         "label": "Proof of new postal address"
+      },
+      "home-address-documents": {
+        "label": "Proof of home address"
       }
     }
   }
