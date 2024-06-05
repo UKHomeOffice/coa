@@ -15,8 +15,7 @@ module.exports = {
   },
   survey: {
     urls: {
-      root: 'https://eforms.homeoffice.gov.uk/outreach/Feedback.ofml?FormName=coa/',
-      acq: 'https://eforms.homeoffice.gov.uk/outreach/Feedback.ofml?FormName=coa/'
+      root: 'https://eforms.homeoffice.gov.uk/outreach/Feedback.ofml?FormName=coa'
     }
   },
   hosts: {
