@@ -58,24 +58,10 @@ module.exports = {
       behaviours: [saveDesiredContent],
       fields: ['who-are-you', 'legal-representative-name', 'someone-else-name'],
       next: '/contact-details',
-      forks: [
-        {
-          target: '/legal-representative',
-          condition: {
-            field: 'who-are-you',
-            value: 'legal-representative'
-          }
-        }
-      ],
-      continueOnEdit: true
-    },
-    '/legal-representative': {
-      fields: ['email', 'telephone', 'client-email', 'client-telephone'],
-      next: '/identity-number',
       continueOnEdit: true
     },
     '/contact-details': {
-      fields: ['email', 'telephone'],
+      fields: ['email', 'telephone', 'client-email', 'client-telephone'],
       next: '/identity-number',
       continueOnEdit: true
     },
@@ -146,6 +132,10 @@ module.exports = {
           condition: req => forkCondition(req, 'who-are-you', 'applicant')
         },
         {
+          target: '/upload-letter',
+          condition: req => forkCondition(req, 'who-are-you', 'legal-representative')
+        },
+        {
           target: '/legal-details',
           condition: req => forkCondition(req, 'which-details-updating', 'legal-details')
         },
@@ -181,6 +171,10 @@ module.exports = {
           condition: req => forkCondition(req, 'who-are-you', 'applicant')
         },
         {
+          target: '/upload-letter',
+          condition: req => forkCondition(req, 'who-are-you', 'legal-representative')
+        },
+        {
           target: '/legal-details',
           condition: req => forkCondition(req, 'which-details-updating', 'legal-details')
         }
@@ -197,13 +191,20 @@ module.exports = {
         'legal-address-county',
         'legal-address-postcode'
       ],
+      next: '/upload-letter',
+      continueOnEdit: true
+    },
+    '/upload-letter': {
+      behaviours: [SaveDocument('letter-of-authority', 'file-upload'), RemoveDocument('letter-of-authority')],
+      fields: ['file-upload'],
       next: '/check-answers',
       forks: [
         {
           target: '/update-dependant',
           condition: req => forkCondition(req, 'who-are-you', 'applicant')
         }
-      ]
+      ],
+      continueOnEdit: true
     },
     '/update-dependant': {
       fields: ['change-dependant-details'],

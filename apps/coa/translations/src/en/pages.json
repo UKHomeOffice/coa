@@ -46,6 +46,12 @@
   "legal-details": {
     "header": "Enter your legal representative’s details"
   },
+  "upload-letter": {
+    "header": "Upload letter of authority ",
+    "upload-letter-intro": "To prove {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} legal representation,",
+    "upload-letter-instructions": "you must upload a scanned copy of a solicitor's letter of authority. This should be on paper with a letterhead.",
+    "upload-letter-requirements": "The scan must be clear and easy to read. You must scan and upload the whole document, if it is more than one page."
+  },
   "dependant-summary": {
     "header": "Dependants"
   },
@@ -143,6 +149,9 @@
       },
       "home-address-documents": {
         "label": "Proof of home address"
+      },
+      "letter-of-authority": {
+        "label": "Letter of authority"
       }
     }
   }
