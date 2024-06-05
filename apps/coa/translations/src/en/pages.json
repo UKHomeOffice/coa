@@ -26,7 +26,7 @@
     "header": "Upload proof of address",
     "upload-home-address-intro": "For security, you must prove {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} address.",
     "upload-home-address-instructions": "Upload a scanned copy of an acceptable proof of address document.",
-    "upload-home-address-requirements": "The document must be dated within the last 3 months. The scan must be clear and easy to read."
+    "upload-home-address-requirements": "The document must be dated within the last 3 months. The scan must be clear and easy to read. You must scan and upload the whole document, if it is more than one page."
   },
   "postal-address": {
     "header": "What is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} new postal address?"
@@ -35,7 +35,7 @@
     "header": "Upload proof of address",
     "upload-postal-intro": "For security, you must prove {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} address.",
     "upload-postal-instructions": "Upload a scanned copy of an acceptable proof of address document.",
-    "upload-postal-requirements": "The document must be dated within the last 3 months. The scan must be clear and easy to read."
+    "upload-postal-requirements": "The document must be dated within the last 3 months. The scan must be clear and easy to read. You must scan and upload the whole document, if it is more than one page."
   },
   "legal-details": {
     "header": "Enter your legal representative’s details"
