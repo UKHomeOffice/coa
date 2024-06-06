@@ -176,6 +176,13 @@ module.exports = {
         }
       },
       {
+        step: '/upload-postal-address',
+        field: 'postal-address-documents',
+        parse: documents => {
+          return Array.isArray(documents) && documents.length > 0  ? documents.map(doc => doc.name).join('\n') : null;
+        }
+      },
+      {
         step: '/legal-details',
         field: 'legal-company-name'
       },

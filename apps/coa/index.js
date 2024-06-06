@@ -157,11 +157,8 @@ module.exports = {
       next: '/upload-postal-address'
     },
     '/upload-postal-address': {
-      continueOnEdit: true,
-      fields: [],
-      next: '/upload-postal-address-summary'
-    },
-    '/upload-postal-address-summary': {
+      behaviours: [SaveDocument('postal-address-documents', 'file-upload'), RemoveDocument('postal-address-documents')],
+      fields: ['file-upload'],
       continueOnEdit: true,
       next: '/check-answers',
       // The conditional check should be performed in reverse order, as the last fork takes over.
@@ -207,6 +204,7 @@ module.exports = {
       continueOnEdit: true
     },
     '/update-dependant': {
+      continueOnEdit: true,
       fields: ['change-dependant-details'],
       forks: [{
         target: '/dependant-details',
