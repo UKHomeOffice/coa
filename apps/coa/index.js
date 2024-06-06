@@ -203,6 +203,7 @@ module.exports = {
       ]
     },
     '/update-dependant': {
+      continueOnEdit: true,
       fields: ['change-dependant-details'],
       forks: [{
         target: '/dependant-details',

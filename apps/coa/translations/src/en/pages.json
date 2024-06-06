@@ -112,7 +112,7 @@
         "label": "What is your new postal address?"
       },
       "old-address": {
-        "label": "Is {{#values.isApplicant}}your{{/values.isApplicant}} {{^values.isApplicant}}{{values.nameWithPossession}} {{/values.isApplicant}} old home address in the UK?"
+        "label": "Is old home address in the UK?"
       },
       "old-postcode": {
         "label": "Old postcode"
@@ -139,7 +139,7 @@
         "label": "Proof of new postal address"
       },
       "home-address-documents": {
-        "label": "Proof of home address"
+        "label": "Proof of new home address"
       }
     }
   }
