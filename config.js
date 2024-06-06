@@ -49,7 +49,7 @@ module.exports = {
         limit: 3,
         limitValidationError: 'maxAddressDocsUploads'
       },
-      'cert-of-authority-documents': {
+      'letter-of-authority': {
         limit: 1,
         limitValidationError: 'maxCertOfAuthorityUploads'
       }

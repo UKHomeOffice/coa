@@ -80,6 +80,15 @@ module.exports = {
         parse: documents => {
           return Array.isArray(documents) && documents.length > 0  ? documents.map(doc => doc.name).join('\n') : null;
         }
+      },
+      {
+        step: '/upload-letter',
+        field: 'letter-of-authority',
+        parse: (documents, req) => {
+          return req.sessionModel.get('isLegalRep') &&
+           Array.isArray(documents) && documents.length > 0 ?
+            documents.map(doc => doc.name).join('\n') : null;
+        }
       }
     ]
   },
@@ -197,6 +206,18 @@ module.exports = {
           }
           legalAddressDetails.push(req.sessionModel.get('legal-address-postcode'));
           return legalAddressDetails.join('\n');
+        }
+      },
+      {
+        step: '/upload-letter',
+        field: 'letter-of-authority',
+        parse: (documents, req) => {
+          if (!req.sessionModel.get('steps').includes('/upload-letter')) {
+            return null;
+          }
+          return !req.sessionModel.get('isLegalRep') &&
+            Array.isArray(documents) && documents.length > 0 ?
+            documents.map(doc => doc.name).join('\n') : null;
         }
       }
     ]
