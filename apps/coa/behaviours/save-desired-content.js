@@ -11,7 +11,9 @@ module.exports = superclass => class extends superclass {
   saveValues(req, res, next) {
     const whoIsApplying = req.form.values['who-are-you'];
     const isApplicant = whoIsApplying === 'applicant' ? true : false;
+    const isLegalRep = whoIsApplying === 'legal-representative' ? true : false;
     req.sessionModel.set('isApplicant', isApplicant);
+    req.sessionModel.set('isLegalRep', isLegalRep);
     return super.saveValues(req, res, next);
   }
 };

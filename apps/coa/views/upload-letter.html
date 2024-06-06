@@ -1,0 +1,38 @@
+{{<partials-page}} {{$encoding}}enctype="multipart/form-data" name="file-upload-form" {{/encoding}} {{$page-content}}
+<p>{{#t}}pages.upload-letter.upload-letter-intro{{/t}} {{#t}}pages.upload-letter.upload-letter-instructions{{/t}}</p>
+<p>{{#t}}pages.upload-letter.upload-letter-requirements{{/t}}</p>
+
+
+  <div class="govuk-form-group">
+    <label class="govuk-label bold" for="file-upload">
+      Upload a file
+    </label>
+    <input class="govuk-file-upload" id="file-upload" name="file-upload" type="file" value="letter-of-authority">
+  </div>
+
+  {{^values.letter-of-authority}}
+  <h2 class="govuk-heading-m">No documents uploaded</h2>
+  {{/values.letter-of-authority}}
+
+  {{#values.letter-of-authority.length}}
+  <h2 class="govuk-heading-m">You have uploaded {{values.letter-of-authority.length}} file</h2>
+  <table class="loop-summary-table">
+    <tbody class="govuk-table__body">
+      {{#values.letter-of-authority}}
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">{{name}}</td>
+        <td><a href="?delete={{id}}" class="govuk-link">{{#t}}buttons.delete{{/t}}</a></td>
+      </tr>
+      {{/values.letter-of-authority}}
+    </tbody>
+  </table>
+  {{/values.letter-of-authority.length}}
+
+  {{#markdown}}what-file-types{{/markdown}}
+  
+    <button class="govuk-button govuk-button" name="continueWithoutUpload" value="letter-of-authority">
+      {{#t}}buttons.continue{{/t}}
+    </button>
+    
+  {{/page-content}}
+  {{/partials-page}}
