@@ -2,7 +2,6 @@ const SendEmailConfirmation = require('./send-email-notification');
 
 module.exports = superclass => class extends superclass {
   async successHandler(req, res, next) {
-    
     try {
 	    const crs = await import('crypto-random-string');
 	    const uniqueRefNumber = crs.default({ length: 6, characters: 'ABCDEFGHJKMNPRTUVWXY0123456789' });
@@ -13,14 +12,14 @@ module.exports = superclass => class extends superclass {
     }
 
     const notifyEmail = new SendEmailConfirmation();
-    
+
     try {
       await notifyEmail.send(req, res, super.locals(req, res));
     } catch (error) {
       req.log('error', 'Failed to send notification email:', error);
       return next(Error(`Failed to send notification email: ${error}`));
     }
-    
+
     return super.successHandler(req, res, next);
   }
 };
