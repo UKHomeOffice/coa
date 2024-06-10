@@ -36,13 +36,14 @@ app.use((req, res, next) => {
       });
 
       bb.on('file', (key, file, fileInfo) => {
+        logger.log('info', `Processing file: , ${JSON.stringify(file)}, ${JSON.stringify(fileInfo)}`);
         file.pipe(bl((err, d) => {
           if (err) {
             logger.log('error', `Error processing file : ${err}`);
             return;
           }
           if (!(d.length || fileInfo.filename)) {
-            logger.log('warn', 'Empty file received');
+            logger.log('warn', `Empty file received, ${d}, ${d.length}, ${fileInfo}, ${fileInfo.filename}`);
             return;
           }
 
