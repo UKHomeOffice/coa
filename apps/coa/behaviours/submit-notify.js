@@ -1,3 +1,5 @@
+const SendEmailConfirmation = require('./send-email-notification');
+
 module.exports = superclass => class extends superclass {
   async successHandler(req, res, next) {
     try {
@@ -8,6 +10,16 @@ module.exports = superclass => class extends superclass {
       req.log('error', 'coa_uniqueRefNumber_Failed to generate unique reference number:', error);
       return next(Error(`Failed to generate unique reference number: ${error}`));
     }
+
+    const notifyEmail = new SendEmailConfirmation();
+
+    try {
+      await notifyEmail.send(req, res, super.locals(req, res));
+    } catch (error) {
+      req.log('error', 'Failed to send notification email:', error);
+      return next(Error(`Failed to send notification email: ${error}`));
+    }
+
     return super.successHandler(req, res, next);
   }
 };

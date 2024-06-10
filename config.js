@@ -9,12 +9,13 @@ module.exports = {
   env: env,
   govukNotify: {
     notifyApiKey: process.env.NOTIFY_KEY,
-    submissionTemplateId: process.env.SUBMISSION_TEMPLATE_ID
+    caseworkerEmail: process.env.CASEWORKER_EMAIL,
+    userConfirmationTemplateId: process.env.USER_CONFIRMATION_TEMPLATE_ID,
+    businessConfirmationTemplateId: process.env.BUSINESS_CONFIRMATION_TEMPLATE_ID
   },
   survey: {
     urls: {
-      root: 'https://eforms.homeoffice.gov.uk/outreach/Feedback.ofml?FormName=coa/',
-      acq: 'https://eforms.homeoffice.gov.uk/outreach/Feedback.ofml?FormName=coa/'
+      root: 'https://eforms.homeoffice.gov.uk/outreach/Feedback.ofml?FormName=coa'
     }
   },
   hosts: {

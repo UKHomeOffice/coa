@@ -78,7 +78,7 @@
   "which-details-updating": {
     "legend": "Which details are you updating?",
     "options": {
-      "old-address": {
+      "home-address": {
         "label": "Home address"
       },
       "postal-address": {

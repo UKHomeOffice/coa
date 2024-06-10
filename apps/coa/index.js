@@ -91,7 +91,7 @@ module.exports = {
         },
         {
           target: '/old-address',
-          condition: req => forkCondition(req, 'which-details-updating', 'old-address')
+          condition: req => forkCondition(req, 'which-details-updating', 'home-address')
         }
       ]
     },

@@ -143,6 +143,7 @@ module.exports = {
             addressDetails.push(req.sessionModel.get('home-address-county'));
           }
           addressDetails.push(req.sessionModel.get('home-address-postcode'));
+          req.sessionModel.set('addressDetails', addressDetails.join(', '));
           return addressDetails.join('\n');
         }
       },
@@ -170,6 +171,7 @@ module.exports = {
             postalAddressDetails.push(req.sessionModel.get('postal-address-county'));
           }
           postalAddressDetails.push(req.sessionModel.get('postal-address-postcode'));
+          req.sessionModel.set('postalAddressDetails', postalAddressDetails.join(', '));
           return postalAddressDetails.join('\n');
         }
       },
@@ -205,6 +207,7 @@ module.exports = {
             legalAddressDetails.push(req.sessionModel.get('legal-address-county'));
           }
           legalAddressDetails.push(req.sessionModel.get('legal-address-postcode'));
+          req.sessionModel.set('legalAddressDetails', legalAddressDetails.join(', '));
           return legalAddressDetails.join('\n');
         }
       },

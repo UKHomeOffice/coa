@@ -198,7 +198,7 @@ module.exports = {
     isPageHeading: true,
     options: [
       {
-        value: 'old-address'
+        value: 'home-address'
       },
       {
         value: 'postal-address'
