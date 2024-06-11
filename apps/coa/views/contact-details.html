@@ -2,9 +2,12 @@
   {{$page-content}}
     
   {{#input-text}}email{{/input-text}}
-  {{#input-text}}telephone{{/input-text}}
+  {{^values.isLegalRep}}
+    {{#input-text}}telephone{{/input-text}}
+  {{/values.isLegalRep}}
  
   {{#values.isLegalRep}}
+  {{#input-text}}legal-representative-telephone{{/input-text}}
     {{#input-text}}client-email{{/input-text}}
     {{#input-text}}client-telephone{{/input-text}}
   {{/values.isLegalRep}}

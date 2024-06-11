@@ -39,13 +39,19 @@
         "email": "Enter a valid email address"
     },
     "telephone": {
-        "ukPhoneNumber": "Enter a valid UK telephone number"
+        "notUrl": "Please do not enter a link/URL into your answers",
+        "internationalPhoneNumber" : "Please enter a valid telephone number"
+    },
+    "legal-representative-telephone": {
+        "notUrl": "Please do not enter a link/URL into your answers",
+        "ukPhoneNumber" : "Enter a valid UK telephone number"
     },
     "client-email": {
         "email": "Enter a valid email address"
     },
     "client-telephone": {
-        "ukPhoneNumber": "Enter a valid UK telephone number"
+        "notUrl": "Please do not enter a link/URL into your answers",
+        "internationalPhoneNumber" : "Please enter a valid telephone number"
     },
     "change-dependant-details": {
         "default": "Select an option"
@@ -94,14 +100,17 @@
     },
     "passport-number-details": {
         "required": "Enter a passport number",
+        "notUrl": "Your answer must not contain URLs or links",
         "passportNumber": "Passport number can only have numbers and letters a-z"
     },
     "brp-details": {
         "required": "Enter a BRP number",
+        "notUrl": "Your answer must not contain URLs or links",
         "brpNumber": "Enter a BRP number in the correct format"
     },
     "arc-details": {
         "required": "Enter an ARC number",
+        "notUrl": "Your answer must not contain URLs or links",
         "alphanum": "ARC number can only have numbers and letters a-z"
     },
     "old-address": {

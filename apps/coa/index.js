@@ -7,9 +7,10 @@ const ModifyChangeURL = require('./behaviours/modify-change-link');
 const saveDesiredContent = require('./behaviours/save-desired-content');
 const clearSession = require('./behaviours/clear-session');
 const sendNotification = require('./behaviours/submit-notify');
-const checkOiscSraNumber = require('./behaviours/check-oisc-sra-number');
 const SaveDocument = require('./behaviours/save-document');
 const RemoveDocument = require('./behaviours/remove-document');
+const checkhasDependants = require('./behaviours/check-has-dependants');
+const checkValidation = require('./behaviours/check-validation');
 /**
  * Checks if a given field value matches a conditional value based on the request object.
  *
@@ -61,7 +62,7 @@ module.exports = {
       continueOnEdit: true
     },
     '/contact-details': {
-      fields: ['email', 'telephone', 'client-email', 'client-telephone'],
+      fields: ['email', 'telephone', 'legal-representative-telephone',  'client-email', 'client-telephone'],
       next: '/identity-number',
       continueOnEdit: true
     },
@@ -178,7 +179,7 @@ module.exports = {
       ]
     },
     '/legal-details': {
-      behaviours: [checkOiscSraNumber],
+      behaviours: [checkValidation],
       fields: [
         'legal-company-name',
         'oisc-sra-number',
@@ -204,6 +205,7 @@ module.exports = {
       continueOnEdit: true
     },
     '/update-dependant': {
+      behaviours: [checkhasDependants],
       continueOnEdit: true,
       fields: ['change-dependant-details'],
       forks: [{
