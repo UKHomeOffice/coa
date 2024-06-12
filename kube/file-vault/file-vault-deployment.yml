@@ -115,7 +115,7 @@ spec:
                   # encryption_key is randomly generated password used to encrypt the params that are returned by file-vault
                   key: encryption_key
             - name: AWS_EXPIRY_TIME
-            {{ if eq .KUBE_NAMES
+            {{ if eq .KUBE_NAMES }}
               value: "31536000" # 365 days in seconds
             {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
               value: "604800" # 7 days in seconds
