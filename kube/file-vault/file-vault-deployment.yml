@@ -145,12 +145,12 @@ spec:
                 name: configmap
                 {{ end }}
           env:
-            - name: KEYCLOAK_SECRET
+            - name: PROXY_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: keycloak-client
                   key: secret
-            - name: KEYCLOAK_CLIENT_ID
+            - name: PROXY_CLIENT_ID
               valueFrom:
                 secretKeyRef:
                   name: keycloak-client
