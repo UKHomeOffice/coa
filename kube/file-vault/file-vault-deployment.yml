@@ -126,6 +126,12 @@ spec:
               value: "no"
             - name: ALLOW_GENERATE_LINK_ROUTE
               value: "no"
+            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+            - name: DEBUG
+              value: "*"
+            - name: NODE_ENV
+              value: "development"
+            {{ end }}
           securityContext:
             runAsNonRoot: true
 
@@ -155,16 +161,6 @@ spec:
                 secretKeyRef:
                   name: keycloak-client
                   key: id
-            - name: KEYCLOAK_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: keycloak-user
-                  key: username
-            - name: KEYCLOAK_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: keycloak-user
-                  key: password
             - name: PROXY_LISTEN
               value: 127.0.0.1:3001
             - name: PROXY_UPSTREAM_URL

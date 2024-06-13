@@ -6,6 +6,7 @@ const Model = require('hof').model;
 const uuid = require('uuid').v4;
 
 const config = require('../../../config');
+const logger = require('hof/lib/logger')({ env: config.env });
 
 module.exports = class UploadModel extends Model {
   constructor(...args) {
@@ -14,6 +15,11 @@ module.exports = class UploadModel extends Model {
   }
 
   save() {
+    if (!config.upload.hostname) {
+      logger.error('File-vault hostname is not defined');
+      return Promise.reject(new Error('File-vault hostname is not defined'));
+    }
+
     return new Promise((resolve, reject) => {
       const attributes = {
         url: config.upload.hostname
@@ -47,9 +53,15 @@ module.exports = class UploadModel extends Model {
   }
 
   auth() {
-    if (!config.keycloak.token) {
-      return Promise.reject('Keycloak token url is not defined');
+    const requiredProperties = ['token', 'username', 'password', 'clientId', 'secret'];
+
+    for (const property of requiredProperties) {
+      if (!config.keycloak[property]) {
+        logger.error(`Keycloak ${property} is not defined`);
+        return Promise.reject(new Error(`Keycloak ${property} is not defined`));
+      }
     }
+
     const tokenReq = {
       url: config.keycloak.token,
       form: {
@@ -64,12 +76,32 @@ module.exports = class UploadModel extends Model {
 
     return new Promise((resolve, reject) => {
       return this._request(tokenReq, (err, response) => {
-        if (err) {
-          return reject(err);
+        if (err || response.statusCode !== 200) {
+          let errorMsg = 'Error occurred';
+          if (err) {
+            errorMsg += ': ' + err;
+          } else {
+            errorMsg += '. Status code: ' + response.statusCode;
+          }
+          logger.error(errorMsg);
+          return reject(new Error(errorMsg));
+        }
+
+        let parsedBody;
+        try {
+          parsedBody = JSON.parse(response.body);
+        } catch (parseError) {
+          logger.error(`Failed to parse response body: ${parseError}`);
+          return reject(new Error(`Failed to parse response body: ${parseError}`));
+        }
+
+        if (!parsedBody.access_token) {
+          logger.error('No access token in response');
+          return reject(new Error('No access token in response'));
         }
 
         return resolve({
-          bearer: JSON.parse(response.body).access_token
+          bearer: parsedBody.access_token
         });
       });
     });

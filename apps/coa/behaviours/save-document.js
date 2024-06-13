@@ -47,7 +47,7 @@ module.exports = (documentCategory, name) => superclass => class extends supercl
     return super.validateField(key, req);
   }
 
-  saveValues(req, res, next) {
+  async saveValues(req, res, next) {
     const documentsByCategory = req.sessionModel.get(documentCategory) || [];
 
     if (req.files[name]) {
@@ -59,12 +59,13 @@ module.exports = (documentCategory, name) => superclass => class extends supercl
       };
       const model = new Model(document);
 
-      return model.save()
-        .then(() => {
-          req.sessionModel.set(documentCategory, [...documentsByCategory, model.toJSON()]);
-          return res.redirect(`${req.baseUrl}${req.path}`);
-        })
-        .catch(next);
+      try {
+        await model.save();
+        req.sessionModel.set(documentCategory, [...documentsByCategory, model.toJSON()]);
+        return res.redirect(`${req.baseUrl}${req.path}`);
+      } catch (error) {
+        return next(new Error(`Failed to save document: ${error}`));
+      }
     }
     return super.saveValues.apply(this, arguments);
   }
