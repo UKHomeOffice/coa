@@ -17,7 +17,7 @@ module.exports = class UploadModel extends Model {
   save() {
     if (!config.upload.hostname) {
       logger.error('File-vault hostname is not defined');
-      return Promise.reject(new Error('File-vault hostname is not defined'));
+      throw new Error('File-vault hostname is not defined');
     }
 
     return new Promise((resolve, reject) => {
@@ -37,19 +37,28 @@ module.exports = class UploadModel extends Model {
       reqConf.method = 'POST';
       return this.request(reqConf, (err, data) => {
         if (err) {
-          return reject(err);
+          logger.error(`File upload failed: ${err.message}`);
+          reject(new Error(`File upload failed: ${err.message}`));
+        } else {
+          logger.info(`File uploaded successfully:`);
+          logger.info(data);
+          resolve(data);
         }
-        return resolve(data);
       });
     })
-      .then(result => {
+    .then(result => { 
+      try {
         return this.set({
           url: result.url
         });
-      })
-      .then(() => {
-        return this.unset('data');
-      });
+      } catch (err) {
+        logger.error(`No url in response: ${err.message}`);
+        throw new Error(`No url in response: ${err.message}`);
+      }
+    })
+    .then(() => {
+      return this.unset('data');
+    });
   }
 
   auth() {
@@ -100,6 +109,8 @@ module.exports = class UploadModel extends Model {
           return reject(new Error('No access token in response'));
         }
 
+        logger.info('Successfully retrieved access token');
+        logger.info('Access token: ' + parsedBody.access_token);
         return resolve({
           bearer: parsedBody.access_token
         });
