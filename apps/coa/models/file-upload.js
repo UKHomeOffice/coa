@@ -36,7 +36,7 @@ module.exports = class UploadModel extends Model {
       };
       reqConf.method = 'POST';
 
-      return this._request(reqConf, (err, response) => {
+      return this.request(reqConf, (err, response) => {
         if (err) {
           logger.error(`File upload failed: ${err.message},
             error: ${JSON.stringify(err)},
