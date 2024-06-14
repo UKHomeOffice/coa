@@ -36,7 +36,6 @@ module.exports = class UploadModel extends Model {
       };
       reqConf.method = 'POST';
       return this._request(reqConf, (err, response) => {
-
         logger.info('Response from file-vault:');
         logger.info(response);
 
