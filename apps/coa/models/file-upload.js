@@ -39,14 +39,14 @@ module.exports = class UploadModel extends Model {
       return this._request(reqConf, (err, response) => {
         if (err) {
           logger.error(`File upload failed: ${err.message},
-            error: ${JSON.stringify(error)},
+            error: ${JSON.stringify(err)},
             reqConf: ${JSON.stringify(reqConf)}`);
           return reject(new Error(`File upload failed: ${err.message}`));
         }
 
         logger.info('Response from file-vault:');
         logger.info(response);
-        resolve(response);
+        return resolve(response);
       });
     })
       .then(result => {
