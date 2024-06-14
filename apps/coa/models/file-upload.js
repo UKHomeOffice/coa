@@ -40,25 +40,25 @@ module.exports = class UploadModel extends Model {
           logger.error(`File upload failed: ${err.message}`);
           reject(new Error(`File upload failed: ${err.message}`));
         } else {
-          logger.info(`File uploaded successfully:`);
+          logger.info('File uploaded successfully:');
           logger.info(data);
           resolve(data);
         }
       });
     })
-    .then(result => { 
-      try {
-        return this.set({
-          url: result.url
-        });
-      } catch (err) {
-        logger.error(`No url in response: ${err.message}`);
-        throw new Error(`No url in response: ${err.message}`);
-      }
-    })
-    .then(() => {
-      return this.unset('data');
-    });
+      .then(result => {
+        try {
+          return this.set({
+            url: result.url
+          });
+        } catch (err) {
+          logger.error(`No url in response: ${err.message}`);
+          throw new Error(`No url in response: ${err.message}`);
+        }
+      })
+      .then(() => {
+        return this.unset('data');
+      });
   }
 
   auth() {
