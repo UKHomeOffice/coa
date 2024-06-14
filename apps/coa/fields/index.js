@@ -174,7 +174,7 @@ module.exports = {
 
   telephone: {
     mixin: 'input-text',
-    validate: ['notUrl', 'internationalPhoneNumber'],
+    validate: ['notUrl'],
     labelClassName: 'govuk-label--s',
     className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
@@ -194,7 +194,7 @@ module.exports = {
 
   'client-telephone': {
     mixin: 'input-text',
-    validate: ['notUrl', 'internationalPhoneNumber'],
+    validate: ['notUrl'],
     labelClassName: 'govuk-label--s',
     className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
@@ -233,6 +233,7 @@ module.exports = {
   },
   'postal-address-postcode': {
     validate: ['required', 'notUrl', 'postcode'],
+    formatter: ['ukPostcode'],
     className: ['govuk-input', 'govuk-input--width-10']
   },
   'identity-type': {
@@ -267,7 +268,7 @@ module.exports = {
     },
     labelClassName: 'govuk-label--s',
     className: ['govuk-input', 'govuk-!-width-two-thirds'],
-    validate: ['required', 'notUrl',  passportNumber]
+    validate: ['required', 'notUrl', passportNumber]
   },
 
   'brp-details': {
@@ -277,7 +278,7 @@ module.exports = {
     },
     labelClassName: 'govuk-label--s',
     className: ['govuk-input', 'govuk-!-width-two-thirds'],
-    validate: ['required', 'notUrl',  brpNumber]
+    validate: ['required', 'notUrl', brpNumber]
   },
 
   'arc-details': {
@@ -287,7 +288,7 @@ module.exports = {
     },
     labelClassName: 'govuk-label--s',
     className: ['govuk-input', 'govuk-!-width-two-thirds'],
-    validate: ['required', 'notUrl',  'alphanum']
+    validate: ['required', 'notUrl', 'alphanum']
   },
   'old-address': {
     mixin: 'radio-group',

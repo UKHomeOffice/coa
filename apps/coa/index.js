@@ -62,6 +62,7 @@ module.exports = {
       continueOnEdit: true
     },
     '/contact-details': {
+      behaviours: [checkValidation],
       fields: ['email', 'telephone', 'legal-representative-telephone',  'client-email', 'client-telephone'],
       next: '/identity-number',
       continueOnEdit: true
