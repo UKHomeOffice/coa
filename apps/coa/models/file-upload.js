@@ -35,18 +35,18 @@ module.exports = class UploadModel extends Model {
         }
       };
       reqConf.method = 'POST';
+
       return this._request(reqConf, (err, response) => {
+        if (err) {
+          logger.error(`File upload failed: ${err.message},
+            error: ${JSON.stringify(error)},
+            reqConf: ${JSON.stringify(reqConf)}`);
+          return reject(new Error(`File upload failed: ${err.message}`));
+        }
+
         logger.info('Response from file-vault:');
         logger.info(response);
-
-        if (err) {
-          logger.error(`File upload failed: ${err.message}`);
-          reject(new Error(`File upload failed: ${err.message}`));
-        } else {
-          logger.info('File uploaded successfully:');
-          logger.info(response);
-          resolve(response);
-        }
+        resolve(response);
       });
     })
       .then(result => {
@@ -88,13 +88,8 @@ module.exports = class UploadModel extends Model {
 
     return new Promise((resolve, reject) => {
       return this._request(tokenReq, (err, response) => {
-        if (err || response.statusCode !== 200) {
-          let errorMsg = 'Error occurred';
-          if (err) {
-            errorMsg += ': ' + err;
-          } else {
-            errorMsg += '. Status code: ' + response.statusCode;
-          }
+        if (err) {
+          const errorMsg = `Error occurred: ${JSON.stringify(err)}`;
           logger.error(errorMsg);
           return reject(new Error(errorMsg));
         }
