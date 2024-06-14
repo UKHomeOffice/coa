@@ -35,14 +35,18 @@ module.exports = class UploadModel extends Model {
         }
       };
       reqConf.method = 'POST';
-      return this.request(reqConf, (err, data) => {
+      return this._request(reqConf, (err, response) => {
+
+        logger.info('Response from file-vault:');
+        logger.info(response);
+
         if (err) {
           logger.error(`File upload failed: ${err.message}`);
           reject(new Error(`File upload failed: ${err.message}`));
         } else {
           logger.info('File uploaded successfully:');
-          logger.info(data);
-          resolve(data);
+          logger.info(response);
+          resolve(response);
         }
       });
     })
