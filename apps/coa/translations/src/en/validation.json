@@ -39,18 +39,18 @@
         "email": "Enter a valid email address"
     },
     "telephone": {
-        "notUrl": "Please do not enter a link/URL into your answers",
+        "notUrl": "Your answer must not contain URLs or links",
         "internationalPhoneNumber" : "Please enter a valid telephone number"
     },
     "legal-representative-telephone": {
-        "notUrl": "Please do not enter a link/URL into your answers",
+        "notUrl": "Your answer must not contain URLs or links",
         "ukPhoneNumber" : "Enter a valid UK telephone number"
     },
     "client-email": {
         "email": "Enter a valid email address"
     },
     "client-telephone": {
-        "notUrl": "Please do not enter a link/URL into your answers",
+        "notUrl": "Your answer must not contain URLs or links",
         "internationalPhoneNumber" : "Please enter a valid telephone number"
     },
     "change-dependant-details": {
