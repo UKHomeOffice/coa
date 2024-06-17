@@ -108,7 +108,6 @@ module.exports = class UploadModel extends Model {
         }
 
         logger.info('Successfully retrieved access token');
-        logger.info('Access token: ' + parsedBody.access_token);
         return resolve({
           bearer: parsedBody.access_token
         });
