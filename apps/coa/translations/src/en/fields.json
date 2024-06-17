@@ -69,11 +69,15 @@
     "label": "Telephone number (optional)",
     "hint": "For international numbers include + and the country code. For example, +39 1 33 45 70 90"
   },
+  "legal-representative-telephone": {
+    "label": "Telephone number (optional)"
+  },
   "client-email": {
     "label": "Client’s email address (optional)"
   },
   "client-telephone": {
-    "label": "Client’s telephone number (optional)"
+    "label": "Client’s telephone number (optional)",
+    "hint": "For international numbers include + and the country code. For example, +39 1 33 45 70 90"
   },
   "which-details-updating": {
     "legend": "Which details are you updating?",

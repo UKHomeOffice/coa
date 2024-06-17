@@ -174,7 +174,14 @@ module.exports = {
 
   telephone: {
     mixin: 'input-text',
-    validate: ['ukPhoneNumber'],
+    validate: ['notUrl'],
+    labelClassName: 'govuk-label--s',
+    className: ['govuk-input', 'govuk-!-width-two-thirds']
+  },
+
+  'legal-representative-telephone': {
+    mixin: 'input-text',
+    validate: ['notUrl', 'ukPhoneNumber'],
     labelClassName: 'govuk-label--s',
     className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
@@ -187,7 +194,7 @@ module.exports = {
 
   'client-telephone': {
     mixin: 'input-text',
-    validate: ['ukPhoneNumber'],
+    validate: ['notUrl'],
     labelClassName: 'govuk-label--s',
     className: ['govuk-input', 'govuk-!-width-two-thirds']
   },
@@ -226,6 +233,7 @@ module.exports = {
   },
   'postal-address-postcode': {
     validate: ['required', 'notUrl', 'postcode'],
+    formatter: ['ukPostcode'],
     className: ['govuk-input', 'govuk-input--width-10']
   },
   'identity-type': {
@@ -260,7 +268,7 @@ module.exports = {
     },
     labelClassName: 'govuk-label--s',
     className: ['govuk-input', 'govuk-!-width-two-thirds'],
-    validate: ['required', passportNumber]
+    validate: ['required', 'notUrl', passportNumber]
   },
 
   'brp-details': {
@@ -270,7 +278,7 @@ module.exports = {
     },
     labelClassName: 'govuk-label--s',
     className: ['govuk-input', 'govuk-!-width-two-thirds'],
-    validate: ['required', brpNumber]
+    validate: ['required', 'notUrl', brpNumber]
   },
 
   'arc-details': {
@@ -280,7 +288,7 @@ module.exports = {
     },
     labelClassName: 'govuk-label--s',
     className: ['govuk-input', 'govuk-!-width-two-thirds'],
-    validate: ['required', 'alphanum']
+    validate: ['required', 'notUrl', 'alphanum']
   },
   'old-address': {
     mixin: 'radio-group',
