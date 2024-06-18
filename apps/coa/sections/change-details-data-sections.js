@@ -83,13 +83,13 @@ module.exports = {
         omitChangeLink: true
       },
       {
-        step: '/legal-representative',
+        step: '/contact-details',
         field: 'legal-representative-email',
         parse: (list, req) => {
-          if (!req.sessionModel.get('steps').includes('/legal-representative')) {
+          if (!req.sessionModel.get('steps').includes('/contact-details')) {
             return null;
           }
-          return req.sessionModel.get('email');
+          return req.sessionModel.get('isLegalRep') ? req.sessionModel.get('email') : null ;
         },
         omitChangeLink: true
       }
