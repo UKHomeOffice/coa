@@ -89,7 +89,7 @@ module.exports = {
           if (!req.sessionModel.get('steps').includes('/contact-details')) {
             return null;
           }
-          return req.sessionModel.get('isLegalRep') ? req.sessionModel.get('email') : null ;
+          return req.sessionModel.get('isLegalRep') ? req.sessionModel.get('email') : null;
         },
         omitChangeLink: true
       }
