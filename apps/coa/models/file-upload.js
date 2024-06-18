@@ -44,8 +44,11 @@ module.exports = class UploadModel extends Model {
           return reject(new Error(`File upload failed: ${err.message}`));
         }
 
-        logger.info('Response from file-vault:');
-        logger.info(response);
+        if (Object.keys(response).length === 0) {
+          return reject(new Error('Received empty response from file-vault'));
+        }
+
+        logger.info(`Received response from file-vault with keys: ${Object.keys(response)}`);
         return resolve(response);
       });
     })
