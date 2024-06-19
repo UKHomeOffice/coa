@@ -6,6 +6,7 @@ const Model = require('hof').model;
 const uuid = require('uuid').v4;
 
 const config = require('../../../config');
+const logger = require('hof/lib/logger')({ env: config.env });
 
 module.exports = class UploadModel extends Model {
   constructor(...args) {
@@ -14,6 +15,11 @@ module.exports = class UploadModel extends Model {
   }
 
   save() {
+    if (!config.upload.hostname) {
+      logger.error('File-vault hostname is not defined');
+      throw new Error('File-vault hostname is not defined');
+    }
+
     return new Promise((resolve, reject) => {
       const attributes = {
         url: config.upload.hostname
@@ -29,17 +35,32 @@ module.exports = class UploadModel extends Model {
         }
       };
       reqConf.method = 'POST';
-      return this.request(reqConf, (err, data) => {
+
+      return this.request(reqConf, (err, response) => {
         if (err) {
-          return reject(err);
+          logger.error(`File upload failed: ${err.message},
+            error: ${JSON.stringify(err)},
+            reqConf: ${JSON.stringify(reqConf)}`);
+          return reject(new Error(`File upload failed: ${err.message}`));
         }
-        return resolve(data);
+
+        if (Object.keys(response).length === 0) {
+          return reject(new Error('Received empty response from file-vault'));
+        }
+
+        logger.info(`Received response from file-vault with keys: ${Object.keys(response)}`);
+        return resolve(response);
       });
     })
       .then(result => {
-        return this.set({
-          url: result.url
-        });
+        try {
+          return this.set({
+            url: result.url.replace('/file/', '/file/generate-link/').split('?')[0]
+          });
+        } catch (err) {
+          logger.error(`No url in response: ${err.message}`);
+          throw new Error(`No url in response: ${err.message}`);
+        }
       })
       .then(() => {
         return this.unset('data');
@@ -47,9 +68,15 @@ module.exports = class UploadModel extends Model {
   }
 
   auth() {
-    if (!config.keycloak.token) {
-      return Promise.reject('Keycloak token url is not defined');
+    const requiredProperties = ['token', 'username', 'password', 'clientId', 'secret'];
+
+    for (const property of requiredProperties) {
+      if (!config.keycloak[property]) {
+        logger.error(`Keycloak ${property} is not defined`);
+        return Promise.reject(new Error(`Keycloak ${property} is not defined`));
+      }
     }
+
     const tokenReq = {
       url: config.keycloak.token,
       form: {
@@ -65,11 +92,27 @@ module.exports = class UploadModel extends Model {
     return new Promise((resolve, reject) => {
       return this._request(tokenReq, (err, response) => {
         if (err) {
-          return reject(err);
+          const errorMsg = `Error occurred: ${JSON.stringify(err)}`;
+          logger.error(errorMsg);
+          return reject(new Error(errorMsg));
         }
 
+        let parsedBody;
+        try {
+          parsedBody = JSON.parse(response.body);
+        } catch (parseError) {
+          logger.error(`Failed to parse response body: ${parseError}`);
+          return reject(new Error(`Failed to parse response body: ${parseError}`));
+        }
+
+        if (!parsedBody.access_token) {
+          logger.error('No access token in response');
+          return reject(new Error('No access token in response'));
+        }
+
+        logger.info('Successfully retrieved access token');
         return resolve({
-          bearer: JSON.parse(response.body).access_token
+          bearer: parsedBody.access_token
         });
       });
     });
