@@ -123,8 +123,6 @@ spec:
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - name: DEBUG
               value: "*"
-            - name: NODE_ENV
-              value: "development"
             {{ end }}
           securityContext:
             runAsNonRoot: true
