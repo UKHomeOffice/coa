@@ -55,7 +55,7 @@ module.exports = class UploadModel extends Model {
       .then(result => {
         try {
           return this.set({
-            url: result.url
+            url: result.url.replace('/file/', '/file/generate-link/').split('?')[0]
           });
         } catch (err) {
           logger.error(`No url in response: ${err.message}`);

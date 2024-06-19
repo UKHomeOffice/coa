@@ -21,72 +21,68 @@ app.use((req, res, next) => {
   next();
 });
 
+// eslint-disable-next-line consistent-return
 app.use((req, res, next) => {
-  if (req.is('multipart/form-data')) {
-    try {
-      const bb = busboy({
-        headers: req.headers,
-        limits: {
-          fileSize: config.upload.maxFileSizeInBytes
-        }
-      });
-
-      bb.on('field', (key, value) => {
-        req.body[key] = value;
-      });
-
-      bb.on('file', (key, file, fileInfo) => {
-        logger.log('info', `Processing file: , ${JSON.stringify(file)}, ${JSON.stringify(fileInfo)}`);
-        file.pipe(bl((err, d) => {
-          if (err) {
-            logger.log('error', `Error processing file : ${err}`);
-            return;
-          }
-          if (!(d.length || fileInfo.filename)) {
-            logger.log('warn', `Empty file received, ${d}, ${d.length}, ${fileInfo}, ${fileInfo.filename}`);
-            return;
-          }
-
-          const fileData = {
-            data: file.truncated ? null : d,
-            name: fileInfo.filename || null,
-            encoding: fileInfo.encoding,
-            mimetype: fileInfo.mimeType,
-            truncated: file.truncated,
-            size: file.truncated ? null : Buffer.byteLength(d, 'binary')
-          };
-
-          if (settings.multi) {
-            req.files[key] = req.files[key] || [];
-            req.files[key].push(fileData);
-          } else {
-            req.files[key] = fileData;
-          }
-        }));
-      });
-
-      let error;
-
-      bb.on('error', function (err) {
-        error = err;
-        next(err);
-      });
-
-      bb.on('finish', function () {
-        if (!error) {
-          next();
-        }
-      });
-      req.files = req.files || {};
-      req.body = req.body || {};
-      req.pipe(bb);
-    } catch (err) {
-      logger.log('error', `Error processing file: ${err}`);
-      next(err);
-    }
-  } else {
-    next();
+  if (!req.is('multipart/form-data')) {
+    return next();
   }
+
+  req.files = req.files || {};
+  req.body = req.body || {};
+
+  const bb = busboy({
+    headers: req.headers,
+    limits: {
+      fileSize: config.upload.maxFileSizeInBytes
+    }
+  });
+
+  bb.on('field', (key, value) => {
+    req.body[key] = value;
+  });
+
+  bb.on('file', (key, file, fileInfo) => {
+    logger.info(`Processing file: filename: ${fileInfo.filename}, encoding: ${fileInfo.encoding}, mimeType: ${fileInfo.mimeType}`
+    );
+
+    // eslint-disable-next-line consistent-return
+    file.pipe(bl((err, data) => {
+      if (err) {
+        const errorMessage = `Failed to process file during streaming operation: ${err}`;
+        logger.error(errorMessage);
+        return next(new Error(errorMessage));
+      }
+
+      const isDataEmpty = data.length === 0;
+      const isFilenameMissing = !fileInfo.filename;
+
+      if (isDataEmpty && isFilenameMissing) {
+        logger.error(`Empty file received, data length: ${data.length}, filename: ${fileInfo.filename}`);
+        return next(new Error('Empty file received'));
+      }
+
+      req.files[key] = {
+        data: file.truncated ? null : data,
+        name: fileInfo.filename || null,
+        encoding: fileInfo.encoding,
+        mimetype: fileInfo.mimeType,
+        truncated: file.truncated,
+        size: Buffer.byteLength(data, 'binary')
+      };
+    }));
+  });
+
+  bb.on('error', err => {
+    const errorMessage = `Error while parsing the form: ${err}`;
+    logger.error(errorMessage);
+    return next(new Error(errorMessage));
+  });
+
+  bb.on('finish', () => {
+    next();
+  });
+
+  req.pipe(bb);
 });
 
 module.exports = app;
