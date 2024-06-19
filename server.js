@@ -42,7 +42,10 @@ app.use((req, res, next) => {
   });
 
   bb.on('file', (key, file, fileInfo) => {
-    logger.info(`Processing file: filename: ${fileInfo.filename}, encoding: ${fileInfo.encoding}, mimeType: ${fileInfo.mimeType}`
+    logger.info(`Processing file: 
+      filename: ${fileInfo.filename},
+      encoding: ${fileInfo.encoding},
+      mimeType: ${fileInfo.mimeType}`
     );
 
     // eslint-disable-next-line consistent-return
