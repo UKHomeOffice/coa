@@ -60,8 +60,7 @@ app.use((req, res, next) => {
       const isFilenameMissing = !fileInfo.filename;
 
       if (isDataEmpty && isFilenameMissing) {
-        logger.error(`Empty file received, data length: ${data.length}, filename: ${fileInfo.filename}`);
-        return next(new Error('Empty file received'));
+        return;
       }
 
       req.files[key] = {
