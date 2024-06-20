@@ -21,10 +21,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// eslint-disable-next-line consistent-return
+
 app.use((req, res, next) => {
   if (!req.is('multipart/form-data')) {
-    return next();
+    next();
+    return;
   }
 
   req.files = req.files || {};
@@ -41,7 +42,6 @@ app.use((req, res, next) => {
     req.body[key] = value;
   });
 
-  // eslint-disable-next-line consistent-return
   bb.on('file', (key, file, fileInfo) => {
     logger.info(`Processing file: 
       filename: ${fileInfo.filename},
@@ -51,22 +51,24 @@ app.use((req, res, next) => {
 
     if (!fileInfo.filename) {
       logger.warn(`File skipped due to missing filename for key: ${key}`);
-      return undefined;
+      file.resume();
+      return;
     }
 
-    // eslint-disable-next-line consistent-return
     file.pipe(bl((err, data) => {
       if (err) {
         const errorMessage = `Failed to process file during streaming operation: ${err}`;
         logger.error(errorMessage);
-        return next(new Error(errorMessage));
+        next(new Error(errorMessage));
+        return;
       }
 
       const isDataEmpty = data.length === 0;
 
       if (isDataEmpty) {
         logger.error(`Empty file received, data length: ${data.length}, filename: ${fileInfo.filename}`);
-        return next(new Error('Empty file received'));
+        next(new Error('Empty file received'));
+        return;
       }
 
       req.files[key] = {
