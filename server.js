@@ -41,12 +41,18 @@ app.use((req, res, next) => {
     req.body[key] = value;
   });
 
+  // eslint-disable-next-line consistent-return
   bb.on('file', (key, file, fileInfo) => {
     logger.info(`Processing file: 
       filename: ${fileInfo.filename},
       encoding: ${fileInfo.encoding},
       mimeType: ${fileInfo.mimeType}`
     );
+
+    if (!fileInfo.filename) {
+      logger.warn(`File skipped due to missing filename for key: ${key}`);
+      return undefined;
+    }
 
     // eslint-disable-next-line consistent-return
     file.pipe(bl((err, data) => {
@@ -57,9 +63,8 @@ app.use((req, res, next) => {
       }
 
       const isDataEmpty = data.length === 0;
-      const isFilenameMissing = !fileInfo.filename;
 
-      if (isDataEmpty && isFilenameMissing) {
+      if (isDataEmpty) {
         logger.error(`Empty file received, data length: ${data.length}, filename: ${fileInfo.filename}`);
         return next(new Error('Empty file received'));
       }
