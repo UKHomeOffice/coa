@@ -1,3 +1,155 @@
 {
-  
+  "applicant-details": {
+    "header": "Applicant details",
+    "application-details-intro": "Enter the details of the person whose details you want to update. Their details must match the identity document that UK Visas and Immigration holds on record."
+  },
+  "contact-details": {
+    "header": "Contact details"
+  },
+  "legal-representative": {
+    "header": "Contact details"
+  },
+  "identity-number": {
+    "header": "Identity document number",
+    "intro": "For security, you must provide us with information from an identity document that UK Visas and Immigration has on {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} record."
+  },
+  "upload-identity": {
+    "header": "Upload proof of identity",
+    "upload-identity-intro": "For security, you must prove {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} identity.",
+    "upload-identity-instructions": "Upload a scanned copy of an acceptable proof of identity document.",
+    "upload-identity-requirements": "The identity document must not be expired and the scan must be clear and easy to read."
+  },
+  "home-address": {
+    "header": "What is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} new home address?"
+  },
+  "upload-address": {
+    "header": "Upload proof of address",
+    "upload-home-address-intro": "For security, you must prove {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} address.",
+    "upload-home-address-instructions": "Upload a scanned copy of an acceptable proof of address document.",
+    "upload-home-address-requirements": "The document must be dated within the last 3 months. The scan must be clear and easy to read. You must scan and upload the whole document, if it is more than one page."
+  },
+  "postal-address": {
+    "header": "What is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} new postal address?"
+  },
+  "upload-postal-address": {
+    "header": "Upload proof of address",
+    "upload-postal-intro": "For security, you must prove {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} address.",
+    "upload-postal-instructions": "Upload a scanned copy of an acceptable proof of address document.",
+    "upload-postal-requirements": "The document must be dated within the last 3 months. The scan must be clear and easy to read. You must scan and upload the whole document, if it is more than one page."
+  },
+  "legal-details": {
+    "header": "Enter your legal representative’s details"
+  },
+  "upload-letter": {
+    "header": "Upload letter of authority ",
+    "upload-letter-intro": "To prove {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} legal representation,",
+    "upload-letter-instructions": "you must upload a scanned copy of a solicitor's letter of authority. This should be on paper with a letterhead.",
+    "upload-letter-requirements": "The scan must be clear and easy to read. You must scan and upload the whole document, if it is more than one page."
+  },
+  "dependant-summary": {
+    "header": "Dependants"
+  },
+  "dependant-details": {
+    "header": "Which dependant would you like to make the same changes to?"
+  },
+  "check-answers": {
+    "header": "Check your answers",
+    "check-answers-intro": "Check these details carefully before continuing. If any of the details are incorrect, change them."
+  },
+  "privacy-policy": {
+    "header": "Privacy policy"
+  },
+  "request-submitted": {
+    "confirmed": "Update submitted",
+    "p1": "You should keep this reference number safe as you will need it if you contact us about this update.",
+    "p2": "We have received your new details and have sent a confirmation email to {{values.email}}.",
+    "p3": "Sometimes we will contact you for more information. If we do not contact you, it will take up to 5 working days to update your details."
+  },
+  "confirm": {
+    "sections": {
+      "applicant-details": {
+        "header": "Applicant information"
+      },
+      "your-details": {
+        "header": "Your details"
+      },
+      "change-details": {
+        "header": "Change details"
+      },
+      "home-address-details": {
+        "header": "Your Home address will be"
+      },
+      "postal-address-details": {
+        "header": "Your postal address will be"
+      },
+      "legal-representative-details": {
+        "header": "Your legal representative details will be"
+      }
+    },
+    "fields": {
+      "applicant-nationality": {
+        "label": "Nationality"
+      },
+      "applicant-unique-number": {
+        "label": "Unique application number"
+      },
+      "telephone": {
+        "label": "Telephone number"
+      },
+      "client-email": {
+        "label": "Client’s email address"
+      },
+      "client-telephone": {
+        "label": "Client’s telephone number"
+      },
+      "passport-number-details": {
+        "label": "Passport number"
+      },
+      "brp-details": {
+        "label": "BRP number"
+      },
+      "arc-details": {
+        "label": "ARC number"
+      },
+      "dependants": {
+        "label": "Which dependant(s) would you like to make the same changes to?"
+      },
+      "postal-address-details": {
+        "label": "What is your new postal address?"
+      },
+      "old-address": {
+        "label": "Is old home address in the UK?"
+      },
+      "old-postcode": {
+        "label": "Old postcode"
+      },
+      "home-address-details": {
+        "label": "What is your new home address"
+      },
+      "legal-company-name": {
+        "label": "Company name"
+      },
+      "legal-representative-address-details": {
+        "label": "Legal representative postal address"
+      },
+      "legal-representative-email": {
+        "label": "Rep’/IA’s main email address"
+      },
+      "legal-rep-address-details": {
+        "label": "Address"
+      },
+      "identity-documents": {
+        "label": "Proof of identity"
+      },
+      "postal-address-documents": {
+        "label": "Proof of new postal address"
+      },
+      "home-address-documents": {
+        "label": "Proof of new home address"
+      },
+      "letter-of-authority": {
+        "label": "Letter of authority"
+      }
+    }
+  }
 }

@@ -81,6 +81,12 @@ spec:
                   name: file-vault
                   #encryption_key is randomly generated password used to encrypt the params that are returned by file-vault
                   key: encryption_key
+            - name: AWS_EXPIRY_TIME
+              value: "120" # 2 minutes in seconds
+            - name: RETURN_ORIGINAL_SIGNED_URL
+              value: "no"
+            - name: ALLOW_GENERATE_LINK_ROUTE
+              value: "yes"
             - name: KEYCLOAK_SECRET
               valueFrom:
                 secretKeyRef:
@@ -108,13 +114,17 @@ spec:
                   key: session-secret
             - name: FILE_VAULT_URL
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
-              value: https://fv.prod.{{ .APP_NAME }}.homeoffice.gov.uk/file
+              value: https://fv-{{ .APP_NAME }}.sas.homeoffice.gov.uk/file
             {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-              value: https://fv-stg.prod.{{ .APP_NAME }}.homeoffice.gov.uk/file
+              value: https://fv-{{ .APP_NAME }}.stg.sas.homeoffice.gov.uk/file
             {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
-              value: https://fv-uat.notprod.{{ .APP_NAME }}.homeoffice.gov.uk/file
+              value: https://fv-{{ .APP_NAME }}.uat.sas-notprod.homeoffice.gov.uk/file
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk/file
+            {{ end }}
+            {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+            - name: DEBUG
+              value: "*"
             {{ end }}
           {{ if not (eq .KUBE_NAMESPACE .BRANCH_ENV) }}
           livenessProbe:

@@ -2,6 +2,9 @@
 
 const hof = require('hof');
 const config = require('./config.js');
+const busboy = require('busboy');
+const bl = require('bl');
+const logger = require('hof/lib/logger')({ env: config.env });
 
 let settings = require('./hof.settings');
 
@@ -14,8 +17,80 @@ const app = hof(settings);
 
 app.use((req, res, next) => {
   res.locals.htmlLang = 'en';
-  res.locals.feedbackUrl = config.survey.urls.acq;
+  res.locals.feedbackUrl = config.survey.urls.root;
   next();
+});
+
+// eslint-disable-next-line consistent-return
+app.use((req, res, next) => {
+  if (!req.is('multipart/form-data')) {
+    return next();
+  }
+
+  req.files = req.files || {};
+  req.body = req.body || {};
+
+  const bb = busboy({
+    headers: req.headers,
+    limits: {
+      fileSize: config.upload.maxFileSizeInBytes
+    }
+  });
+
+  bb.on('field', (key, value) => {
+    req.body[key] = value;
+  });
+
+  // eslint-disable-next-line consistent-return
+  bb.on('file', (key, file, fileInfo) => {
+    logger.info(`Processing file: 
+      filename: ${fileInfo.filename},
+      encoding: ${fileInfo.encoding},
+      mimeType: ${fileInfo.mimeType}`
+    );
+
+    if (!fileInfo.filename) {
+      logger.warn(`File skipped due to missing filename for key: ${key}`);
+      return undefined;
+    }
+
+    // eslint-disable-next-line consistent-return
+    file.pipe(bl((err, data) => {
+      if (err) {
+        const errorMessage = `Failed to process file during streaming operation: ${err}`;
+        logger.error(errorMessage);
+        return next(new Error(errorMessage));
+      }
+
+      const isDataEmpty = data.length === 0;
+
+      if (isDataEmpty) {
+        logger.error(`Empty file received, data length: ${data.length}, filename: ${fileInfo.filename}`);
+        return next(new Error('Empty file received'));
+      }
+
+      req.files[key] = {
+        data: file.truncated ? null : data,
+        name: fileInfo.filename || null,
+        encoding: fileInfo.encoding,
+        mimetype: fileInfo.mimeType,
+        truncated: file.truncated,
+        size: Buffer.byteLength(data, 'binary')
+      };
+    }));
+  });
+
+  bb.on('error', err => {
+    const errorMessage = `Error while parsing the form: ${err}`;
+    logger.error(errorMessage);
+    return next(new Error(errorMessage));
+  });
+
+  bb.on('finish', () => {
+    next();
+  });
+
+  req.pipe(bb);
 });
 
 module.exports = app;

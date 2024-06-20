@@ -1,3 +1,195 @@
 {
-  
+  "applicant-full-name": {
+    "label": "Full name"
+  },
+  "applicant-dob": {
+    "legend": "Date of birth",
+    "hint": "For example 31 7 1985"
+  },
+  "applicant-nationality": {
+    "label": "Country of nationality",
+    "options": {
+      "null": "Select a country"
+    }
+  },
+  "applicant-unique-number": {
+    "label": "Unique application number (optional)",
+    "hint": "UANs are shown on letters from the Home Office. For example, 1234-1234-1234-1234/00"
+  },
+  "who-are-you": {
+    "legend": "Who are you?",
+    "options": {
+      "applicant": {
+        "label": "{{values.applicant-full-name}}"
+      },
+      "legal-representative": {
+        "label": "{{values.nameWithPossession}} legal representative"
+      },
+      "someone-else": {
+        "label": "Someone else",
+        "hint": "For example, someone helping {{values.applicant-full-name}}"
+      }
+    }
+  },
+  "legal-representative-name": {
+    "label": "Legal representative’s full name"
+  },
+  "change-dependant-details": {
+    "legend": "Do you want to make the same changes to your dependant's details",
+    "options": {
+      "yes": {
+        "label": "Yes"
+      },
+      "no": {
+        "label": "No"
+      }
+    }
+  },
+  "dependant-full-name": {
+    "label": "Full name"
+  },
+  "dependant-date-of-birth": {
+    "legend": "Date of Birth",
+    "hint": "For example 31 7 1985"
+  },
+  "dependant-country-of-nationality": {
+    "label": "Country of nationality",
+    "options": {
+      "none": "Select an option"
+    }
+  },
+  "someone-else-name": {
+    "label": "Your full name"
+  },
+  "email": {
+    "label": "Email address",
+    "hint": "Where we will contact you about your request"
+  },
+  "telephone": {
+    "label": "Telephone number (optional)",
+    "hint": "For international numbers include + and the country code. For example, +39 1 33 45 70 90"
+  },
+  "legal-representative-telephone": {
+    "label": "Telephone number (optional)"
+  },
+  "client-email": {
+    "label": "Client’s email address (optional)"
+  },
+  "client-telephone": {
+    "label": "Client’s telephone number (optional)",
+    "hint": "For international numbers include + and the country code. For example, +39 1 33 45 70 90"
+  },
+  "which-details-updating": {
+    "legend": "Which details are you updating?",
+    "options": {
+      "home-address": {
+        "label": "Home address"
+      },
+      "postal-address": {
+        "label": "Postal address"
+      },
+      "legal-details": {
+        "label": "Legal representative",
+        "hint": "If your legal representative or their details changed"
+      }
+    }
+  },
+  "postal-address-line-1": {
+    "label": "Address line 1"
+  },
+  "postal-address-line-2": {
+    "label": "Address line 2 (optional)"
+  },
+  "postal-address-town-or-city": {
+    "label": "Town or city"
+  },
+  "postal-address-county": {
+    "label": "County (optional)"
+  },
+  "postal-address-postcode": {
+    "label": "Postcode"
+  },
+  "identity-type": {
+    "legend": "Which information can you provide?",
+    "options": {
+      "passport": {
+        "label": "Passport number"
+      },
+      "brp": {
+        "label": "Biometric residence permit (BRP) number",
+        "hint": "This is on your BRP card or on any letters we've sent you"
+      },
+      "arc": {
+        "label": "Application registration card number"
+        
+      },
+      "none": {
+        "label": "None of these"
+      }
+    }
+  },
+  "passport-number-details": {
+    "label": "What is your passport number?",
+    "hint": "For example, 1208297A"
+  },
+  "brp-details" : {
+    "label": "What is your Biometric residence permit (BRP) number?"
+  },
+  "arc-details" : {
+    "label": "What is your Application registration card number?"
+  },
+  "old-address": {
+    "legend": "Is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} old home address in the UK?",
+    "options": {
+      "Yes": {
+        "label": "Yes"
+      },
+      "No": {
+        "label": "No"
+      }
+    }
+  },
+  "old-postcode": {
+    "label": "Old postcode"
+  },
+  "home-address-line-1": {
+    "label": "Address line 1"
+  },
+  "home-address-line-2": {
+    "label": "Address line 2 (optional)"
+  },
+  "home-address-town-or-city": {
+    "label": "Town or city"
+  },
+  "home-address-county": {
+    "label": "County (optional)"
+  },
+  "home-address-postcode": {
+    "label": "Postcode"
+  },
+  "legal-company-name": {
+    "label": "Company name (optional)"
+  },
+  "oisc-sra-number": {
+    "label": "OISC or SRA number",
+    "hint": "Office of the Immigration Services Commissioner number or Solicitor’s Regulation Authority number"
+  },
+  "legal-address-line-1": {
+    "label": "Address line 1"
+  },
+  "legal-address-line-2": {
+    "label": "Address line 2 (optional)"
+  },
+  "legal-address-town-or-city": {
+    "label": "Town or city"
+  },
+  "legal-address-county": {
+    "label": "County (optional)"
+  },
+  "legal-address-postcode": {
+    "label": "Postcode"
+  },
+  "privacy-check": {
+    "label": "I confirm that I have read and understood the Data Protection statement above."
+  }
 }
