@@ -40,20 +40,20 @@ Change of Address (COA) used by the public to update their details with UK Visas
 
 ## Install & Run the Application locally with Docker Compose
 
-You can containerize the application using [Docker](https://www.docker.com). The `.devcontainer` directory includes a `docker-compose.dev.yml` file for orchestrating multi-container application.
+You can containerise the application using [Docker](https://www.docker.com). The `.devcontainer` directory includes a `docker-compose.dev.yml` file for orchestrating multi-container application.
 
 ### Prerequisites
    - [Docker](https://www.docker.com)
 
 ### Setup
 
-By following these steps, you should be able to install and run your application using a Docker Compose. This allows for a consistent development environment across different machines and ensures that all the required dependencies are available.
+By following these steps, you should be able to install and run your application using a Docker Compose. This provides a consistent development environment across different machines and ensures that all required dependencies are available.
 
 1. Make sure you have Docker installed and running on your machine. Docker is needed to create and manage your containers.
 
 2. To configure your dev environment, copy `/.devcontainer/devcontainer.env.sample` to `devcontainer.env` in the same directory and fill in the necessary values. This ensures your development container is set up with the required environment variables.
 
-3. Open a terminal, navigate to the project directory, and run the command: `docker compose -f .devcontainer/docker-compose.dev.yml up -d`
+3. Open a terminal, navigate to the project directory and run: `docker compose -f .devcontainer/docker-compose.dev.yml up -d`
 
 4. Once the containers are built and started, you can go inside the app container: `docker exec -it devcontainer-hof-coa-app-1 sh` (note: Docker containers may be named differently)
 
@@ -61,7 +61,7 @@ By following these steps, you should be able to install and run your application
 
 ## Install & Run the Application locally with VS Code Dev Containers
 
-Alternatevly if you are using [Visual Studio Code](https://code.visualstudio.com/) (VS Code), you can run the application with a [VS Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers).
+Alternatively, if you are using [Visual Studio Code](https://code.visualstudio.com/) (VS Code), you can run the application with a [VS Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers).
 
 The `.devcontainer` folder contains the necessary configuration files for the devcontainer.
 
@@ -71,17 +71,17 @@ The `.devcontainer` folder contains the necessary configuration files for the de
 
 ### Setup
 
-By following these steps, you should be able to run your application using a devcontainer in VS Code. The Dev Containers extension lets you use a Docker container as a full-featured development environment. This allows for a consistent development environment across different machines and ensures that all the required dependencies are available. A `devcontainer.json` file in this project tells VS Code how to access (or create) a development container with a well-defined tool and runtime stack.
+By following these steps, you should be able to run your application using a devcontainer in VS Code. The Dev Containers extension lets you use a Docker container as a full-featured development environment. This provides a consistent development environment across different machines and ensures that all required dependencies are available. A `devcontainer.json` file in this project tells VS Code how to access (or create) a development container with a well-defined tool and runtime stack.
 
 1. Make sure you have Docker installed and running on your machine. Docker is needed to create and manage your containers.
 
-2. Install the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extention in VS Code. This extension allows you to develop inside a containerized environment.
+2. Install the [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extention in VS Code. This extension allows you to develop inside a containerised environment.
 
 3. To configure your dev environment, copy `/.devcontainer/devcontainer.env.sample` to `devcontainer.env` in the same directory and fill in the necessary values. This ensures your development container is set up with the required environment variables.
 
 4. Run the `Dev Containers: Open Folder in Container...` command from the Command Palette (F1) or click on the Remote Indicator (≶) in the status bar. This command will build and start the devcontainer based on the configuration files in the `.devcontainer` folder.
 
-7. Once the devcontainer is built and started, you will be inside the containerized environment. You can now work on your project as if you were working locally, but with all the necessary dependencies and tools installed within the container.
+7. Once the devcontainer is built and started, you will be inside the containerised environment. You can now work on your project as if you were working locally, but with all the necessary dependencies and tools installed within the container.
 
 8. To start the application, open a terminal within VS Code by going to `View -> Terminal` or by pressing `Ctrl+backtick` (`Cmd+backtick` on macOS). In the terminal, navigate to the project directory if you're not already there.
 
@@ -100,4 +100,4 @@ By following these steps, you should be able to run your application using a dev
 
 ### Deployment
 
-This application is containerized and ready for deployment on Kubernetes. Refer to the `kube/` directory for Kubernetes deployment scripts.
+This application is containerised and ready for deployment on Kubernetes. Refer to the `kube/` directory for Kubernetes deployment scripts.
