@@ -107,8 +107,6 @@ spec:
                 secretKeyRef:
                   name: keycloak-user
                   key: password
-            - name: ALLOW_SKIP
-              value: "true"
             - name: SESSION_SECRET
               valueFrom:
                 secretKeyRef:
