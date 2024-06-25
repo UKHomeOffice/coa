@@ -138,7 +138,7 @@ spec:
                 {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
                 name: {{ .APP_NAME }}-configmap-{{ .DRONE_SOURCE_BRANCH }}
                 {{ else }}
-                name: configmap
+                name: {{ .APP_NAME }}-configmap
                 {{ end }}
           env:
             - name: PROXY_CLIENT_SECRET
