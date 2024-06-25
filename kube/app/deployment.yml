@@ -107,10 +107,8 @@ spec:
                 secretKeyRef:
                   name: keycloak-user
                   key: password
-            {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
             - name: ALLOW_SKIP
               value: "true"
-            {{ end }}
             - name: SESSION_SECRET
               valueFrom:
                 secretKeyRef:
