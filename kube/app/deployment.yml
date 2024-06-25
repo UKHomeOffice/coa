@@ -14,7 +14,7 @@ metadata:
   name: {{ .APP_NAME }}
   {{ end }}
 spec:
-  {{ if or (eq .KUBE_NAMESPACE .STG_ENV) (eq .KUBE_NAMESPACE .PROD_ENV) }}
+  {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
   replicas: 2
   {{ else }}
   replicas: 1
@@ -107,6 +107,9 @@ spec:
                 secretKeyRef:
                   name: keycloak-user
                   key: password
+            {{ if or (eq .KUBE_NAMESPACE .BRANCH_ENV) (eq .KUBE_NAMESPACE .UAT_ENV) }}
+            - name: ALLOW_SKIP
+              value: "true"
             - name: SESSION_SECRET
               valueFrom:
                 secretKeyRef:
@@ -115,8 +118,6 @@ spec:
             - name: FILE_VAULT_URL
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv-{{ .APP_NAME }}.sas.homeoffice.gov.uk/file
-            {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-              value: https://fv-{{ .APP_NAME }}.stg.sas.homeoffice.gov.uk/file
             {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
               value: https://fv-{{ .APP_NAME }}.uat.sas-notprod.homeoffice.gov.uk/file
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}

@@ -59,8 +59,6 @@ spec:
             - name: FILE_VAULT_URL
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv-{{ .APP_NAME }}.sas.homeoffice.gov.uk
-            {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-              value: https://fv-{{ .APP_NAME }}.stg.sas.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
               value: https://fv-{{ .APP_NAME }}.uat.sas-notprod.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
@@ -140,7 +138,7 @@ spec:
                 {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
                 name: {{ .APP_NAME }}-configmap-{{ .DRONE_SOURCE_BRANCH }}
                 {{ else }}
-                name: {{ .APP_NAME }}-configmap
+                name: configmap
                 {{ end }}
           env:
             - name: PROXY_CLIENT_SECRET
@@ -160,8 +158,6 @@ spec:
             - name: PROXY_REDIRECTION_URL
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
               value: https://fv-{{ .APP_NAME }}.sas.homeoffice.gov.uk
-            {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-              value: https://fv-{{ .APP_NAME }}.stg.sas.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
               value: https://fv-{{ .APP_NAME }}.uat.sas-notprod.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
