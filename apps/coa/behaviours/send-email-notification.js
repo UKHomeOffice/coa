@@ -72,9 +72,12 @@ const getPersonalisation = (recipientType, req) => {
 
   if (recipientType === 'business') {
     const identityDocuments = parseDocumentList(req.sessionModel.get('identity-documents'));
-    const homeAddressDocuments = parseDocumentList(req.sessionModel.get('home-address-documents'));
-    const postalAddressDocuments = parseDocumentList(req.sessionModel.get('postal-address-documents'));
-    const letterOfAuthority = parseDocumentList(req.sessionModel.get('letter-of-authority'));
+    const homeAddressDocuments = req.sessionModel.get('steps').includes('/upload-address') ?
+      parseDocumentList(req.sessionModel.get('home-address-documents')) : '';
+    const postalAddressDocuments = req.sessionModel.get('steps').includes('/upload-postal-address') ?
+      parseDocumentList(req.sessionModel.get('postal-address-documents')) : '';
+    const letterOfAuthority = req.sessionModel.get('steps').includes('/upload-letter') ?
+      parseDocumentList(req.sessionModel.get('letter-of-authority')) : '';
 
     return {
       ...basePersonalisation,
