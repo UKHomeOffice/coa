@@ -3,13 +3,21 @@ kind: Ingress
 metadata:
   {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
   name: file-vault-ingress-{{ .DRONE_SOURCE_BRANCH }}
+  {{ file .FILEVAULT_INGRESS_EXTERNAL_ANNOTATIONS | indent 2 }}
+  {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
+  name: file-vault-ingress
+  {{ file .FILEVAULT_INGRESS_EXTERNAL_ANNOTATIONS | indent 2 }}
   {{ else }}
   name: file-vault-ingress
+  {{ file .FILEVAULT_INGRESS_EXTERNAL_ANNOTATIONS_PROD | indent 2 }}
   {{ end }}
-{{ file .FILEVAULT_INGRESS_EXTERNAL_ANNOTATIONS | indent 2 }}
+
 spec:
-# The ingress should be restore to external upon the domain can be used.
+  {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
   ingressClassName: nginx-internal
+  {{ else }}
+  ingressClassName: nginx-external
+  {{ end }}
   tls:
   - hosts:
     {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
@@ -21,9 +29,11 @@ spec:
     - fv-{{ .APP_NAME }}.sas.homeoffice.gov.uk
     {{ end }}
     {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-    secretName: branch-tls-internal
-    {{ else }}
+    secretName: branch-tls-external
+    {{ if else .KUBE_NAMESPACE .UAT_ENV }}
     secretName: file-vault-cert
+    {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
+    secretName: branch-tls-internal
     {{ end }}
   rules:
   {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
