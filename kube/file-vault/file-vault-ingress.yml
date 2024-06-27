@@ -8,7 +8,8 @@ metadata:
   {{ end }}
 {{ file .FILEVAULT_INGRESS_EXTERNAL_ANNOTATIONS | indent 2 }}
 spec:
-  ingressClassName: nginx-external
+# The ingress should be restore to external upon the domain can be used.
+  ingressClassName: nginx-internal
   tls:
   - hosts:
     {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
@@ -20,7 +21,7 @@ spec:
     - fv-{{ .APP_NAME }}.sas.homeoffice.gov.uk
     {{ end }}
     {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-    secretName: branch-tls-external
+    secretName: branch-tls-internal
     {{ else }}
     secretName: file-vault-cert
     {{ end }}

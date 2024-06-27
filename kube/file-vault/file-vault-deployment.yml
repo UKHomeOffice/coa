@@ -210,7 +210,7 @@ spec:
         - name: certs
           secret:
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-            secretName: branch-tls-external
+            secretName: branch-tls-internal
             {{ else }}
             secretName: file-vault-cert
             {{ end }}
