@@ -26,4 +26,4 @@ if [[ "$REFS" != "refs/heads/master" ]]; then
   exit 1
 fi
 
-echo "Build number $DRONE_BUILD_PARENT passed sanity check. Ready to deploy to PROD!"
+echo "Build number $DRONE_BUILD_PARENT passed sanity check. Ready to deploy to PROD!."
