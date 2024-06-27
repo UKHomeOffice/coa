@@ -58,14 +58,18 @@ const getPersonalisation = (recipientType, req) => {
     has_leg_details: req.sessionModel.get('steps').includes('/legal-details') ? 'yes' : 'no',
     OISC_SRA_number: req.sessionModel.get('oisc-sra-number') ?? '',
     company_name: req.sessionModel.get('legal-company-name') ?? '',
-    leg_rep_address: req.sessionModel.get('steps').includes('/upload-letter') ? req.sessionModel.get('legalAddressDetails') : '',
+    leg_rep_address: req.sessionModel.get('steps').includes('/upload-letter') ?
+      req.sessionModel.get('legalAddressDetails') : '',
     details_updating: getLabel('which-details-updating', req.sessionModel.get('which-details-updating')),
     has_old_postcode: req.sessionModel.get('old-postcode') ? 'yes' : 'no',
     old_postcode: req.sessionModel.get('old-postcode') ?? '',
-    has_new_home_address: req.sessionModel.get('steps').includes('/home-address') ? 'yes' : 'no',
-    new_home_address: req.sessionModel.get('steps').includes('/upload-address') ? req.sessionModel.get('addressDetails') : '',
+    has_new_home_address: req.sessionModel.get('steps').includes('/home-address') ?
+      'yes' : 'no',
+    new_home_address: req.sessionModel.get('steps').includes('/upload-address') ?
+      req.sessionModel.get('addressDetails') : '',
     has_new_postal_address: req.sessionModel.get('steps').includes('/postal-address') ? 'yes' : 'no',
-    new_postal_address: req.sessionModel.get('steps').includes('/upload-postal-address') ? req.sessionModel.get('postalAddressDetails') : '',
+    new_postal_address: req.sessionModel.get('steps').includes('/upload-postal-address') ?
+      req.sessionModel.get('postalAddressDetails') : '',
     has_dependents: req.sessionModel.get('steps').includes('/dependant-summary') ? 'yes' : 'no',
     dependents: getDependants(req.sessionModel.get('dependants'))
   };
