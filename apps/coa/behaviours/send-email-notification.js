@@ -124,9 +124,9 @@ module.exports = class SendEmailConfirmation {
       req.log(
         'error',
         `Failed to send User Confirmation Email, reference number: ${req.sessionModel.get('uniqueRefNumber')}`,
-        err
+        JSON.stringify(err.response.data)
       );
-      throw err;
+      throw new Error(JSON.stringify(err.response.data));
     }
   }
 
@@ -150,9 +150,9 @@ module.exports = class SendEmailConfirmation {
       req.log(
         'error',
         `Failed to send Business Confirmation Email, reference number: ${req.sessionModel.get('uniqueRefNumber')}`,
-        err
+        JSON.stringify(err.response.data)
       );
-      throw err;
+      throw new Error(JSON.stringify(err.response.data));
     }
   }
 
