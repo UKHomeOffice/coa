@@ -30,9 +30,9 @@ spec:
     {{ end }}
     {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
     secretName: branch-tls-external
-    {{ if else .KUBE_NAMESPACE .UAT_ENV }}
+    {{ else if .KUBE_NAMESPACE .UAT_ENV }}
     secretName: file-vault-cert
-    {{ if else eq .KUBE_NAMESPACE .PROD_ENV }}
+    {{ else if eq .KUBE_NAMESPACE .PROD_ENV }}
     secretName: branch-tls-internal
     {{ end }}
   rules:
