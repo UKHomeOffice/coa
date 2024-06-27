@@ -150,7 +150,10 @@ module.exports = {
       {
         step: '/upload-address',
         field: 'home-address-documents',
-        parse: documents => {
+        parse: (documents, req) => {
+          if (!req.sessionModel.get('steps').includes('/upload-address')) {
+            return null;
+          }
           return Array.isArray(documents) && documents.length > 0  ? documents.map(doc => doc.name).join('\n') : null;
         }
       },
@@ -178,7 +181,10 @@ module.exports = {
       {
         step: '/upload-postal-address',
         field: 'postal-address-documents',
-        parse: documents => {
+        parse: (documents, req) => {
+          if (!req.sessionModel.get('steps').includes('/upload-postal-address')) {
+            return null;
+          }
           return Array.isArray(documents) && documents.length > 0  ? documents.map(doc => doc.name).join('\n') : null;
         }
       },
