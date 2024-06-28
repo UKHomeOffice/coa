@@ -157,7 +157,9 @@ spec:
               value: "http://127.0.0.1:3000"
             - name: PROXY_REDIRECTION_URL
             {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
-              value: https://fv-{{ .APP_NAME }}.sas.homeoffice.gov.uk
+              # This is temporary change using ingress internal for prod. We will revert back the change after PECC expires
+              # https://support.acp.homeoffice.gov.uk/servicedesk/customer/portal/1/ACP-19781
+              value: https://fv-{{ .APP_NAME }}.sas.internal.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
               value: https://fv-{{ .APP_NAME }}.uat.sas-notprod.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
