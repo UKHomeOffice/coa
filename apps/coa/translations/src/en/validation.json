@@ -101,6 +101,7 @@
     "passport-number-details": {
         "required": "Enter a passport number",
         "notUrl": "Your answer must not contain URLs or links",
+        "maxlength": "Passport number must be 9 characters or less",
         "passportNumber": "Passport number can only have numbers and letters a-z"
     },
     "brp-details": {
