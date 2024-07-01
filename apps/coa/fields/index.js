@@ -268,7 +268,7 @@ module.exports = {
     },
     labelClassName: 'govuk-label--s',
     className: ['govuk-input', 'govuk-!-width-two-thirds'],
-    validate: ['required', 'notUrl', passportNumber]
+    validate: ['required', 'notUrl', { type: 'maxlength', arguments: 9 }, passportNumber]
   },
 
   'brp-details': {
