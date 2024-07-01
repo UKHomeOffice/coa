@@ -8,6 +8,10 @@
       Upload a file
     </label>
     <input class="govuk-file-upload" id="file-upload" name="file-upload" type="file" value="letter-of-authority">
+    <div id="upload-page-loading-spinner" class="spinner-container">
+      <div class="spinner-loader"></div>
+      <span class="spinner-message">Uploading your document...</span>
+    </div>
   </div>
 
   {{^values.letter-of-authority}}

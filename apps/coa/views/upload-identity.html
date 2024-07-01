@@ -1,13 +1,17 @@
 {{<partials-page}} {{$encoding}}enctype="multipart/form-data" name="file-upload-form" {{/encoding}} {{$page-content}}
-<p>{{#t}}pages.upload-identity.upload-identity-intro{{/t}} {{#t}}pages.upload-identity.upload-identity-instructions{{/t}}</p>
-<p>{{#t}}pages.upload-identity.upload-identity-requirements{{/t}}</p>
-
+  <p>{{#t}}pages.upload-identity.upload-identity-intro{{/t}}
+  {{#t}}pages.upload-identity.upload-identity-instructions{{/t}}</p>
+  <p>{{#t}}pages.upload-identity.upload-identity-requirements{{/t}}</p>
 
   <div class="govuk-form-group">
     <label class="govuk-label bold" for="file-upload">
       Upload a file
     </label>
     <input class="govuk-file-upload" id="file-upload" name="file-upload" type="file" value="identity-documents">
+    <div id="upload-page-loading-spinner" class="spinner-container">
+      <div class="spinner-loader"></div>
+      <span class="spinner-message">Uploading your document...</span>
+    </div>
   </div>
 
   {{^values.identity-documents}}
@@ -31,10 +35,10 @@
   {{#markdown}}what-file-types{{/markdown}}
 
   {{#markdown}}what-counts-as-proof-of-identity{{/markdown}}
-  
-    <button class="govuk-button govuk-button" name="continueWithoutUpload" value="identity-documents">
-      {{#t}}buttons.continue{{/t}}
-    </button>
-    
+
+  <button class="govuk-button govuk-button uploadPageContinue" name="continueWithoutUpload" value="identity-documents">
+    {{#t}}buttons.continue{{/t}}
+  </button>
+
   {{/page-content}}
   {{/partials-page}}
