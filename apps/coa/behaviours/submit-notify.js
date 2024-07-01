@@ -16,8 +16,8 @@ module.exports = superclass => class extends superclass {
     try {
       await notifyEmail.send(req, res, super.locals(req, res));
     } catch (error) {
-      req.log('error', 'Failed to send notification email:', error);
-      return next(Error(`Failed to send notification email: ${error}`));
+      req.log('error', 'Failed to send notification emails:', error);
+      return next(Error(`Failed to send notification emails: ${error}`));
     }
 
     return super.successHandler(req, res, next);
