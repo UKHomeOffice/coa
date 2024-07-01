@@ -121,12 +121,16 @@ module.exports = class SendEmailConfirmation {
         `User Confirmation Email sent successfully, reference number: ${req.sessionModel.get('uniqueRefNumber')}`
       );
     } catch (err) {
+      const errorDetails = err.response?.data ? `Cause: ${JSON.stringify(err.response.data)}` : '';
+      const errorCode = err.code ? `${err.code} -` : '';
+      const errorMessage = `${errorCode} ${err.message}; ${errorDetails}`;
+      
       req.log(
         'error',
-        `Failed to send User Confirmation Email, reference number: ${req.sessionModel.get('uniqueRefNumber')}`,
-        JSON.stringify(err.response.data)
+        `Failed to send User Confirmation Email, reference number: ${req.sessionModel.get('uniqueRefNumber')};`,
+        errorMessage
       );
-      throw new Error(JSON.stringify(err.response.data));
+      throw  Error(errorMessage);
     }
   }
 
@@ -147,12 +151,16 @@ module.exports = class SendEmailConfirmation {
         `Business Confirmation Email sent successfully, reference number: ${req.sessionModel.get('uniqueRefNumber')}`
       );
     } catch (err) {
+      const errorDetails = err.response?.data ? `Cause: ${JSON.stringify(err.response.data)}` : '';
+      const errorCode = err.code ? `${err.code} -` : '';
+      const errorMessage = `${errorCode} ${err.message}; ${errorDetails}`;
+
       req.log(
         'error',
-        `Failed to send Business Confirmation Email, reference number: ${req.sessionModel.get('uniqueRefNumber')}`,
-        JSON.stringify(err.response.data)
+        `Failed to send Business Confirmation Email, reference number: ${req.sessionModel.get('uniqueRefNumber')};`,
+        errorMessage
       );
-      throw new Error(JSON.stringify(err.response.data));
+      throw Error(errorMessage);
     }
   }
 
@@ -161,9 +169,9 @@ module.exports = class SendEmailConfirmation {
       await this.sendUserEmailNotification(req);
       await this.sendCaseworkerEmailNotification(req);
 
-      req.log('info', 'Request to send email notifications completed successfully.');
+      req.log('info', 'Request to send notification emails completed successfully.');
     } catch(err) {
-      req.log('error', `Failed to send email notifications. ${JSON.stringify(err)}`);
+      req.log('error', `Failed to send all notifications emails. ${err}`);
       throw err;
     }
   }
