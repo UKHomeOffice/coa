@@ -7,6 +7,8 @@ export CONFIGMAP_VALUES=$HOF_CONFIG/configmap-values.yaml
 export NGINX_SETTINGS=$HOF_CONFIG/nginx-settings.yaml
 export FILEVAULT_NGINX_SETTINGS=$HOF_CONFIG/filevault-nginx-settings.yaml
 export FILEVAULT_INGRESS_EXTERNAL_ANNOTATIONS=$HOF_CONFIG/filevault-ingress-external-annotations.yaml
+# Filevault Ingress internal annotations are added temporarily until july 5th 2024.
+export FILEVAULT_INGRESS_INTERNAL_ANNOTATIONS=$HOF_CONFIG/filevault-ingress-internal-annotations.yaml
 
 kd='kd --insecure-skip-tls-verify --timeout 10m --check-interval 10s'
 
