@@ -11,7 +11,6 @@ metadata:
   name: file-vault-ingress
   # This is temporary change using ingress internal for prod. We will revert back the change after PECC expires
   # https://support.acp.homeoffice.gov.uk/servicedesk/customer/portal/1/ACP-19781
-  #{{ file .FILEVAULT_INGRESS_EXTERNAL_ANNOTATIONS_PROD | indent 2 }}
   {{ file .FILEVAULT_INGRESS_INTERNAL_ANNOTATIONS | indent 2 }}
   {{ end }}
 
