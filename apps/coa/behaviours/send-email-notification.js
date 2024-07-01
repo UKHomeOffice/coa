@@ -124,7 +124,7 @@ module.exports = class SendEmailConfirmation {
       const errorDetails = err.response?.data ? `Cause: ${JSON.stringify(err.response.data)}` : '';
       const errorCode = err.code ? `${err.code} -` : '';
       const errorMessage = `${errorCode} ${err.message}; ${errorDetails}`;
-      
+
       req.log(
         'error',
         `Failed to send User Confirmation Email, reference number: ${req.sessionModel.get('uniqueRefNumber')};`,
