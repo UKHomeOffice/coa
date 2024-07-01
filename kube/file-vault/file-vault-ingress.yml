@@ -37,7 +37,7 @@ spec:
     {{ end }}
     {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
     secretName: branch-tls-external
-    {{ else if .KUBE_NAMESPACE .UAT_ENV }}
+    {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
     secretName: file-vault-cert
     # This is temporary change using ingress internal for prod. We will revert back the change after PECC expires
     # https://support.acp.homeoffice.gov.uk/servicedesk/customer/portal/1/ACP-19781
