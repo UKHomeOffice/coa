@@ -8,6 +8,10 @@
       Upload a file
     </label>
     <input class="govuk-file-upload" id="file-upload" name="file-upload" type="file" value="home-address-documents">
+    <div id="upload-page-loading-spinner" class="spinner-container">
+      <div class="spinner-loader"></div>
+      <span class="spinner-message">Uploading your document...</span>
+    </div>
   </div>
 
   {{^values.home-address-documents}}
