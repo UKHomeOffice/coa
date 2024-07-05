@@ -154,7 +154,7 @@ steps:
     environment:
       IMAGE_NAME: coa:${DRONE_COMMIT_SHA}
       SEVERITY: MEDIUM,HIGH,CRITICAL
-      FAIL_ON_DETECTION: false
+      FAIL_ON_DETECTION: true
       IGNORE_UNFIXED: true
       ALLOW_CVE_LIST_FILE: hof-services-config/Change_Of_Address/trivy-cve-exceptions.txt
     when:
@@ -169,9 +169,9 @@ steps:
         cpu: 1000
         memory: 1024Mi
     environment:
-      IMAGE_NAME: node:18-alpine@sha256:2322b1bb3917b313f2e9308395aa5c39d51b91cc92a5d4d5be6d0451fcfb4d24
+      IMAGE_NAME: node:18-alpine@sha256:538e4e1286473c79ec415222d2ed61c1112c00056ad7f212ce64c15c908bde41
       SEVERITY: MEDIUM,HIGH,CRITICAL
-      FAIL_ON_DETECTION: false
+      FAIL_ON_DETECTION: true
       IGNORE_UNFIXED: true
       ALLOW_CVE_LIST_FILE: hof-services-config/Change_Of_Address/trivy-cve-exceptions.txt
     when:
@@ -400,7 +400,7 @@ steps:
     pull: always
     environment:
         IMAGE_NAME: coa:${DRONE_COMMIT_SHA}
-        SEVERITY: MEDIUM,HIGH,CRITICAL
+        SEVERITY: UNKOWN,LOW,MEDIUM,HIGH,CRITICAL
         FAIL_ON_DETECTION: false
         IGNORE_UNFIXED: true
         ALLOW_CVE_LIST_FILE: hof-services-config/Change_Of_Address/trivy-cve-exceptions.txt
@@ -412,8 +412,8 @@ steps:
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/trivy/client:latest
     pull: always
     environment:
-        IMAGE_NAME: node:18-alpine@sha256:2322b1bb3917b313f2e9308395aa5c39d51b91cc92a5d4d5be6d0451fcfb4d24
-        SEVERITY: MEDIUM,HIGH,CRITICAL
+        IMAGE_NAME: node:18-alpine@sha256:538e4e1286473c79ec415222d2ed61c1112c00056ad7f212ce64c15c908bde41
+        SEVERITY: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
         FAIL_ON_DETECTION: false
         IGNORE_UNFIXED: true
         ALLOW_CVE_LIST_FILE: hof-services-config/Change_Of_Address/trivy-cve-exceptions.txt
