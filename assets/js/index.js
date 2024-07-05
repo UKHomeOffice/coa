@@ -4,6 +4,7 @@
 require('hof/frontend/themes/gov-uk/client-js');
 
 const accessibleAutocomplete = require('accessible-autocomplete');
+const config = require('../../config.js');
 
 document.querySelectorAll('.typeahead').forEach(function applyTypeahead(element) {
   accessibleAutocomplete.enhanceSelectElement({
@@ -26,16 +27,53 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const fileUploadStatusHandler = (status, errorType) => {
+    const fileUploadComponent = document.getElementById('hofFileUpload');
+    const fileUploadErrorMsg = fileUploadComponent.querySelector('.govuk-error-message');
+    switch (status) {
+      case 'ready':
+        if (fileUploadComponent){
+          fileUploadComponent.classList.remove('govuk-form-group--error');
+        }
+        if (fileUploadErrorMsg) {
+          fileUploadErrorMsg.classList.add('govuk-!-display-none');
+        }
+        break;
+      case 'error':
+        if (fileUploadComponent){
+          fileUploadComponent.classList.add('govuk-form-group--error');  
+          document.getElementById(`file-upload-error-${errorType}`).classList.remove('govuk-!-display-none');
+        }
+        break;
+      case 'uploading':
+        uploadPageLoaderContainer.style.display = 'flex';
+        fileUpload.disabled = true;
+        fileUpload.ariaDisabled = true;
+        continueWithoutUpload.forEach(a => {
+          a.disabled = true;
+          a.ariaDisabled = true;
+        });
+        break;
+    }
+  }
+
   if (fileUpload) {
     fileUpload.addEventListener('change', () => {
+      fileUploadStatusHandler('ready');
+      let fileInfo = fileUpload.files && fileUpload.files.length > 0 ? fileUpload.files[0] : null;
+      if (fileInfo) {
+        if (fileInfo.size > config.upload.maxFileSizeInBytes) {
+          fileUploadStatusHandler('error', 'maxFileSize');
+          return;
+        }
+        if (!config.upload.allowedMimeTypes.includes(fileInfo.type) ) {
+          fileUploadStatusHandler('error', 'fileType');
+          return;
+        }
+      }
+
       document.querySelector('[name=file-upload-form]').submit();
-      uploadPageLoaderContainer.style.display = 'flex';
-      fileUpload.disabled = true;
-      fileUpload.ariaDisabled = true;
-      continueWithoutUpload.forEach(a => {
-        a.disabled = true;
-        a.ariaDisabled = true;
-      });
+      fileUploadStatusHandler('uploading');
     });
   }
 });

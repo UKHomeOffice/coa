@@ -1,5 +1,6 @@
 {
   "header": "UKVI - Update address or legal representative",
   "serviceName": "Update address or legal representative",
-  "phase": "beta"
+  "phase": "beta",
+  "error": "Error"
 }
