@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileUploadErrorMsg = fileUploadComponent.querySelector('.govuk-error-message');
     switch (status) {
       case 'ready':
-        if (fileUploadComponent){
+        if (fileUploadComponent) {
           fileUploadComponent.classList.remove('govuk-form-group--error');
         }
         if (fileUploadErrorMsg) {
@@ -40,8 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         break;
       case 'error':
-        if (fileUploadComponent){
-          fileUploadComponent.classList.add('govuk-form-group--error');  
+        if (fileUploadComponent) {
+          fileUploadComponent.classList.add('govuk-form-group--error');
           document.getElementById(`file-upload-error-${errorType}`).classList.remove('govuk-!-display-none');
         }
         break;
@@ -54,13 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
           a.ariaDisabled = true;
         });
         break;
+      default:
+        break;
     }
-  }
+  };
 
   if (fileUpload) {
     fileUpload.addEventListener('change', () => {
       fileUploadStatusHandler('ready');
-      let fileInfo = fileUpload.files && fileUpload.files.length > 0 ? fileUpload.files[0] : null;
+      const fileInfo = fileUpload.files && fileUpload.files.length > 0 ? fileUpload.files[0] : null;
       if (fileInfo) {
         if (fileInfo.size > config.upload.maxFileSizeInBytes) {
           fileUploadStatusHandler('error', 'maxFileSize');
