@@ -2,6 +2,8 @@
 kind: pipeline
 name: default
 type: kubernetes
+node_image: node:20-alpine3.20@sha256:24c14a8a192a6e81d0942929a344f7a4bdf0db8e3b3c77d64a5eb8a4b0c759b7
+cve_expections: hof-services-config/Change_Of_Address/trivy-cve-exceptions.txt
 
 environment:
   APP_NAME: coa
@@ -16,8 +18,6 @@ environment:
   HOF_CONFIG: hof-services-config/Change_Of_Address
   NON_PROD_AVAILABILITY: Mon-Sun 08:00-23:00 Europe/London
   READY_FOR_TEST_DELAY: 20s
-  NODE_IMAGE: node:20-alpine3.20@sha256:24c14a8a192a6e81d0942929a344f7a4bdf0db8e3b3c77d64a5eb8a4b0c759b7
-  CVE_EXCEPTIONS: hof-services-config/Change_Of_Address/trivy-cve-exceptions.txt
 
 trigger:
   branch:
@@ -27,7 +27,7 @@ trigger:
 
 linting: &linting
   pull: if-not-exists
-  image: ${NODE_IMAGE}
+  image: {{ .input.node_image }}
   environment:
     NOTIFY_KEY: USE_MOCK
   commands:
@@ -35,7 +35,7 @@ linting: &linting
 
 unit_tests: &unit_tests
   pull: if-not-exists
-  image: ${NODE_IMAGE}
+  image: {{ .input.node_image }}
   environment:
     NOTIFY_KEY: USE_MOCK
   commands:
@@ -61,11 +61,11 @@ steps:
         cpu: 1000
         memory: 1024Mi
     environment:
-      IMAGE_NAME: ${NODE_IMAGE}
+      IMAGE_NAME: {{ .input.node_image }}
       SEVERITY: MEDIUM,HIGH,CRITICAL
       FAIL_ON_DETECTION: false
       IGNORE_UNFIXED: true
-      ALLOW_CVE_LIST_FILE: ${CVE_EXCEPTIONS}
+      ALLOW_CVE_LIST_FILE: {{ .input.cve_expections }}
     when:
       event: [push, pull_request, tag]
 
@@ -88,7 +88,7 @@ steps:
 
   - name: setup_deploy
     pull: if-not-exists
-    image: ${NODE_IMAGE}
+    image: {{ .input.node_image }}
     environment:
       NOTIFY_KEY: USE_MOCK
     commands:
@@ -175,7 +175,7 @@ steps:
       SEVERITY: MEDIUM,HIGH,CRITICAL
       FAIL_ON_DETECTION: false
       IGNORE_UNFIXED: true
-      ALLOW_CVE_LIST_FILE: ${CVE_EXCEPTIONS}
+      ALLOW_CVE_LIST_FILE: {{ .input.cve_expections }}
     when:
       event: [push, pull_request, tag]
 
@@ -200,7 +200,7 @@ steps:
 
   - name: setup_branch
     pull: if-not-exists
-    image: ${NODE_IMAGE}
+    image: {{ .input.node_image }}
     environment:
       NOTIFY_KEY: USE_MOCK
     commands:
@@ -405,7 +405,7 @@ steps:
         SEVERITY: UNKOWN,LOW,MEDIUM,HIGH,CRITICAL
         FAIL_ON_DETECTION: false
         IGNORE_UNFIXED: true
-        ALLOW_CVE_LIST_FILE: ${CVE_EXCEPTIONS}
+        ALLOW_CVE_LIST_FILE: {{ .input.cve_expections }}
     when:
       cron: security_scans
       event: cron
@@ -414,11 +414,11 @@ steps:
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/trivy/client:latest
     pull: always
     environment:
-        IMAGE_NAME: ${NODE_IMAGE}
+        IMAGE_NAME: {{ .input.node_image }}
         SEVERITY: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
         FAIL_ON_DETECTION: false
         IGNORE_UNFIXED: true
-        ALLOW_CVE_LIST_FILE: ${CVE_EXCEPTIONS}
+        ALLOW_CVE_LIST_FILE: {{ .input.cve_expections }}
     when:
       cron: security_scans
       event: cron
