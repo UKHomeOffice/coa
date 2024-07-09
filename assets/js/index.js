@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const fileUpload = document.getElementById('file-upload');
   const uploadPageLoaderContainer = document.getElementById('upload-page-loading-spinner');
   const continueWithoutUpload = document.getElementsByName('continueWithoutUpload');
+  const removeLinks = document.querySelectorAll('#uploaded-documents > div > div > a');
 
   if (loaderContainer) {
     document.querySelector('#report-submit .govuk-button').addEventListener('click', () => {
@@ -52,6 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
         continueWithoutUpload.forEach(a => {
           a.disabled = true;
           a.ariaDisabled = true;
+        });
+        removeLinks.forEach(a => {
+          a.classList.add('disabled-link');
         });
         break;
       default:

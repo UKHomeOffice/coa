@@ -26,16 +26,21 @@
 
   {{#values.identity-documents.length}}
   <h2 class="govuk-heading-m">You have uploaded {{values.identity-documents.length}} file(s)</h2>
-  <table class="loop-summary-table">
-    <tbody class="govuk-table__body">
-      {{#values.identity-documents}}
-      <tr class="govuk-table__row">
-        <td class="govuk-table__cell">{{name}}</td>
-        <td><a href="?delete={{id}}" class="govuk-link">{{#t}}buttons.delete{{/t}}</a></td>
-      </tr>
-      {{/values.identity-documents}}
-    </tbody>
-  </table>
+
+  <div id="uploaded-documents" class="govuk-width-container">
+    {{#values.identity-documents}}
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-three-quarters">
+          {{name}}
+        </div>
+        <div class="govuk-grid-column-one-quarter">
+          <a href="?delete={{id}}" class="govuk-link">{{#t}}buttons.delete{{/t}}</a>
+        </div>
+    </div>
+    <div class="file-upload-hrline"></div>
+  {{/values.identity-documents}}
+  </div>
+
   {{/values.identity-documents.length}}
 
   {{#markdown}}what-file-types{{/markdown}}
