@@ -11,13 +11,7 @@ spec:
   - from:
     - namespaceSelector:
         matchLabels:
-          # This is temporary change using ingress internal for prod. We will revert back the change after PECC expires
-          # https://support.acp.homeoffice.gov.uk/servicedesk/customer/portal/1/ACP-19781
-          {{ if eq .KUBE_NAMESPACE .PROD_ENV }}
-          name: ingress-internal
-          {{ else }}
           name: ingress-external
-          {{ end }}
     ports:
     - port: 10080
       protocol: TCP
