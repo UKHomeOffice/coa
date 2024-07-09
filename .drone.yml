@@ -62,7 +62,7 @@ steps:
       IMAGE_NAME: node:20-alpine3.20@sha256:24c14a8a192a6e81d0942929a344f7a4bdf0db8e3b3c77d64a5eb8a4b0c759b7
       SEVERITY: MEDIUM,HIGH,CRITICAL
       FAIL_ON_DETECTION: false
-      IGNORE_UNFIXED: true
+      IGNORE_UNFIXED: false
       ALLOW_CVE_LIST_FILE: hof-services-config/Change_Of_Address/trivy-cve-exceptions.txt
     when:
       event: [push, pull_request, tag]
@@ -172,7 +172,7 @@ steps:
       IMAGE_NAME: coa:${DRONE_COMMIT_SHA}
       SEVERITY: MEDIUM,HIGH,CRITICAL
       FAIL_ON_DETECTION: false
-      IGNORE_UNFIXED: true
+      IGNORE_UNFIXED: false
       ALLOW_CVE_LIST_FILE: hof-services-config/Change_Of_Address/trivy-cve-exceptions.txt
     when:
       event: [push, pull_request, tag]
@@ -402,7 +402,7 @@ steps:
         IMAGE_NAME: coa:${DRONE_COMMIT_SHA}
         SEVERITY: UNKOWN,LOW,MEDIUM,HIGH,CRITICAL
         FAIL_ON_DETECTION: false
-        IGNORE_UNFIXED: true
+        IGNORE_UNFIXED: false
         ALLOW_CVE_LIST_FILE: hof-services-config/Change_Of_Address/trivy-cve-exceptions.txt
     when:
       cron: security_scans
@@ -415,7 +415,7 @@ steps:
         IMAGE_NAME: node:20-alpine3.20@sha256:24c14a8a192a6e81d0942929a344f7a4bdf0db8e3b3c77d64a5eb8a4b0c759b7
         SEVERITY: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
         FAIL_ON_DETECTION: false
-        IGNORE_UNFIXED: true
+        IGNORE_UNFIXED: false
         ALLOW_CVE_LIST_FILE: hof-services-config/Change_Of_Address/trivy-cve-exceptions.txt
     when:
       cron: security_scans
