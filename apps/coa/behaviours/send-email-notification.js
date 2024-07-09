@@ -58,17 +58,16 @@ const getPersonalisation = (recipientType, req) => {
     has_leg_details: req.sessionModel.get('steps').includes('/legal-details') ? 'yes' : 'no',
     OISC_SRA_number: req.sessionModel.get('oisc-sra-number') ?? '',
     company_name: req.sessionModel.get('legal-company-name') ?? '',
-    leg_rep_address: req.sessionModel.get('steps').includes('/upload-letter') ?
+    leg_rep_address: req.sessionModel.get('steps').includes('/legal-details') ?
       req.sessionModel.get('legalAddressDetails') : '',
     details_updating: getLabel('which-details-updating', req.sessionModel.get('which-details-updating')),
     has_old_postcode: req.sessionModel.get('old-postcode') ? 'yes' : 'no',
     old_postcode: req.sessionModel.get('old-postcode') ?? '',
-    has_new_home_address: req.sessionModel.get('steps').includes('/home-address') ?
-      'yes' : 'no',
-    new_home_address: req.sessionModel.get('steps').includes('/upload-address') ?
+    has_new_home_address: req.sessionModel.get('steps').includes('/home-address') ? 'yes' : 'no',
+    new_home_address: req.sessionModel.get('steps').includes('/home-address') ?
       req.sessionModel.get('addressDetails') : '',
     has_new_postal_address: req.sessionModel.get('steps').includes('/postal-address') ? 'yes' : 'no',
-    new_postal_address: req.sessionModel.get('steps').includes('/upload-postal-address') ?
+    new_postal_address: req.sessionModel.get('steps').includes('/postal-address') ?
       req.sessionModel.get('postalAddressDetails') : '',
     has_dependents: req.sessionModel.get('steps').includes('/dependant-summary') ? 'yes' : 'no',
     dependents: getDependants(req.sessionModel.get('dependants'))
@@ -121,12 +120,16 @@ module.exports = class SendEmailConfirmation {
         `User Confirmation Email sent successfully, reference number: ${req.sessionModel.get('uniqueRefNumber')}`
       );
     } catch (err) {
+      const errorDetails = err.response?.data ? `Cause: ${JSON.stringify(err.response.data)}` : '';
+      const errorCode = err.code ? `${err.code} -` : '';
+      const errorMessage = `${errorCode} ${err.message}; ${errorDetails}`;
+
       req.log(
         'error',
-        `Failed to send User Confirmation Email, reference number: ${req.sessionModel.get('uniqueRefNumber')}`,
-        err
+        `Failed to send User Confirmation Email, reference number: ${req.sessionModel.get('uniqueRefNumber')};`,
+        errorMessage
       );
-      throw err;
+      throw  Error(errorMessage);
     }
   }
 
@@ -147,12 +150,16 @@ module.exports = class SendEmailConfirmation {
         `Business Confirmation Email sent successfully, reference number: ${req.sessionModel.get('uniqueRefNumber')}`
       );
     } catch (err) {
+      const errorDetails = err.response?.data ? `Cause: ${JSON.stringify(err.response.data)}` : '';
+      const errorCode = err.code ? `${err.code} -` : '';
+      const errorMessage = `${errorCode} ${err.message}; ${errorDetails}`;
+
       req.log(
         'error',
-        `Failed to send Business Confirmation Email, reference number: ${req.sessionModel.get('uniqueRefNumber')}`,
-        err
+        `Failed to send Business Confirmation Email, reference number: ${req.sessionModel.get('uniqueRefNumber')};`,
+        errorMessage
       );
-      throw err;
+      throw Error(errorMessage);
     }
   }
 
@@ -161,9 +168,9 @@ module.exports = class SendEmailConfirmation {
       await this.sendUserEmailNotification(req);
       await this.sendCaseworkerEmailNotification(req);
 
-      req.log('info', 'Request to send email notifications completed successfully.');
+      req.log('info', 'Request to send notification emails completed successfully.');
     } catch(err) {
-      req.log('error', `Failed to send email notifications. ${JSON.stringify(err)}`);
+      req.log('error', `Failed to send all notifications emails. ${err}`);
       throw err;
     }
   }

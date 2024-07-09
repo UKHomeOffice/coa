@@ -423,5 +423,21 @@ pre.looped-records {
   height: 30px;
   animation: spin 1s linear infinite;
 }
+.spinner-container {
+  display: none;
+  margin-top: 20px;
+  align-items: center; /* Vertically center the spinner and message */
+}
+.spinner-message {
+ margin-left: 10px;
+}
+ @-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+ }
+ @keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+ }
 
 
