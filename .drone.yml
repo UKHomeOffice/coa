@@ -7,7 +7,6 @@ environment:
   APP_NAME: coa
   PROD_ENV: sas-coa-prod
   BRANCH_ENV: sas-coa-branch
-  STG_ENV: sas-coa-stg
   UAT_ENV: sas-coa-uat
   PRODUCTION_URL: www.update-my-details.homeoffice.gov.uk
   IMAGE_URL: quay.io/ukhomeofficedigital

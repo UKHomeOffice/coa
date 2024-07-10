@@ -6,7 +6,7 @@ metadata:
   {{ else }}
   name: file-vault-ingress
   {{ end }}
-{{ file .FILEVAULT_INGRESS_EXTERNAL_ANNOTATIONS | indent 2 }}
+  {{ file .FILEVAULT_INGRESS_EXTERNAL_ANNOTATIONS | indent 2 }}
 spec:
   ingressClassName: nginx-external
   tls:
@@ -29,8 +29,6 @@ spec:
   - host: fv-{{ .DRONE_SOURCE_BRANCH }}.branch.sas-notprod.homeoffice.gov.uk
   {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
   - host: fv-{{ .APP_NAME }}.uat.sas-notprod.homeoffice.gov.uk
-  {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
-  - host: fv-{{ .APP_NAME }}.stg.sas.homeoffice.gov.uk
   {{ else if eq .KUBE_NAMESPACE .PROD_ENV }}
   - host: fv-{{ .APP_NAME }}.sas.homeoffice.gov.uk
   {{ end }}
