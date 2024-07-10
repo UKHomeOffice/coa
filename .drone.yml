@@ -80,7 +80,7 @@ steps:
       SEVERITY: MEDIUM,HIGH,CRITICAL  --dependency-tree
       FAIL_ON_DETECTION: false
       IGNORE_UNFIXED: false
-      ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore
+      ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
     when:
       event: [push, pull_request]
 
@@ -173,7 +173,7 @@ steps:
       SEVERITY: MEDIUM,HIGH,CRITICAL  --dependency-tree --format table
       FAIL_ON_DETECTION: false
       IGNORE_UNFIXED: false
-      ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore
+      ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
     when:
       event: [push, pull_request]
 
@@ -404,7 +404,7 @@ steps:
         SEVERITY: UNKOWN,LOW,MEDIUM,HIGH,CRITICAL
         FAIL_ON_DETECTION: false
         IGNORE_UNFIXED: false
-        ALLOW_CVE_LIST_FILE: hof-services-config/Change_Of_Address/trivy-cve-exceptions.txt
+        ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
     when:
       cron: security_scans
       event: cron
@@ -417,7 +417,7 @@ steps:
         SEVERITY: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
         FAIL_ON_DETECTION: false
         IGNORE_UNFIXED: false
-        ALLOW_CVE_LIST_FILE: hof-services-config/Change_Of_Address/trivy-cve-exceptions.txt
+        ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
     when:
       cron: security_scans
       event: cron
