@@ -25,7 +25,7 @@ spec:
     {{ end }}
   rules:
   {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-  - host: fv-{{ .DRONE_SOURCE_BRANCH }}.branch.sas-notprod.homeoffice.gov.uk
+  - host: fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
   {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
   - host: fv-{{ .APP_NAME }}.uat.sas-notprod.homeoffice.gov.uk
   {{ else if eq .KUBE_NAMESPACE .PROD_ENV }}
