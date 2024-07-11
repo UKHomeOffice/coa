@@ -257,6 +257,6 @@ module.exports = {
     }
   },
   pages: {
-    '/accessibility': 'static/accessibility' 
+    '/accessibility': 'static/accessibility'
   }
 };
