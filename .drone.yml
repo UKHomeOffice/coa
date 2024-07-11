@@ -437,6 +437,24 @@ steps:
       cron: tear_down_pr_envs
       event: cron
       status: failure
+  
+  - name: cron_notify_slack_security_scans
+    pull: if-not-exists
+    image: plugins/slack
+    settings:
+      channel: sas-hof-security
+      failure: ignore
+      icon_url: http://readme.drone.io/0.5/logo_dark.svg
+      icon.url: http://readme.drone.io/0.5/logo_dark.svg
+      template: "CRON Job {{build.deployTo}} of Change of Address has {{build.status}} - <{{build.link}}|#{{build.number}}> {{#success build.status}}\n  :thumbsup: :thumbsup: :thumbsup:\n{{else}}\n  :x: :x: :x:\n{{/success}} Author: {{build.author}}\n\nDuration: {{since job.started}}\n\nJob: <{{build.link}}|#{{build.number}}>\n\nCommit: {{build.commit}}\n"
+      username: Drone
+      webhook:
+        from_secret: slack_webhook
+    when:
+      cron: security_scans
+      event: cron
+      status: failure
+
 
 services:
   - name: docker
