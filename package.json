@@ -31,7 +31,7 @@
   "dependencies": {
     "accessible-autocomplete": "^2.0.4",
     "crypto-random-string": "^5.0.0",
-    "hof": "^20.5.2",
+    "hof": "^20.5.5",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "busboy": "^1.6.0",
