@@ -151,5 +151,8 @@
         "label": "Letter of authority"
       }
     }
+  },
+  "accessibility": {
+    "header": "Accessibility statement for Update my details (Change of Address)"
   }
 }
