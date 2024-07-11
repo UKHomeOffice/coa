@@ -168,7 +168,7 @@ steps:
         memory: 1024Mi
     environment:
       IMAGE_NAME: coa:${DRONE_COMMIT_SHA}
-      SEVERITY: MEDIUM,HIGH,CRITICAL  --dependency-tree --format table
+      SEVERITY: MEDIUM,HIGH,CRITICAL  --dependency-tree
       FAIL_ON_DETECTION: false
       IGNORE_UNFIXED: false
       ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
@@ -206,7 +206,7 @@ steps:
       branch:
         include:
           - master
-          - feature/*   
+          - feature/*
       event: pull_request
 
   - name: linting_branch
@@ -385,7 +385,7 @@ steps:
   - name: cron_build_image
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
     commands:
-      - docker build --no-cache  --build-arg BASE_IMAGE=${BASE_IMAGE} -t $${IMAGE_REPO}:$${DRONE_COMMIT_SHA} .
+      - docker build --no-cache -t $${IMAGE_REPO}:$${DRONE_COMMIT_SHA} .
     volumes:
       - name: dockersock
         path: /var/run
@@ -437,6 +437,24 @@ steps:
       cron: tear_down_pr_envs
       event: cron
       status: failure
+  
+  - name: cron_notify_slack_security_scans
+    pull: if-not-exists
+    image: plugins/slack
+    settings:
+      channel: sas-hof-security
+      failure: ignore
+      icon_url: http://readme.drone.io/0.5/logo_dark.svg
+      icon.url: http://readme.drone.io/0.5/logo_dark.svg
+      template: "CRON Job {{build.deployTo}} of Change of Address has {{build.status}} - <{{build.link}}|#{{build.number}}> {{#success build.status}}\n  :thumbsup: :thumbsup: :thumbsup:\n{{else}}\n  :x: :x: :x:\n{{/success}} Author: {{build.author}}\n\nDuration: {{since job.started}}\n\nJob: <{{build.link}}|#{{build.number}}>\n\nCommit: {{build.commit}}\n"
+      username: Drone
+      webhook:
+        from_secret: slack_webhook
+    when:
+      cron: security_scans
+      event: cron
+      status: failure
+
 
 services:
   - name: docker
