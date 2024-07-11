@@ -37,7 +37,7 @@ module.exports = (documentCategory, fieldName) => superclass => class extends su
       if (invalidSize) {
         return validationErrorFunc('maxFileSize');
       } else if (invalidMimetype) {
-        return validationErrorFunc('fileType', ['JPG, JPEG, PNG or PDF']);
+        return validationErrorFunc('fileType');
       } else if (numberOfDocsUploaded >= documentCategoryConfig.limit) {
         return validationErrorFunc(documentCategoryConfig.limitValidationError, [documentCategoryConfig.limit]);
       } else if (isDuplicateFile) {

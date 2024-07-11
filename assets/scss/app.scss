@@ -440,4 +440,17 @@ pre.looped-records {
   100% { transform: rotate(360deg); }
  }
 
+.disabled-link {
+  pointer-events: none;
+  opacity: .5;
+}
 
+.file-upload-hrline {
+  display: block;
+  background: #bfc1c3;
+  border: 0;
+  height: 1px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 0;
+}

@@ -133,10 +133,12 @@
     "hint": "For example, 1208297A"
   },
   "brp-details" : {
-    "label": "What is your Biometric residence permit (BRP) number?"
+    "label": "What is your Biometric residence permit (BRP) number?",
+    "hint": "For example, ZU1234567"
   },
   "arc-details" : {
-    "label": "What is your Application registration card number?"
+    "label": "What is your Application registration card number?",
+    "hint": "For example, ZU1234567"
   },
   "old-address": {
     "legend": "Is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} old home address in the UK?",

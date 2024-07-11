@@ -3,10 +3,16 @@
   {{#t}}pages.upload-identity.upload-identity-instructions{{/t}}</p>
   <p>{{#t}}pages.upload-identity.upload-identity-requirements{{/t}}</p>
 
-  <div class="govuk-form-group">
+  <div class="govuk-form-group" id="hofFileUpload">
     <label class="govuk-label bold" for="file-upload">
       Upload a file
     </label>
+    <p id="file-upload-error-maxFileSize" class="govuk-error-message govuk-!-display-none">
+      <span id="validation-error" class="govuk-visually-hidden">{{#t}}journey.error{{/t}}:</span> {{#t}}validation.file-upload.maxFileSize{{/t}}
+    </p>
+    <p id="file-upload-error-fileType" class="govuk-error-message govuk-!-display-none">
+      <span id="validation-error" class="govuk-visually-hidden">{{#t}}journey.error{{/t}}:</span> {{#t}}validation.file-upload.fileType{{/t}}
+    </p>
     <input class="govuk-file-upload" id="file-upload" name="file-upload" type="file" value="identity-documents">
     <div id="upload-page-loading-spinner" class="spinner-container">
       <div class="spinner-loader"></div>
@@ -20,16 +26,21 @@
 
   {{#values.identity-documents.length}}
   <h2 class="govuk-heading-m">You have uploaded {{values.identity-documents.length}} file(s)</h2>
-  <table class="loop-summary-table">
-    <tbody class="govuk-table__body">
-      {{#values.identity-documents}}
-      <tr class="govuk-table__row">
-        <td class="govuk-table__cell">{{name}}</td>
-        <td><a href="?delete={{id}}" class="govuk-link">{{#t}}buttons.delete{{/t}}</a></td>
-      </tr>
-      {{/values.identity-documents}}
-    </tbody>
-  </table>
+
+  <div id="uploaded-documents" class="govuk-width-container">
+    {{#values.identity-documents}}
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-three-quarters">
+          {{name}}
+        </div>
+        <div class="govuk-grid-column-one-quarter">
+          <a href="?delete={{id}}" class="govuk-link">{{#t}}buttons.delete{{/t}}</a>
+        </div>
+    </div>
+    <div class="file-upload-hrline"></div>
+  {{/values.identity-documents}}
+  </div>
+
   {{/values.identity-documents.length}}
 
   {{#markdown}}what-file-types{{/markdown}}
