@@ -7,7 +7,6 @@ environment:
   APP_NAME: coa
   PROD_ENV: sas-coa-prod
   BRANCH_ENV: sas-coa-branch
-  STG_ENV: sas-coa-stg
   UAT_ENV: sas-coa-uat
   PRODUCTION_URL: www.update-my-details.homeoffice.gov.uk
   IMAGE_URL: quay.io/ukhomeofficedigital
@@ -22,7 +21,6 @@ trigger:
     - feature/*
     - master
   
-
 linting: &linting
   pull: if-not-exists
   image: node:18
@@ -38,6 +36,12 @@ unit_tests: &unit_tests
     NOTIFY_KEY: USE_MOCK
   commands:
     - yarn run test:unit
+
+sonar_scanner: &sonar_scanner
+  pull: if-not-exists
+  image: quay.io/ukhomeofficedigital/sonar-scanner-nodejs:latest
+  commands:
+    - sonar-scanner -Dproject.settings=./sonar-project.properties
 
 acceptance_tests: &acceptance_tests
   pull: if-not-exists
@@ -58,12 +62,29 @@ steps:
         include:
         - master
         - feature/*
-      
+      event: [push, pull_request]
+
+  # Trivy Security Scannner for scanning OS related vulnerabilities in Base image of Dockerfile
+  - name: scan_image_os
+    pull: always
+    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/trivy/client:latest
+    resources:
+      limits:
+        cpu: 1000
+        memory: 1024Mi
+    environment:
+      IMAGE_NAME: node:18-alpine@sha256:2322b1bb3917b313f2e9308395aa5c39d51b91cc92a5d4d5be6d0451fcfb4d24
+      SERVICE_URL: https://acp-trivy.acp-trivy.svc.cluster.local:443
+      SEVERITY: MEDIUM,HIGH,CRITICAL  --dependency-tree
+      FAIL_ON_DETECTION: false
+      IGNORE_UNFIXED: false
+      ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
+    when:
       event: [push, pull_request]
 
   - name: setup_deploy
     pull: if-not-exists
-    image: node:18.12.1
+    image: node:18
     environment:
       NOTIFY_KEY: USE_MOCK
     commands:
@@ -92,6 +113,14 @@ steps:
         include:
           - master
           - feature/*
+      event: push
+
+  - name: sonar_scanner_deploy
+    <<: *sonar_scanner
+    when:
+      branch:
+        include:
+          - master
       event: push
 
   - name: build_image
@@ -129,8 +158,8 @@ steps:
           - feature/*
       event: [push, pull_request]
 
-  # Trivy Security Scannner
-  - name: scan-image
+  # Trivy Security Scannner for scanning nodejs packages in Yarn
+  - name: scan_node_packages
     pull: always
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/trivy/client:latest
     resources:
@@ -139,15 +168,12 @@ steps:
         memory: 1024Mi
     environment:
       IMAGE_NAME: coa:${DRONE_COMMIT_SHA}
-      SEVERITY: MEDIUM,HIGH,CRITICAL
+      SEVERITY: MEDIUM,HIGH,CRITICAL  --dependency-tree --format table
       FAIL_ON_DETECTION: false
-      IGNORE_UNFIXED: true
-      ALLOW_CVE_LIST_FILE: hof-services-config/Change_Of_Address/trivy-cve-exceptions.txt
+      IGNORE_UNFIXED: false
+      ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
     when:
-      event:
-      - pull_request
-      - push
-      - tag
+      event: [push, pull_request]
 
   # Deploy to pull request UAT environment
   - name: deploy_to_branch
@@ -166,7 +192,6 @@ steps:
         include:
           - master
           - feature/*
-
       event: pull_request
 
   - name: setup_branch
@@ -181,8 +206,7 @@ steps:
       branch:
         include:
           - master
-          - feature/*
-          
+          - feature/*   
       event: pull_request
 
   - name: linting_branch
@@ -192,7 +216,6 @@ steps:
         include:
           - master
           - feature/*
-         
       event: [push, pull_request]
 
   - name: unit_tests_branch
@@ -202,8 +225,16 @@ steps:
         include:
           - master
           - feature/*
-         
       event: [push, pull_request]
+
+  - name: sonar_scanner_branch
+    <<: *sonar_scanner
+    when:
+      branch:
+        include:
+          - master
+          - feature/*
+      event: pull_request
 
   - name: acceptance_tests_branch
     <<: *acceptance_tests
@@ -297,7 +328,7 @@ steps:
       target: PROD
       event: promote
 
-    # Deploy to Production environment
+  # Deploy to Production environment
   - name: deploy_to_prod
     pull: if-not-exists
     image: quay.io/ukhomeofficedigital/kd:v1.14.0
@@ -336,8 +367,8 @@ steps:
     when:
       cron: tear_down_pr_envs
       event: cron
-
-    # CRON job steps that runs security scans using Snyk & Trivy
+  
+  # CRON job steps that runs security scans using Trivy
   - name: cron_clone_repos
     image: alpine/git
     environment:
@@ -354,7 +385,7 @@ steps:
   - name: cron_build_image
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
     commands:
-      - docker build --no-cache -t $${IMAGE_REPO}:$${DRONE_COMMIT_SHA} .
+      - docker build --no-cache  --build-arg BASE_IMAGE=${BASE_IMAGE} -t $${IMAGE_REPO}:$${DRONE_COMMIT_SHA} .
     volumes:
       - name: dockersock
         path: /var/run
@@ -362,33 +393,32 @@ steps:
       cron: security_scans
       event: cron
 
-  - name: cron_snyk_scan
-    pull: if-not-exists
-    image: node:18
-    environment:
-      SNYK_TOKEN:
-        from_secret: snyk_token
-    commands:
-      - yarn install --frozen-lockfile
-      - yarn run postinstall
-      - yarn run test:snyk
-    when:
-      cron: security_scans
-      event: cron
-
-  - name: cron_trivy_scan
+  - name: cron_trivy_scan_node_packages
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/trivy/client:latest
     pull: always
     environment:
         IMAGE_NAME: coa:${DRONE_COMMIT_SHA}
-        SEVERITY: MEDIUM,HIGH,CRITICAL
+        SERVICE_URL: https://acp-trivy.acp-trivy.svc.cluster.local:443
+        SEVERITY: UNKOWN,LOW,MEDIUM,HIGH,CRITICAL
         FAIL_ON_DETECTION: false
-        IGNORE_UNFIXED: true
-        ALLOW_CVE_LIST_FILE: hof-services-config/Change_Of_Address/trivy-cve-exceptions.txt
+        IGNORE_UNFIXED: false
+        ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
     when:
       cron: security_scans
       event: cron
- 
+
+  - name: cron_trivy_scan_image_os
+    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/trivy/client:latest
+    pull: always
+    environment:
+        IMAGE_NAME: node:18-alpine@sha256:2322b1bb3917b313f2e9308395aa5c39d51b91cc92a5d4d5be6d0451fcfb4d24
+        SEVERITY: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
+        FAIL_ON_DETECTION: false
+        IGNORE_UNFIXED: false
+        ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
+    when:
+      cron: security_scans
+      event: cron
 
   # Slack notification upon a CRON job fail
   - name: cron_notify_slack_tear_down_pr_envs
@@ -399,7 +429,7 @@ steps:
       failure: ignore
       icon_url: http://readme.drone.io/0.5/logo_dark.svg
       icon.url: http://readme.drone.io/0.5/logo_dark.svg
-      template: "CRON Job {{build.deployTo}} of GRO has {{build.status}} - <{{build.link}}|#{{build.number}}> {{#success build.status}}\n  :thumbsup: :thumbsup: :thumbsup:\n{{else}}\n  :x: :x: :x:\n{{/success}} Author: {{build.author}}\n\nDuration: {{since job.started}}\n\nJob: <{{build.link}}|#{{build.number}}>\n\nCommit: {{build.commit}}\n"
+      template: "CRON Job {{build.deployTo}} of Change of Address has {{build.status}} - <{{build.link}}|#{{build.number}}> {{#success build.status}}\n  :thumbsup: :thumbsup: :thumbsup:\n{{else}}\n  :x: :x: :x:\n{{/success}} Author: {{build.author}}\n\nDuration: {{since job.started}}\n\nJob: <{{build.link}}|#{{build.number}}>\n\nCommit: {{build.commit}}\n"
       username: Drone
       webhook:
         from_secret: slack_webhook
