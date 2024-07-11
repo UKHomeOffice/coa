@@ -1,8 +1,7 @@
-# Accept a build Argument named BASE_IMAGE
-FROM node:20.15.0-alpine3.20@sha256:24c14a8a192a6e81d0942929a344f7a4bdf0db8e3b3c77d64a5eb8a4b0c759b7
+FROM node:18-alpine@sha256:2322b1bb3917b313f2e9308395aa5c39d51b91cc92a5d4d5be6d0451fcfb4d24
 USER root
 
-# Update packages as a result of Anchore security vulnerability checks
+# Update packages as a result of Trivy security vulnerability checks
 RUN apk update && \
     apk add --upgrade gnutls binutils nodejs npm apk-tools libjpeg-turbo libcurl libx11 libxml2
 
