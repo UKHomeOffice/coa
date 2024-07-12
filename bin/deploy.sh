@@ -42,5 +42,5 @@ sleep $READY_FOR_TEST_DELAY
 
 if [[ ${KUBE_NAMESPACE} == ${BRANCH_ENV} ]]; then
   echo "App Branch - coa-$DRONE_SOURCE_BRANCH.internal.sas-coa-branch.homeoffice.gov.uk"
-  echo "Data Service Branch - data-service-$DRONE_SOURCE_BRANCH.sas-coa-branch.homeoffice.gov.uk"
+  echo "File Vault Branch - fv-$DRONE_SOURCE_BRANCH.sas-coa-branch.homeoffice.gov.uk"
 fi
