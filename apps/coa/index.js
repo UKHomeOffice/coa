@@ -255,5 +255,8 @@ module.exports = {
       sections: require('./sections/change-details-data-sections'),
       backLink: false
     }
+  },
+  pages: {
+    '/accessibility': 'static/accessibility'
   }
 };
