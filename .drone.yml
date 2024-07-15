@@ -427,10 +427,11 @@ steps:
     settings:
       channel: sas-hof-build-notify
       failure: ignore
-      icon_url: http://readme.drone.io/0.5/logo_dark.svg
-      icon.url: http://readme.drone.io/0.5/logo_dark.svg
-      template: "CRON Job {{build.deployTo}} of Change of Address has {{build.status}} - <{{build.link}}|#{{build.number}}> {{#success build.status}}\n  :thumbsup: :thumbsup: :thumbsup:\n{{else}}\n  :x: :x: :x:\n{{/success}} Author: {{build.author}}\n\nDuration: {{since job.started}}\n\nJob: <{{build.link}}|#{{build.number}}>\n\nCommit: {{build.commit}}\n"
-      username: Drone
+      icon.url: https://readme.drone.io/logo.svg
+      template: >
+            :x: CRON Job `tear_down_pr_envs` for *Change of Address (COA)* has failed.
+            Repo `{{ repo.name }}` branch <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{build.branch}}> for commit <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
+      username: Drone_CI
       webhook:
         from_secret: slack_sas_hof_build_notify_webhook
     when:
@@ -444,10 +445,11 @@ steps:
     settings:
       channel: sas-hof-security
       failure: ignore
-      icon_url: http://readme.drone.io/0.5/logo_dark.svg
-      icon.url: http://readme.drone.io/0.5/logo_dark.svg
-      template: "CRON Job {{build.deployTo}} of Change of Address has {{build.status}} - <{{build.link}}|#{{build.number}}> {{#success build.status}}\n  :thumbsup: :thumbsup: :thumbsup:\n{{else}}\n  :x: :x: :x:\n{{/success}} Author: {{build.author}}\n\nDuration: {{since job.started}}\n\nJob: <{{build.link}}|#{{build.number}}>\n\nCommit: {{build.commit}}\n"
-      username: Drone
+      icon.url: https://readme.drone.io/logo.svg
+      template: >
+            :x: CRON Job `security_scans` for *Change of Address (COA)* has failed.
+            Repo `{{ repo.name }}` branch <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{build.branch}}> for commit <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
+      username: Drone_CI
       webhook:
         from_secret: slack_sas_hof_security_webhook
     when:
