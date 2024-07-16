@@ -66,7 +66,8 @@ app.use((req, res, next) => {
       const isDataEmpty = data.length === 0;
 
       if (isDataEmpty) {
-        logger.error(`Empty file received, data length: ${data.length}, filename: ${fileInfo.filename}`);
+        logger.error(`Empty file received, data length: ${data.length}, 
+          filename: ${fileInfo.filename.replace(/^(.{2}).*(.{2}\.[^.]+)$/, '$1**REDACTED**$2')}`);
         next(new Error('Empty file received'));
         return;
       }

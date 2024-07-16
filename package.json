@@ -4,7 +4,7 @@
   "description": "A service for changing address",
   "main": "index.js",
   "engines": {
-    "node": ">=18.12.1"
+    "node": ">=20.15.0"
   },
   "scripts": {
     "start": "node server.js",
