@@ -11,7 +11,7 @@ const logger = require('hof/lib/logger')({ env: config.env });
 function sanitiseReqConf(reqConf) {
   const sanitised = { ...reqConf };
   sanitised.formData.document.value = '**REDACTED**';
-  sanitised.formData.document.options.filename.replace(/^(.{2}).*(.{2}\.[^.]+)$/, '$1**REDACTED**$2');;
+  sanitised.formData.document.options.filename.replace(/^(.{2}).*(.{2}\.[^.]+)$/, '$1**REDACTED**$2');
   return sanitised;
 }
 
