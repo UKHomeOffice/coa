@@ -3,7 +3,8 @@
 const config = require('../../../config');
 const Model = require('../models/file-upload');
 
-// Use regex to replace the middle part of the filename with **REDACTED**, keeping the first 2 and last 2 characters before the extension
+// Use regex to replace the middle part of the filename with **REDACTED**,
+// keeping the first 2 and last 2 characters before the extension
 const sanitiseFilename = filename => filename.replace(/^(.{2}).*(.{2}\.[^.]+)$/, '$1**REDACTED**$2');
 
 module.exports = (documentCategory, fieldName) => superclass => class extends superclass {
@@ -54,7 +55,9 @@ module.exports = (documentCategory, fieldName) => superclass => class extends su
     const documentsByCategory = req.sessionModel.get(documentCategory) || [];
 
     if (req.files[fieldName]) {
-      req.log('info', `Saving document: ${sanitiseFilename(req.files[fieldName].name)} in ${documentCategory} category`);
+      req.log('info',
+        `Saving document: ${sanitiseFilename(req.files[fieldName].name)} in ${documentCategory} category`
+      );
       const document = {
         name: req.files[fieldName].name,
         data: req.files[fieldName].data,
