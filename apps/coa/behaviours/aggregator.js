@@ -29,12 +29,15 @@ module.exports = superclass => class extends superclass {
 
   updateItem(req, res) {
     const id = req.params.id;
+
     const items = this.getAggregateArray(req);
 
     if (items[id]) {
       items[id].fields.forEach(obj => {
         req.sessionModel.set(obj.field, obj.value);
       });
+
+      items.splice(id, 1);
       this.setAggregateArray(req, items);
     }
 
