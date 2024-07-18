@@ -429,8 +429,11 @@ steps:
       failure: ignore
       icon.url: https://readme.drone.io/logo.svg
       template: >
-            :x: CRON Job `tear_down_pr_envs` for *Change of Address (COA)* has failed.
-            Repo `{{ repo.name }}` branch <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{build.branch}}> for commit <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
+            *✘ {{ uppercasefirst build.status }}*: CRON Job `tear_down_pr_envs` for *Change of Address (COA)* has failed.
+
+            Branch <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{build.branch}}> | Commit <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
+            
+            *Build <{{build.link}}|#{{build.number}}>*
       username: Drone_CI
       webhook:
         from_secret: slack_sas_hof_build_notify_webhook
@@ -447,8 +450,11 @@ steps:
       failure: ignore
       icon.url: https://readme.drone.io/logo.svg
       template: >
-            :x: CRON Job `security_scans` for *Change of Address (COA)* has failed.
-            Repo `{{ repo.name }}` branch <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{build.branch}}> for commit <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
+            *✘ {{ uppercasefirst build.status }}*: CRON Job `security_scans` for *Change of Address (COA)* has failed.
+
+            Branch <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{build.branch}}> | Commit <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
+            
+            *Build <{{build.link}}|#{{build.number}}>*
       username: Drone_CI
       webhook:
         from_secret: slack_sas_hof_security_webhook
