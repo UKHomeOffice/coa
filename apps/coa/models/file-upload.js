@@ -7,11 +7,12 @@ const uuid = require('uuid').v4;
 
 const config = require('../../../config');
 const logger = require('hof/lib/logger')({ env: config.env });
+const { sanitiseFilename } = require('../../../utils');
 
 function sanitiseReqConf(reqConf) {
   const sanitised = { ...reqConf };
   sanitised.formData.document.value = '**REDACTED**';
-  sanitised.formData.document.options.filename.replace(/^(.{2}).*(.{2}\.[^.]+)$/, '$1**REDACTED**$2');
+  sanitised.formData.document.options.filename = sanitiseFilename(sanitised.formData.document.options.filename);
   return sanitised;
 }
 
