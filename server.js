@@ -5,6 +5,7 @@ const config = require('./config.js');
 const busboy = require('busboy');
 const bl = require('bl');
 const logger = require('hof/lib/logger')({ env: config.env });
+const { sanitiseFilename } = require('./utils');
 
 let settings = require('./hof.settings');
 
@@ -66,7 +67,8 @@ app.use((req, res, next) => {
       const isDataEmpty = data.length === 0;
 
       if (isDataEmpty) {
-        logger.error(`Empty file received, data length: ${data.length}, filename: ${fileInfo.filename}`);
+        logger.error(`Empty file received, data length: ${data.length}, 
+          filename: ${sanitiseFilename(fileInfo.filename)}`);
         next(new Error('Empty file received'));
         return;
       }

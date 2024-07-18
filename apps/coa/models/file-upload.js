@@ -7,11 +7,13 @@ const uuid = require('uuid').v4;
 
 const config = require('../../../config');
 const logger = require('hof/lib/logger')({ env: config.env });
+const { sanitiseFilename } = require('../../../utils');
 
-function sanitizeReqConf(reqConf) {
-  const sanitized = { ...reqConf };
-  sanitized.formData.document.value = '**REDACTED**';
-  return sanitized;
+function sanitiseReqConf(reqConf) {
+  const sanitised = { ...reqConf };
+  sanitised.formData.document.value = '**REDACTED**';
+  sanitised.formData.document.options.filename = sanitiseFilename(sanitised.formData.document.options.filename);
+  return sanitised;
 }
 
 module.exports = class UploadModel extends Model {
@@ -46,7 +48,7 @@ module.exports = class UploadModel extends Model {
         if (err) {
           logger.error(`File upload failed: ${err.message},
             error: ${JSON.stringify(err)},
-            reqConf: ${JSON.stringify(sanitizeReqConf(reqConf))}`);
+            reqConf: ${JSON.stringify(sanitiseReqConf(reqConf))}`);
           return reject(new Error(`File upload failed: ${err.message}`));
         }
 

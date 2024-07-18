@@ -28,7 +28,7 @@ Change of Address (COA) used by the public to update their details with UK Visas
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/en/) - v.18.14.0
+- [Node.js](https://nodejs.org/en/) - v.20.15.0
 - [Redis server](http://redis.io/download) running on default port 6379
 - [File Vault](https://github.com/UKHomeOffice/file-vault) Service - running port 3000
 
