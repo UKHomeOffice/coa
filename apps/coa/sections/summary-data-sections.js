@@ -108,6 +108,7 @@ module.exports = {
       {
         step: '/dependant-summary',
         field: 'dependants',
+        changeLink: '/dependant-summary',
         parse: (list, req) => {
           if (req.sessionModel.get('change-dependant-details') === 'no' ||
            !req.sessionModel.get('steps').includes('/dependant-summary')) {

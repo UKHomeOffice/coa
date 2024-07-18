@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const moment = require('moment');
 const config = require('../../../config');
 const dateComponent = require('hof').components.date;
@@ -74,7 +73,7 @@ module.exports = {
     options: [{
       value: '',
       label: 'fields.dependant-country-of-nationality.options.none'
-    }].concat(_.sortBy(countries, o => o.label)),
+    }].concat(countries),
     labelClassName: 'govuk-label--s'
   },
 

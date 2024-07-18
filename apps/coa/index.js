@@ -3,7 +3,6 @@ const hof = require('hof');
 const Summary = hof.components.summary;
 const Aggregate = require('./behaviours/aggregator');
 const setDateErrorLink = require('./behaviours/set-date-error-link');
-const ModifyChangeURL = require('./behaviours/modify-change-link');
 const saveDesiredContent = require('./behaviours/save-desired-content');
 const clearSession = require('./behaviours/clear-session');
 const sendNotification = require('./behaviours/submit-notify');
@@ -240,7 +239,7 @@ module.exports = {
       next: '/check-answers'
     },
     '/check-answers': {
-      behaviours: [Summary, ModifyChangeURL],
+      behaviours: [Summary],
       sections: require('./sections/summary-data-sections'),
       template: 'summary',
       next: '/privacy-policy'
