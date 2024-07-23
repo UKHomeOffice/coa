@@ -33,7 +33,7 @@
     "bl": "^6.0.12",
     "busboy": "^1.6.0",
     "crypto-random-string": "^5.0.0",
-    "hof": "^20.5.6",
+    "hof": "^21.0.0",
     "moment": "^2.29.4"
   },
   "devDependencies": {
