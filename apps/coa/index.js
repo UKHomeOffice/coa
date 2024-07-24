@@ -35,8 +35,8 @@ module.exports = {
       next: '/what-you-need',
       pagination: {
         nextPage: {
-          label: "what-you-need",
-          link: "/what-you-need"
+          label: 'what-you-need',
+          link: '/what-you-need'
         }
       }
     },
@@ -45,12 +45,12 @@ module.exports = {
       backLink: false,
       pagination: {
         previousPage: {
-          label: "overview",
-          link: "/overview"
+          label: 'overview',
+          link: '/overview'
         },
         nextPage: {
-          label: "proof-of-identity",
-          link: "/proof-of-identity"
+          label: 'proof-of-identity',
+          link: '/proof-of-identity'
         }
       }
     },
@@ -59,12 +59,12 @@ module.exports = {
       backLink: false,
       pagination: {
         previousPage: {
-          label: "what-you-need",
-          link: "/what-you-need"
+          label: 'what-you-need',
+          link: '/what-you-need'
         },
         nextPage: {
-          label: "proof-of-address",
-          link: "/proof-of-address"
+          label: 'proof-of-address',
+          link: '/proof-of-address'
         }
       }
     },
@@ -73,12 +73,12 @@ module.exports = {
       backLink: false,
       pagination: {
         previousPage: {
-          label: "proof-of-identity",
-          link: "/proof-of-identity"
+          label: 'proof-of-identity',
+          link: '/proof-of-identity'
         },
         nextPage: {
-          label: "update-your-details",
-          link: "/update-details"
+          label: 'update-your-details',
+          link: '/update-details'
         }
       }
     },
@@ -87,8 +87,8 @@ module.exports = {
       backLink: false,
       pagination: {
         previousPage: {
-          label: "proof-of-address",
-          link: "/proof-of-address"
+          label: 'proof-of-address',
+          link: '/proof-of-address'
         }
       }
     },

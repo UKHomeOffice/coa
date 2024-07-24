@@ -1,18 +1,18 @@
 {
   "overview": {
-    "header": "Update your details without an account"
+    "header": "Overview"
   },
   "what-you-need": {
-    "header": "{{#t}}pages.overview.header{{/t}}"
+    "header": "What you need"
   },
   "proof-of-identity": {
-    "header": "{{#t}}pages.overview.header{{/t}}"
+    "header": "Proof of identity"
   },
   "proof-of-address": {
-    "header": "{{#t}}pages.overview.header{{/t}}"
+    "header": "Proof of address"
   },
   "update-details": {
-    "header": "{{#t}}pages.overview.header{{/t}}"
+    "header": "Update your details"
   },
   "applicant-details": {
     "header": "Applicant details",
