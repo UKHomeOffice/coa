@@ -1,5 +1,5 @@
 {
-  "appName": "Change of Address",
+  "appName": "UKVI - Update address or legal representative",
   "theme": "govUK",
   "behaviours": [
     "hof/components/clear-session",
