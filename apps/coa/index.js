@@ -32,23 +32,65 @@ module.exports = {
   steps: {
     '/overview': {
       behaviours: [sessionDefaults],
-      next: '/what-you-need'
+      next: '/what-you-need',
+      pagination: {
+        nextPage: {
+          label: 'what-you-need',
+          link: '/what-you-need'
+        }
+      }
     },
     '/what-you-need': {
       next: '/proof-of-identity',
-      backLink: false
+      backLink: false,
+      pagination: {
+        previousPage: {
+          label: 'overview',
+          link: '/overview'
+        },
+        nextPage: {
+          label: 'proof-of-identity',
+          link: '/proof-of-identity'
+        }
+      }
     },
     '/proof-of-identity': {
       next: '/proof-of-address',
-      backLink: false
+      backLink: false,
+      pagination: {
+        previousPage: {
+          label: 'what-you-need',
+          link: '/what-you-need'
+        },
+        nextPage: {
+          label: 'proof-of-address',
+          link: '/proof-of-address'
+        }
+      }
     },
     '/proof-of-address': {
       next: '/update-details',
-      backLink: false
+      backLink: false,
+      pagination: {
+        previousPage: {
+          label: 'proof-of-identity',
+          link: '/proof-of-identity'
+        },
+        nextPage: {
+          label: 'update-your-details',
+          link: '/update-details'
+        }
+      }
     },
     '/update-details': {
       next: '/applicant-details',
-      backLink: false
+      backLink: false,
+      pagination: {
+        previousPage: {
+          label: 'proof-of-address',
+          link: '/proof-of-address'
+        }
+      }
     },
     '/applicant-details': {
       fields: ['applicant-full-name', 'applicant-dob', 'applicant-nationality', 'applicant-unique-number'],

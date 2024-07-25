@@ -45,7 +45,7 @@ app.use((req, res, next) => {
 
   bb.on('file', (key, file, fileInfo) => {
     logger.info(`Processing file: 
-      filename: ${fileInfo.filename},
+      filename: ${sanitiseFilename(fileInfo.filename)},
       encoding: ${fileInfo.encoding},
       mimeType: ${fileInfo.mimeType}`
     );

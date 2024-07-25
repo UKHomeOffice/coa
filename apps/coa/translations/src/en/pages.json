@@ -1,4 +1,19 @@
 {
+  "overview": {
+    "header": "Overview"
+  },
+  "what-you-need": {
+    "header": "What you need"
+  },
+  "proof-of-identity": {
+    "header": "Proof of identity"
+  },
+  "proof-of-address": {
+    "header": "Proof of address"
+  },
+  "update-details": {
+    "header": "Update your details"
+  },
   "applicant-details": {
     "header": "Applicant details",
     "application-details-intro": "Enter the details of the person whose details you want to update. Their details must match the identity document that UK Visas and Immigration holds on record."
