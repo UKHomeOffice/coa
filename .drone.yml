@@ -465,8 +465,8 @@ steps:
           {{/each}}
         {{else}}
           :x: Build {{build.link}} failed. :sob:
-          *Repository:*  <https://github.com/{{ repo.owner }}/{{ repo.name }}
-          *Branch:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}
+          *Repository:*  <https://github.com/{{ repo.owner }}/{{ repo.name }}>
+          *Branch:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}>
           *Build Link:* <{{build.link}}|View Build Details>
           *Commit:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
           *Author:* <https://github.com/{{ build.author }}|{{ build.author }}>
