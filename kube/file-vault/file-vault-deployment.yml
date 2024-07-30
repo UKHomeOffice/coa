@@ -169,9 +169,6 @@ spec:
             - "--resources=uri=/*"
             - "--enable-logging=true"
             - "--enable-json-logging=true"
-          ports:
-            - containerPort: 10080
-            - containerPort: 10443
           securityContext:
             runAsNonRoot: true
           terminationMessagePath: /dev/termination-log
