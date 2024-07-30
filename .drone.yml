@@ -449,16 +449,41 @@ steps:
       channel: sas-hof-security
       failure: ignore
       icon.url: https://readme.drone.io/logo.svg
-      template: |-
-        *✘ Failed:* `{{ build.event }}` / Step: $DRONE_FAILED_STEPS / $${DRONE_FAILED_STEPS} / <{{ build.link }}|Build: #{{ build.number }}>
-        Author: <https://github.com/{{ build.author }}|{{ build.author }}> Repo: <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> Branch: <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}> Commit: <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
+      template: >
+        {{#success build.status}}
+          :white_check_mark: Build #{{build.number}} succeeded. :tada:
+          *Repository:* {{repo.name}}
+          *Branch:* {{build.branch}}
+          *Commit:* {{commit.sha}} - {{commit.message}}
+          *Author:* {{commit.author}}
+          *Steps Passed:* 
+          {{#each build.steps}}
+            {{#success this.status}}
+              - {{this.name}}
+            {{/success}}
+          {{/each}}
+        {{else}}
+          :x: Build #{{build.number}} failed. :sob:
+          *Repository:* {{repo.name}}
+          *Branch:* {{build.branch}}
+          *Commit:* {{commit.sha}} - {{commit.message}}
+          *Author:* {{commit.author}}
+          *Steps Failed:* 
+          {{#each build.steps}}
+            {{#failure this.status}}
+              - {{this.name}}
+            {{/failure}}
+          {{/each}}
+        {{/success}}
       username: Drone_CI
       webhook:
         from_secret: slack_sas_hof_security_webhook
     when:
       cron: test-cron-adi
       event: cron
-      status: failure
+      status:
+        - success
+        - failure
 
 
 services:
