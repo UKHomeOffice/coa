@@ -451,11 +451,12 @@ steps:
       icon.url: https://readme.drone.io/logo.svg
       template: >
         {{#success build.status}}
-          :white_check_mark: Build #{{build.number}} succeeded. :tada:
+          :white_check_mark: Build {{build.link}} succeeded. :tada:
           *Repository:* {{repo.name}}
-          *Branch:* {{build.branch}}
-          *Commit:* {{commit.sha}} - {{commit.message}}
-          *Author:* {{commit.author}}
+          *Branch:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}
+          *Build Link:* <{{build.link}}|View Build Details>
+          *Commit:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
+          *Author:* <https://github.com/{{ build.author }}|{{ build.author }}>
           *Steps Passed:* 
           {{#each build.steps}}
             {{#success this.status}}
@@ -463,11 +464,12 @@ steps:
             {{/success}}
           {{/each}}
         {{else}}
-          :x: Build #{{build.number}} failed. :sob:
-          *Repository:* {{repo.name}}
-          *Branch:* {{build.branch}}
-          *Commit:* {{commit.sha}} - {{commit.message}}
-          *Author:* {{commit.author}}
+          :x: Build {{build.link}} failed. :sob:
+          *Repository:*  <https://github.com/{{ repo.owner }}/{{ repo.name }}
+          *Branch:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}
+          *Build Link:* <{{build.link}}|View Build Details>
+          *Commit:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
+          *Author:* <https://github.com/{{ build.author }}|{{ build.author }}>
           *Steps Failed:* 
           {{#each build.steps}}
             {{#failure this.status}}
