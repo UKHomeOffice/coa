@@ -451,9 +451,9 @@ steps:
       icon.url: https://readme.drone.io/logo.svg
       template: >
         {{#success build.status}}
-          :white_check_mark: Build {{build.link}} succeeded. :tada:
-          *Repository:* {{repo.name}}
-          *Branch:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}
+          :white_check_mark: Build {{build.link}} for cron security scans succeeded. :tada:
+          *Repository:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> 
+          *Branch:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}>
           *Build Link:* <{{build.link}}|View Build Details>
           *Commit:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
           *Author:* <https://github.com/{{ build.author }}|{{ build.author }}>
@@ -464,8 +464,8 @@ steps:
             {{/success}}
           {{/each}}
         {{else}}
-          :x: Build {{build.link}} failed. :sob:
-          *Repository:*  <https://github.com/{{ repo.owner }}/{{ repo.name }}>
+          :x: Build {{build.link}} for cron security scans failed. :sob:
+          *Repository:*  <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> 
           *Branch:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}>
           *Build Link:* <{{build.link}}|View Build Details>
           *Commit:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
