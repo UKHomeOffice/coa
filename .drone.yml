@@ -399,7 +399,7 @@ steps:
     environment:
         IMAGE_NAME: coa:${DRONE_COMMIT_SHA}
         SERVICE_URL: https://acp-trivy.acp-trivy.svc.cluster.local:443
-        SEVERITY: UNKOWN,LOW,MEDIUM,HIGH,CRITICAL
+        SEVERITY: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
         FAIL_ON_DETECTION: true
         IGNORE_UNFIXED: false
         ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
@@ -450,7 +450,7 @@ steps:
       failure: ignore
       icon.url: https://readme.drone.io/logo.svg
       template: |-
-        *✘ Failed:* `{{ build.event }}` at step '${DRONE_STEP_NAME}' / `${DRONE_STAGE_NAME}` / <{{ build.link }}|Build: #{{ build.number }}>
+        *✘ Failed:* `{{ build.event }}` / Step: '${DRONE_STEP_NAME}' / `${DRONE_STAGE_NAME}` / <{{ build.link }}|Build: #{{ build.number }}>
         Author: <https://github.com/{{ build.author }}|{{ build.author }}> Repo: <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> Branch: <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}> Commit: <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
       username: Drone_CI
       webhook:
