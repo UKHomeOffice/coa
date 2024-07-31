@@ -452,7 +452,7 @@ steps:
       template: >
         {{#success build.status}}
           :white_check_mark: Build {{build.link}} for cron security scans succeeded. :tada:
-          * Trivy didn't detect any vulnerabilities *
+          * Trivy didn't detect any vulnerabilities. Hence the pipeline steps ran succesfully *
           *Repository:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> 
           *Branch:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}>
           *Build Link:* <{{build.link}}|View Build Details>
@@ -465,7 +465,7 @@ steps:
             {{/success}}
           {{/each}}
         {{else}}
-          :x: Build {{build.link}} for cron security scans failed. :sob:
+          :x: Build {{build.link}} for cron security scans failed. :siren:
           * Trivy has detected vulnerabilities and resulted in failed step, Please fix them *
           *Repository:*  <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> 
           *Branch:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}>
