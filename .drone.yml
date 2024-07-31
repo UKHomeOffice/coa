@@ -295,7 +295,7 @@ steps:
       - name: dockersock
         path: /root/.dockersock
     commands:
-      - bin/deploy.s tear_down
+      - bin/deploy.sh tear_down
     when:
       branch: master
       event: push
@@ -363,7 +363,7 @@ steps:
       KUBE_TOKEN:
         from_secret: kube_token_dev
     commands:
-      - bin/clean_up.sh $${BRANCH_ENV}
+      - bin/clean_up.s $${BRANCH_ENV}
     when:
       cron: test-cron-adi
 #     cron: tear_down_pr_envs
