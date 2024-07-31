@@ -295,7 +295,7 @@ steps:
       - name: dockersock
         path: /root/.dockersock
     commands:
-      - bin/deploy.sh tear_down
+      - bin/deploy.s tear_down
     when:
       branch: master
       event: push
