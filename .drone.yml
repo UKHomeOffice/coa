@@ -404,7 +404,7 @@ steps:
         IGNORE_UNFIXED: false
         ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
     when:
-      cron: test-cron-adis
+      cron: test-cron-adi
       event: cron
 
   - name: cron_trivy_scan_image_os
@@ -417,7 +417,7 @@ steps:
         IGNORE_UNFIXED: false
         ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
     when:
-      cron: test-cron-adis
+      cron: test-cron-adi
       event: cron
 
   # Slack notification upon a CRON job fail
