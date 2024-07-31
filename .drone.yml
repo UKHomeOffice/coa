@@ -451,7 +451,7 @@ steps:
       icon.url: https://readme.drone.io/logo.svg
       template: >
         {{#success build.status}}
-          :white_check_mark: Build {{build.link}} for cron security scans succeeded. :tada:
+          :white_check_mark: Build for cron security scans succeeded. :tada:
           Trivy didn't detect any vulnerabilities. Hence the pipeline steps ran succesfull
           *Repository:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> 
           *Branch:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}>
@@ -459,8 +459,8 @@ steps:
           *Commit:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
           *Author:* <https://github.com/{{ build.author }}|{{ build.author }}>
         {{else}}
-          :x: Build {{build.link}} for cron security scans failed. :two-siren:
-          Trivy has detected vulnerabilities and resulted in failed step, Please fix them
+          :x: Build for cron security scans failed. :two-siren:
+          Trivy has detected vulnerabilities and hence resulted in failed step, Please use following information to fix them
           *Repository:*  <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> 
           *Branch:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}>
           *Build Link:* <{{build.link}}|View Build Details>
