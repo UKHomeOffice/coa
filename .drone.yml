@@ -353,7 +353,7 @@ steps:
       branch: master
       event: push
 
-  # CRON job step that tears down our pull request UAT environments
+  # CRON job step that tears down our pull request BRANCH environments
   - name: cron_tear_down
     pull: if-not-exists
     image: quay.io/ukhomeofficedigital/kd:v1.14.0
@@ -365,7 +365,8 @@ steps:
     commands:
       - bin/clean_up.sh $${BRANCH_ENV}
     when:
-      cron: tear_down_pr_envs
+      cron: test-cron-adi
+#     cron: tear_down_pr_envs
       event: cron
   
   # CRON job steps that runs security scans using Trivy
@@ -379,7 +380,7 @@ steps:
     commands:
       - git clone https://$${DRONE_GIT_USERNAME}:$${DRONE_GIT_TOKEN}@github.com/UKHomeOfficeForms/hof-services-config.git
     when:
-      cron: test-cron-adi
+      cron: security_scans
       event: cron
 
   - name: cron_build_image
@@ -390,7 +391,7 @@ steps:
       - name: dockersock
         path: /var/run
     when:
-      cron: test-cron-adi
+      cron: security_scans
       event: cron
 
   - name: cron_trivy_scan_node_packages
@@ -404,7 +405,7 @@ steps:
         IGNORE_UNFIXED: false
         ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
     when:
-      cron: test-cron-adi
+      cron: security_scans
       event: cron
 
   - name: cron_trivy_scan_image_os
@@ -417,7 +418,7 @@ steps:
         IGNORE_UNFIXED: false
         ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
     when:
-      cron: test-cron-adi
+      cron: security_scans
       event: cron
 
   # Slack notification upon a CRON job fail
@@ -427,20 +428,29 @@ steps:
     settings:
       channel: sas-hof-build-notify
       failure: ignore
-      icon.url: https://readme.drone.io/logo.svg
       template: >
-            *✘ {{ uppercasefirst build.status }}*: CRON Job `tear_down_pr_envs` for *Change of Address (COA)* has failed.
-
-            Branch <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{build.branch}}> | Commit <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
-            
-            *Build <{{build.link}}|#{{build.number}}>*
-      username: Drone_CI
+        {{#success build.status}}
+          :white_check_mark: Build for cron tear down pr envs succeeded. :tada:
+          Cron job has torn down all the deployments created by Pull requests in Branch env
+          *Repository:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> 
+          *Branch:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}>
+          *Build Link:* <{{build.link}}|View Build Details>
+        {{else}}
+          :x: Build for cron tear down pr envs failed. :two-siren: 
+          Cron job failed to execute and failed to tear the deployments in Branch Env. Please use the information below to fix pipeline
+          *Repository:*  <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> 
+          *Build Link:* <{{build.link}}|View Build Details>
+        {{/success}}
       webhook:
         from_secret: slack_sas_hof_build_notify_webhook
     when:
-      cron: tear_down_pr_envs
+      cron: test-cron-adi
+#     cron: tear_down_pr_envs
       event: cron
-      status: failure
+      event: cron
+      status:
+        - success
+        - failure
   
   - name: cron_notify_slack_security_scans
     pull: if-not-exists
@@ -469,7 +479,7 @@ steps:
       webhook:
         from_secret: slack_sas_hof_security_webhook
     when:
-      cron: test-cron-adi
+      cron: security_scans
       event: cron
       status:
         - success
