@@ -420,7 +420,7 @@ steps:
       event: cron
 
   # Slack notification upon a CRON job fail
-  - name: cron_notify_slack_test-cron-adi
+  - name: cron_notify_slack_tear_down_pr_envs
     pull: if-not-exists
     image: plugins/slack:1.4.1
     settings:
