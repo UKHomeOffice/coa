@@ -366,7 +366,7 @@ steps:
     # test alert with syntax error 
       - bin/clean_up.s $${BRANCH_ENV}
     when:
-      cron: test-cron-adi
+      cron: tear_down_pr_envs
       event: cron
   
   # CRON job steps that runs security scans using Trivy
@@ -439,7 +439,7 @@ steps:
       webhook:
         from_secret: slack_sas_hof_build_notify_webhook
     when:
-      cron: test-cron-adi
+      cron: tear_down_pr_envs
       event: cron
       status: [ failure ]
   
