@@ -428,26 +428,16 @@ steps:
       channel: sas-hof-build-notify
       failure: ignore
       template: >
-        {{#success build.status}}
-          :white_check_mark: Build for cron tear down pr envs succeeded. :tada:
-          Cron job has torn down all the deployments created by Pull requests in Branch env
-          *Repository:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> 
-          *Branch:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}>
-          *Build Link:* <{{build.link}}|View Build Details>
-        {{else}}
           :x: Build for cron tear down pr envs failed. :two-siren: 
           Cron job failed to execute and failed to tear the deployments in Branch Env. Please use the information below to fix pipeline
           *Repository:*  <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> 
           *Build Link:* <{{build.link}}|View Build Details>
-        {{/success}}
       webhook:
         from_secret: slack_sas_hof_build_notify_webhook
     when:
       cron: tear_down_pr_envs
       event: cron
-      event: cron
       status:
-        - success
         - failure
   
   - name: cron_notify_slack_security_scans
@@ -457,15 +447,6 @@ steps:
       channel: sas-hof-security
       failure: ignore
       template: >
-        {{#success build.status}}
-          :white_check_mark: Build for cron security scans succeeded. :tada:
-          Great news! Trivy scan has completed and no vulnerabilities were detected in the target.
-          *Repository:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> 
-          *Branch:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}>
-          *Build Link:* <{{build.link}}|View Build Details>
-          *Commit:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
-          *Author:* <https://github.com/{{ build.author }}|{{ build.author }}>
-        {{else}}
           :x: Build for cron security scans failed. :two-siren: 
           Trivy has detected vulnerabilities. As a result, the build has failed. Please prioritize reviewing and addressing this issue. 
           *Repository:*  <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> 
@@ -473,14 +454,12 @@ steps:
           *Build Link:* <{{build.link}}|View Build Details>
           *Commit:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
           *Author:* <https://github.com/{{ build.author }}|{{ build.author }}>
-        {{/success}}
       webhook:
         from_secret: slack_sas_hof_security_webhook
     when:
       cron: security_scans
       event: cron
       status:
-        - success
         - failure
 
 
