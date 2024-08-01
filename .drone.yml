@@ -459,6 +459,7 @@ steps:
           *Build Link:* <{{build.link}}|View Build Details>
 
           *Commit:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
+          
           *Author:* <https://github.com/{{ build.author }}|{{ build.author }}>
       webhook:
         from_secret: slack_sas_hof_security_webhook
