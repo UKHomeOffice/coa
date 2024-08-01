@@ -378,7 +378,7 @@ steps:
     commands:
       - git clone https://$${DRONE_GIT_USERNAME}:$${DRONE_GIT_TOKEN}@github.com/UKHomeOfficeForms/hof-services-config.git
     when:
-      cron: test_cron_adi
+      cron: test_cron-adi
       event: cron
 
   - name: cron_build_image
@@ -389,7 +389,7 @@ steps:
       - name: dockersock
         path: /var/run
     when:
-      cron: test_cron_adi
+      cron: test_cron-adi
       event: cron
 
   - name: cron_trivy_scan_node_packages
@@ -403,7 +403,7 @@ steps:
         IGNORE_UNFIXED: false
         ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
     when:
-      cron: test_cron_adi
+      cron: test_cron-adi
       event: cron
 
   - name: cron_trivy_scan_image_os
@@ -416,7 +416,7 @@ steps:
         IGNORE_UNFIXED: false
         ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
     when:
-      cron: test_cron_adi
+      cron: test_cron-adi
       event: cron
 
   # Slack notification upon a CRON job fail
@@ -428,7 +428,7 @@ steps:
       failure: ignore
       template: >
           :x: Build for cron tear down pr envs failed.
-          Cron job failed to execute and failed to tear the deployments in Branch Env. Please use the information below to fix pipeline
+          Cron job failed to tear the deployments in Branch Env. Please use the information below to fix pipeline
           *Repository:*  <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> 
           *Build Link:* <{{build.link}}|View Build Details>
       webhook:
@@ -455,7 +455,7 @@ steps:
       webhook:
         from_secret: slack_sas_hof_security_webhook
     when:
-      cron: test_cron_adi
+      cron: test_cron-adi
       event: cron
       status: [ failure ]
 
