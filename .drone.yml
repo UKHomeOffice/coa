@@ -436,7 +436,7 @@ steps:
     when:
       cron: tear_down_pr_envs
       event: cron
-      status: failure
+      status: [ failure ]
   
   - name: cron_notify_slack_security_scans
     pull: if-not-exists
@@ -457,7 +457,7 @@ steps:
     when:
       cron: test_cron_adi
       event: cron
-      status: failure
+      status: [ failure ]
 
 services:
   - name: docker
