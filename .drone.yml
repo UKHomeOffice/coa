@@ -364,7 +364,7 @@ steps:
     commands:
       - bin/clean_up.sh $${BRANCH_ENV}
     when:
-      cron: tear_down_pr_envs
+      cron: test-cron-adi
       event: cron
   
   # CRON job steps that runs security scans using Trivy
@@ -378,7 +378,7 @@ steps:
     commands:
       - git clone https://$${DRONE_GIT_USERNAME}:$${DRONE_GIT_TOKEN}@github.com/UKHomeOfficeForms/hof-services-config.git
     when:
-      cron: test-cron-adi
+      cron: security_scans
       event: cron
 
   - name: cron_build_image
@@ -389,7 +389,7 @@ steps:
       - name: dockersock
         path: /var/run
     when:
-      cron: test-cron-adi
+      cron: security_scans
       event: cron
 
   - name: cron_trivy_scan_node_packages
@@ -403,7 +403,7 @@ steps:
         IGNORE_UNFIXED: false
         ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
     when:
-      cron: test-cron-adi
+      cron: security_scans
       event: cron
 
   - name: cron_trivy_scan_image_os
@@ -416,11 +416,11 @@ steps:
         IGNORE_UNFIXED: false
         ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
     when:
-      cron: test-cron-adi
+      cron: security_scans
       event: cron
 
   # Slack notification upon a CRON job fail
-  - name: cron_notify_slack_tear_down_pr_envs
+  - name: cron_notify_slack_test-cron-adi
     pull: if-not-exists
     image: plugins/slack:1.4.1
     settings:
@@ -437,7 +437,7 @@ steps:
       webhook:
         from_secret: slack_sas_hof_build_notify_webhook
     when:
-      cron: tear_down_pr_envs
+      cron: test-cron-adi
       event: cron
       status: [ failure ]
   
@@ -459,12 +459,12 @@ steps:
           *Build Link:* <{{build.link}}|View Build Details>
 
           *Commit:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
-          
+
           *Author:* <https://github.com/{{ build.author }}|{{ build.author }}>
       webhook:
         from_secret: slack_sas_hof_security_webhook
     when:
-      cron: test-cron-adi
+      cron: security_scans
       event: cron
       status: [ failure ]
 
