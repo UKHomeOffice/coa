@@ -74,7 +74,6 @@ steps:
         memory: 1024Mi
     environment:
       IMAGE_NAME: node:20.15.0-alpine3.20@sha256:24c14a8a192a6e81d0942929a344f7a4bdf0db8e3b3c77d64a5eb8a4b0c759b7
-      SERVICE_URL: https://acp-trivy.acp-trivy.svc.cluster.local:443
       SEVERITY: MEDIUM,HIGH,CRITICAL  --dependency-tree
       FAIL_ON_DETECTION: false
       IGNORE_UNFIXED: false
@@ -168,7 +167,6 @@ steps:
         memory: 1024Mi
     environment:
       IMAGE_NAME: coa:${DRONE_COMMIT_SHA}
-      SERVICE_URL: https://acp-trivy.acp-trivy.svc.cluster.local:443
       SEVERITY: MEDIUM,HIGH,CRITICAL  --dependency-tree
       FAIL_ON_DETECTION: false
       IGNORE_UNFIXED: false
@@ -393,12 +391,11 @@ steps:
       cron: security_scans
       event: cron
 
-  - name: cron_trivy_scan_node_packages
+  - name: cron_trivy_scan_image_os
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/trivy/client:latest
     pull: always
     environment:
-        IMAGE_NAME: coa:${DRONE_COMMIT_SHA}
-        SERVICE_URL: https://acp-trivy.acp-trivy.svc.cluster.local:443
+        IMAGE_NAME: node:20.15.0-alpine3.20@sha256:24c14a8a192a6e81d0942929a344f7a4bdf0db8e3b3c77d64a5eb8a4b0c759b7
         SEVERITY: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL --dependency-tree
         FAIL_ON_DETECTION: true
         IGNORE_UNFIXED: false
@@ -406,13 +403,13 @@ steps:
     when:
       cron: security_scans
       event: cron
+      status: [success, failure]
 
-  - name: cron_trivy_scan_image_os
+  - name: cron_trivy_scan_node_packages
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/trivy/client:latest
     pull: always
     environment:
-        IMAGE_NAME: node:20.15.0-alpine3.20@sha256:24c14a8a192a6e81d0942929a344f7a4bdf0db8e3b3c77d64a5eb8a4b0c759b7
-        SERVICE_URL: https://acp-trivy.acp-trivy.svc.cluster.local:443
+        IMAGE_NAME: coa:${DRONE_COMMIT_SHA}
         SEVERITY: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL --dependency-tree
         FAIL_ON_DETECTION: true
         IGNORE_UNFIXED: false
