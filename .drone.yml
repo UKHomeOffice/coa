@@ -403,7 +403,6 @@ steps:
     when:
       cron: security_scans
       event: cron
-      status: [success, failure]
 
   - name: cron_trivy_scan_node_packages
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/trivy/client:latest
@@ -417,6 +416,7 @@ steps:
     when:
       cron: security_scans
       event: cron
+      status: [success, failure]
 
   # Slack notification upon a CRON job fail
   - name: cron_notify_slack_tear_down_pr_envs
@@ -426,13 +426,11 @@ steps:
       channel: sas-hof-build-notify
       failure: ignore
       template: >
-          :x: Build for cron tear down pr envs failed. 
+          *✘ {{ uppercasefirst build.status }}*: Cron job `tear_down_pr_envs` failed to tears down the deployments in BRANCH enviroment.
 
-          Cron job failed to tear the deployments in Branch Env. Please use the information below to fix pipeline.
-
-          *Repository:*  <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}>
-          
-          *Build Link:* <{{build.link}}|View Build Details> 
+          *Repo* <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> | *Branch* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{build.branch}}> | *Commit* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
+            
+          *Build <{{build.link}}|#{{build.number}}>*
       webhook:
         from_secret: slack_sas_hof_build_notify_webhook
     when:
@@ -447,19 +445,11 @@ steps:
       channel: sas-hof-security
       failure: ignore
       template: >
-          :x: Build for cron security scans failed. 
+          *✘ {{ uppercasefirst build.status }}*: Cron job `security_scans` failed. Trivy has detected vulnerabilities, causing the build to fail.
 
-          Trivy has detected vulnerabilities. As a result, the build has failed. Please prioritize reviewing and addressing this issue.
-
-          *Repository:*  <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> 
-
-          *Branch:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}>
-
-          *Build Link:* <{{build.link}}|View Build Details>
-
-          *Commit:* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
-
-          *Author:* <https://github.com/{{ build.author }}|{{ build.author }}>
+          *Repo* <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> | *Branch* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{build.branch}}> | *Commit* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
+            
+          *Build <{{build.link}}|#{{build.number}}>*
       webhook:
         from_secret: slack_sas_hof_security_webhook
     when:
