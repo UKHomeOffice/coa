@@ -429,10 +429,10 @@ steps:
       channel: sas-hof-build-notify
       failure: ignore
       template: >
-          *✘ {{ uppercasefirst build.status }}*: Cron job `tear_down_pr_envs` failed to tears down the deployments in BRANCH enviroment.
+          *✘ {{ uppercasefirst build.status }}*: Cron job `tear_down_pr_envs` failed to tear down the deployments in the BRANCH environment.
 
           *Repo* <https://github.com/{{ repo.owner }}/{{ repo.name }}/|{{ repo.owner }}/{{ repo.name }}> | *Branch* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{build.branch}}> | *Commit* <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
-            
+
           *Build <{{build.link}}|#{{build.number}}>*
       webhook:
         from_secret: slack_sas_hof_build_notify_webhook
