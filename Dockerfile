@@ -1,4 +1,3 @@
-# Accept a build Argument named BASE_IMAGE
 FROM node:20.15.0-alpine3.20@sha256:24c14a8a192a6e81d0942929a344f7a4bdf0db8e3b3c77d64a5eb8a4b0c759b7
 USER root
 
