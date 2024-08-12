@@ -4,7 +4,7 @@
   "description": "A service for changing address",
   "main": "index.js",
   "engines": {
-    "node": ">=20.15.0"
+    "node": ">=20.16.0"
   },
   "scripts": {
     "start": "node server.js",
@@ -30,11 +30,12 @@
   "homepage": "https://github.com/UKHomeOffice/coa#readme",
   "dependencies": {
     "accessible-autocomplete": "^2.0.4",
-    "bl": "^6.0.12",
+    "bl": "^6.0.14",
     "busboy": "^1.6.0",
     "crypto-random-string": "^5.0.0",
     "hof": "^20.5.6",
-    "moment": "^2.29.4"
+    "moment": "^2.29.4",
+    "notifications-node-client": "^8.2.0"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^7.2.1",
