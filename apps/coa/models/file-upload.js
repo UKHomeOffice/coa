@@ -111,7 +111,8 @@ module.exports = class UploadModel extends Model {
         bearer: response.data.access_token
       };
     } catch(err) {
-      const errorMsg = `Error occurred: ${err.message}, Cause: ${err.response.status} ${err.response.statusText}, Data: ${JSON.stringify(err.response.data)}`;
+      const errorMsg = `Error occurred: ${err.message}, 
+        Cause: ${err.response.status} ${err.response.statusText}, Data: ${JSON.stringify(err.response.data)}`;
       logger.error(errorMsg);
       throw new Error(errorMsg);
     }
