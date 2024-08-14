@@ -4,17 +4,10 @@
 const url = require('url');
 const Model = require('hof').model;
 const uuid = require('uuid').v4;
+const FormData = require('form-data');
 
 const config = require('../../../config');
 const logger = require('hof/lib/logger')({ env: config.env });
-const { sanitiseFilename } = require('../../../utils');
-
-function sanitiseReqConf(reqConf) {
-  const sanitised = { ...reqConf };
-  sanitised.formData.document.value = '**REDACTED**';
-  sanitised.formData.document.options.filename = sanitiseFilename(sanitised.formData.document.options.filename);
-  return sanitised;
-}
 
 module.exports = class UploadModel extends Model {
   constructor(...args) {
@@ -24,70 +17,77 @@ module.exports = class UploadModel extends Model {
 
   save() {
     if (!config.upload.hostname) {
-      logger.error('File-vault hostname is not defined');
-      throw new Error('File-vault hostname is not defined');
+      const errorMsg = 'File-vault hostname is not defined';
+      logger.error(errorMsg);
+      throw new Error(errorMsg);
     }
 
-    return new Promise((resolve, reject) => {
-      const attributes = {
-        url: config.upload.hostname
-      };
-      const reqConf = url.parse(this.url(attributes));
-      reqConf.formData = {
-        document: {
-          value: this.get('data'),
-          options: {
-            filename: this.get('name'),
-            contentType: this.get('mimetype')
-          }
-        }
-      };
-      reqConf.method = 'POST';
+    const attributes = {
+      url: config.upload.hostname
+    };
 
-      return this.request(reqConf, (err, response) => {
+    const formData = new FormData();
+    formData.append('document', this.get('data'), {
+      filename: this.get('name'),
+      contentType: this.get('mimetype')
+    });
+
+    const reqConf = url.parse(this.url(attributes));
+    reqConf.data = formData;
+    reqConf.method = 'POST';
+    reqConf.headers = {
+      ...formData.getHeaders()
+    };
+
+    return new Promise((resolve, reject) => {
+      return this.request(reqConf, (err, data) => {
         if (err) {
           logger.error(`File upload failed: ${err.message},
-            error: ${JSON.stringify(err)},
-            reqConf: ${JSON.stringify(sanitiseReqConf(reqConf))}`);
+            error: ${JSON.stringify(err)}`);
           return reject(new Error(`File upload failed: ${err.message}`));
         }
 
-        if (Object.keys(response).length === 0) {
-          return reject(new Error('Received empty response from file-vault'));
+        if (!data || typeof data !== 'object' || Object.keys(data).length === 0) {
+          const errorMsg = 'Received empty or invalid response from file-vault';
+          logger.error(errorMsg);
+          return reject(new Error(errorMsg));
         }
 
-        logger.info(`Received response from file-vault with keys: ${Object.keys(response)}`);
-        return resolve(response);
+        logger.info(`Received response from file-vault with keys: ${Object.keys(data)}`);
+        return resolve(data);
       });
     })
       .then(result => {
         try {
-          return this.set({
+          this.set({
             url: result.url.replace('/file/', '/file/generate-link/').split('?')[0]
           });
         } catch (err) {
-          logger.error(`No url in response: ${err.message}`);
-          throw new Error(`No url in response: ${err.message}`);
+          const errorMsg = `No url in response: ${err.message}`;
+          logger.error(errorMsg);
+          throw new Error(errorMsg);
         }
       })
       .then(() => {
-        return this.unset('data');
+        this.unset('data');
       });
   }
 
-  auth() {
+  async auth() {
     const requiredProperties = ['token', 'username', 'password', 'clientId', 'secret'];
 
     for (const property of requiredProperties) {
       if (!config.keycloak[property]) {
-        logger.error(`Keycloak ${property} is not defined`);
-        return Promise.reject(new Error(`Keycloak ${property} is not defined`));
+        const errorMsg = `Keycloak ${property} is not defined`;
+        logger.error(errorMsg);
+        throw new Error(errorMsg);
       }
     }
 
     const tokenReq = {
       url: config.keycloak.token,
-      form: {
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      data: {
         username: config.keycloak.username,
         password: config.keycloak.password,
         grant_type: 'password',
@@ -97,32 +97,23 @@ module.exports = class UploadModel extends Model {
       method: 'POST'
     };
 
-    return new Promise((resolve, reject) => {
-      return this._request(tokenReq, (err, response) => {
-        if (err) {
-          const errorMsg = `Error occurred: ${JSON.stringify(err)}`;
-          logger.error(errorMsg);
-          return reject(new Error(errorMsg));
-        }
+    try {
+      const response = await this._request(tokenReq);
 
-        let parsedBody;
-        try {
-          parsedBody = JSON.parse(response.body);
-        } catch (parseError) {
-          logger.error(`Failed to parse response body: ${parseError}`);
-          return reject(new Error(`Failed to parse response body: ${parseError}`));
-        }
+      if (!response.data || !response.data.access_token) {
+        const errorMsg = 'No access token in response';
+        logger.error(errorMsg);
+        throw new Error(errorMsg);
+      }
 
-        if (!parsedBody.access_token) {
-          logger.error('No access token in response');
-          return reject(new Error('No access token in response'));
-        }
-
-        logger.info('Successfully retrieved access token');
-        return resolve({
-          bearer: parsedBody.access_token
-        });
-      });
-    });
+      logger.info('Successfully retrieved access token');
+      return {
+        bearer: response.data.access_token
+      };
+    } catch(err) {
+      const errorMsg = `Error occurred: ${err.message}, Cause: ${err.response.status} ${err.response.statusText}, Data: ${JSON.stringify(err.response.data)}`;
+      logger.error(errorMsg);
+      throw new Error(errorMsg);
+    }
   }
 };
