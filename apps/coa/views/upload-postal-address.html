@@ -26,16 +26,21 @@
 
   {{#values.postal-address-documents.length}}
   <h2 class="govuk-heading-m">You have uploaded {{values.postal-address-documents.length}} file(s)</h2>
-  <table class="loop-summary-table">
-    <tbody class="govuk-table__body">
-      {{#values.postal-address-documents}}
-      <tr class="govuk-table__row">
-        <td class="govuk-table__cell">{{name}}</td>
-        <td><a href="?delete={{id}}" class="govuk-link">{{#t}}buttons.delete{{/t}}</a></td>
-      </tr>
-      {{/values.postal-address-documents}}
-    </tbody>
-  </table>
+
+  <div id="uploaded-documents" class="govuk-width-container">
+    {{#values.postal-address-documents}}
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-three-quarters">
+          {{name}}
+        </div>
+        <div class="govuk-grid-column-one-quarter">
+          <a href="?delete={{id}}" class="govuk-link">{{#t}}buttons.delete{{/t}}</a>
+        </div>
+      </div>
+      <div class="file-upload-hrline"></div>
+    {{/values.postal-address-documents}}
+  </div>
+
   {{/values.postal-address-documents.length}}
 
   {{#markdown}}what-file-types{{/markdown}}

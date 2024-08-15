@@ -4,8 +4,8 @@ const NotifyClient = require('notifications-node-client').NotifyClient;
 const notifyKey = config.govukNotify.notifyApiKey;
 const translation = require('../translations/src/en/fields.json');
 const notifyClient = new NotifyClient(notifyKey);
-const moment = require('moment');
-const PRETTY_DATE_FORMAT = 'DD MMMM YYYY';
+const dateFormater = new Intl.DateTimeFormat(config.dateLocales, config.dateFormat);
+
 
 const getLabel = (fieldKey, fieldValue) => {
   if ( Array.isArray(fieldValue)) {
@@ -35,7 +35,7 @@ const getPersonalisation = (recipientType, req) => {
     reference_number: req.sessionModel.get('uniqueRefNumber'),
     applying_for_whom: req.sessionModel.get('isApplicant') ? 'your' : req.sessionModel.get('nameWithPossession'),
     applicant_full_name: req.sessionModel.get('applicant-full-name'),
-    applicant_dob: moment(req.sessionModel.get('applicant-dob')).format(PRETTY_DATE_FORMAT),
+    applicant_dob: dateFormater.format( new Date(req.sessionModel.get('applicant-dob'))),
     nationality: req.sessionModel.get('applicant-nationality'),
     has_applicant_unique_number: req.sessionModel.get('applicant-unique-number').length > 0 ? 'yes' : 'no',
     applicant_unique_number: req.sessionModel.get('applicant-unique-number'),

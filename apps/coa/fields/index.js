@@ -1,7 +1,7 @@
-const moment = require('moment');
 const config = require('../../../config');
 const dateComponent = require('hof').components.date;
 const countries = require('hof').utils.countries();
+const dateFormater = new Intl.DateTimeFormat(config.dateLocales, config.dateFormat);
 
 /**
  * UANRef represents a Unique Application Number reference.
@@ -57,7 +57,7 @@ module.exports = {
       { type: 'before', arguments: ['0', 'days'] },
       { type: 'after', arguments: ['120', 'years'] }
     ],
-    parse: d => d && moment(d).format(config.PRETTY_DATE_FORMAT),
+    parse: d => d && dateFormater.format(new Date(d)),
     legend: {
       className: 'govuk-label--s'
     }

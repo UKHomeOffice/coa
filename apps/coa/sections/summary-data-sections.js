@@ -1,8 +1,8 @@
 
 'use strict';
 
-const moment = require('moment');
-const PRETTY_DATE_FORMAT = 'DD MMMM YYYY';
+const config = require('../../../config');
+const dateFormater = new Intl.DateTimeFormat(config.dateLocales, config.dateFormat);
 
 module.exports = {
   'applicant-details': {
@@ -14,7 +14,7 @@ module.exports = {
       {
         step: '/applicant-details',
         field: 'applicant-dob',
-        parse: d => d && moment(d).format(PRETTY_DATE_FORMAT)
+        parse: d => d && dateFormater.format(new Date(d))
       },
       {
         step: '/applicant-details',

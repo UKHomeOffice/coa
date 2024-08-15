@@ -24,17 +24,22 @@
   {{/values.letter-of-authority}}
 
   {{#values.letter-of-authority.length}}
-  <h2 class="govuk-heading-m">You have uploaded {{values.letter-of-authority.length}} file</h2>
-  <table class="loop-summary-table">
-    <tbody class="govuk-table__body">
-      {{#values.letter-of-authority}}
-      <tr class="govuk-table__row">
-        <td class="govuk-table__cell">{{name}}</td>
-        <td><a href="?delete={{id}}" class="govuk-link">{{#t}}buttons.delete{{/t}}</a></td>
-      </tr>
-      {{/values.letter-of-authority}}
-    </tbody>
-  </table>
+  <h2 class="govuk-heading-m">You have uploaded {{values.letter-of-authority.length}} file(s)</h2>
+
+  <div id="uploaded-documents" class="govuk-width-container">
+    {{#values.letter-of-authority}}
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-three-quarters">
+          {{name}}
+        </div>
+        <div class="govuk-grid-column-one-quarter">
+          <a href="?delete={{id}}" class="govuk-link">{{#t}}buttons.delete{{/t}}</a>
+        </div>
+      </div>
+      <div class="file-upload-hrline"></div>
+    {{/values.letter-of-authority}}
+  </div>
+
   {{/values.letter-of-authority.length}}
 
   {{#markdown}}what-file-types{{/markdown}}
