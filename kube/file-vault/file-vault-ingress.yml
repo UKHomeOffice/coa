@@ -20,7 +20,7 @@ spec:
     {{ end }}
     {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
     secretName: branch-tls-external
-    {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
+    {{ else }}
     secretName: file-vault-cert
     {{ end }}
   rules:
