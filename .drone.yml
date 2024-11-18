@@ -80,8 +80,10 @@ steps:
       ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
     when:
       event: [push, pull_request]
-
-  - name: setup_deploy
+    depends_on:
+      - clone_repos
+  
+  - name: setup
     pull: if-not-exists
     image: node:20.16.0-alpine3.20@sha256:eb8101caae9ac02229bd64c024919fe3d4504ff7f329da79ca60a04db08cef52
     environment:
@@ -92,35 +94,39 @@ steps:
     when:
       branch:
         include:
-        - master
-        - feature/*
+          - master
+          - feature/*
       event: [push, pull_request]
 
-  - name: linting_deploy
+  - name: linting
     <<: *linting
     when:
       branch:
         include:
           - master
           - feature/*
-      event: push
+      event: [push, pull_request]
+    depends_on:
+      - setup
 
-  - name: unit_tests_deploy
+  - name: unit_tests
     <<: *unit_tests
     when:
       branch:
         include:
           - master
           - feature/*
-      event: push
+      event: [push, pull_request]
+    depends_on:
+      - setup
 
-  - name: sonar_scanner_deploy
+  - name: sonar_scanner
     <<: *sonar_scanner
     when:
       branch:
         include:
           - master
-      event: push
+      event: [push, pull_request]
 
   - name: build_image
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
@@ -139,6 +145,9 @@ steps:
           - master
           - feature/*
       event: [push, pull_request]
+    depends_on:
+      - linting
+      - unit_tests
 
   - name: image_to_quay
     pull: if-not-exists
@@ -156,6 +165,9 @@ steps:
           - master
           - feature/*
       event: [push, pull_request]
+    depends_on:
+      - linting
+      - unit_tests
 
   # Trivy Security Scannner for scanning nodejs packages in Yarn
   - name: scan_node_packages
@@ -173,6 +185,8 @@ steps:
       ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
     when:
       event: [push, pull_request]
+    depends_on:
+      - build_image
 
   # Deploy to pull request UAT environment
   - name: deploy_to_branch
@@ -192,48 +206,9 @@ steps:
           - master
           - feature/*
       event: pull_request
-
-  - name: setup_branch
-    pull: if-not-exists
-    image: node:20.16.0-alpine3.20@sha256:eb8101caae9ac02229bd64c024919fe3d4504ff7f329da79ca60a04db08cef52
-    environment:
-      NOTIFY_KEY: USE_MOCK
-    commands:
-      - yarn install --frozen-lockfile
-      - yarn run postinstall
-    when:
-      branch:
-        include:
-          - master
-          - feature/*
-      event: pull_request
-
-  - name: linting_branch
-    <<: *linting
-    when:
-      branch:
-        include:
-          - master
-          - feature/*
-      event: [push, pull_request]
-
-  - name: unit_tests_branch
-    <<: *unit_tests
-    when:
-      branch:
-        include:
-          - master
-          - feature/*
-      event: [push, pull_request]
-
-  - name: sonar_scanner_branch
-    <<: *sonar_scanner
-    when:
-      branch:
-        include:
-          - master
-          - feature/*
-      event: pull_request
+    depends_on:
+      - clone_repos
+      - image_to_quay
 
   - name: acceptance_tests_branch
     <<: *acceptance_tests
@@ -247,6 +222,9 @@ steps:
           - master
           - feature/*
       event: [push, pull_request]
+    depends_on:
+      - clone_repos
+      - image_to_quay
 
   - name: deploy_to_uat
     pull: if-not-exists
@@ -261,6 +239,9 @@ steps:
     when:
       branch: master
       event: push
+    depends_on:
+      - clone_repos
+      - image_to_quay
 
   # Get pull request branch so correct PR UAT environment is torn down in the tear_down_branch step that follows
   - name: get_pr_branch
@@ -297,6 +278,8 @@ steps:
     when:
       branch: master
       event: push
+    depends_on:
+      - get_pr_branch
 
 # Checks a build being promoted has passed, is on master which effectively means a healthy build on UAT
   - name: sanity_check_build_prod
@@ -325,6 +308,9 @@ steps:
     when:
       target: PROD
       event: promote
+    depends_on:
+      - sanity_check_build_prod
+
 
   # Deploy to Production environment
   - name: deploy_to_prod
@@ -340,6 +326,8 @@ steps:
     when:
       target: PROD
       event: promote
+    depends_on:
+      - clone_repos_prod
 
   - name: acceptance_tests_deploy
     <<: *acceptance_tests
@@ -350,6 +338,9 @@ steps:
     when:
       branch: master
       event: push
+    depends_on:
+      - clone_repos
+      - image_to_quay
 
   # CRON job step that tears down our pull request BRANCH environments
   - name: cron_tear_down
