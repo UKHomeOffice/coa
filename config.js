@@ -17,11 +17,7 @@ module.exports = {
     userConfirmationTemplateId: process.env.USER_CONFIRMATION_TEMPLATE_ID,
     businessConfirmationTemplateId: process.env.BUSINESS_CONFIRMATION_TEMPLATE_ID
   },
-  survey: {
-    urls: {
-      root: 'https://eforms.homeoffice.gov.uk/outreach/Feedback.ofml?FormName=coa'
-    }
-  },
+  feedbackUrl: process.env.FEEDBACK_URL,
   hosts: {
     acceptanceTests: process.env.ACCEPTANCE_HOST_NAME || `http://localhost:${process.env.PORT || 8080}`
   },
