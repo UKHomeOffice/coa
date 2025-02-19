@@ -295,7 +295,9 @@ module.exports = {
       behaviours: [Summary, clearSession],
       sections: require('./sections/change-details-data-sections'),
       backLink: false
-    }
+    },
+    '/session-timeout': {},
+    '/exit': {}
   },
   pages: {
     '/accessibility': 'static/accessibility'

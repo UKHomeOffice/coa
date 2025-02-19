@@ -3,6 +3,7 @@
   "theme": "govUK",
   "behaviours": [
     "hof/components/clear-session",
+    "hof/components/session-timeout-warning",
     "./apps/coa/behaviours/enable-contents-links"
   ],
   "translations": "./apps/coa/translations",
