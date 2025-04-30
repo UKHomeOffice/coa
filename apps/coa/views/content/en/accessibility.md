@@ -41,10 +41,6 @@ On some form elements, an aria-labelledby or aria-describedby reference exists b
 1.3.1 Info and relationships (Level A) 
 4.1.2 Name, role, value (Level A) 
 
-The session timeout of 30 minutes cannot be changed, and the user is not alerted when time running out. This is for each individual page of the form, not the form overall. This does not meet the following WCAG standards and guidelines: 
-
-2.2.1 Timing adjustable
-
 If you find an issue that we have yet to identify, please contact us using one of the routes described in the ‘Reporting accessibility problems with this website’ section of this statement.
 
 ### Disproportionate burden
@@ -54,7 +50,7 @@ At this time, we have not made any disproportionate burden claims.
 At this time, this service does not contain any content that is exempt from the regulations.
 
 ## Preparation of this accessibility statement
-This statement was prepared on 9 June 2004. It was last reviewed on 9 July 2024.
+This statement was prepared on 9 June 2004. It was last reviewed on 18 March 2025.
 
 This website was last tested on 3 July 2024. The test was carried out internally by the Home Office. 
 
