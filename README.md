@@ -4,6 +4,7 @@ Change of Address (COA) used by the public to update their details with UK Visas
 
 ## Description
 
+
 - The service allows the user to make a change request as the applicant themselve along with any dependants, or by someone who is helping the applicant, or by the applicant's legal representative.
 - The details that can be requested to change are Applicant's home address, Applicant's postal address, Applicant's legal representative's contact details and address.
 - The form facilitates the upload of required documents such as proof of identity, proof of home address, proof of postal address, letter of authority.
