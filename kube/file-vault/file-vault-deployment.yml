@@ -169,6 +169,7 @@ spec:
             - "--resources=uri=/*"
             - "--enable-logging=true"
             - "--enable-json-logging=true"
+            - "--secure-cookie=false"
           securityContext:
             runAsNonRoot: true
           terminationMessagePath: /dev/termination-log
