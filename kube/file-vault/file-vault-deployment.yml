@@ -36,8 +36,8 @@ spec:
     spec:
       containers:
         - name: file-vault
-          # v1.1.0
-          image: quay.io/ukhomeofficedigital/file-vault:f4cd1ece1caddc3bfbc8f5db761c593fda79ef12
+          # v3.0.0 added June 27 2025
+          image: quay.io/ukhomeofficedigital/file-vault:3.0.0
           imagePullPolicy: Always
           resources:
             limits:
@@ -126,7 +126,7 @@ spec:
             runAsNonRoot: true
 
         - name: keycloak-proxy
-          image: quay.io/ukhomeofficedigital/go-keycloak-proxy:v2.2.2
+          image: quay.io/ukhomeofficedigital/gogatekeeper:3.5.0
           resources:
             limits:
               memory: 1024Mi
@@ -163,12 +163,18 @@ spec:
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
             {{ end }}
-          command:
-            - "/opt/keycloak-proxy"
-            - "--resources=uri=/file|methods=GET,POST|roles=caseworkers"
-            - "--resources=uri=/*"
-            - "--enable-logging=true"
-            - "--enable-json-logging=true"
+          args:
+            # URls that you wish to protect.
+            - --resources=uri=/*
+            - --enable-default-deny=false
+            - --enable-security-filter=true
+            - --enable-request-id=true
+            - --enable-logging=true
+            - --enable-json-logging=true
+            - --enable-encrypted-token=false
+          {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
+            - --verbose=true
+          {{ end }}
           securityContext:
             runAsNonRoot: true
           terminationMessagePath: /dev/termination-log
