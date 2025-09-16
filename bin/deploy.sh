@@ -31,6 +31,11 @@ elif [[ ${KUBE_NAMESPACE} == ${UAT_ENV} ]]; then
   $kd -f kube/configmaps/configmap.yml
   $kd -f kube/file-vault/file-vault-ingress.yml
   $kd -f kube/redis -f kube/app -f kube/file-vault
+elif [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
+  $kd -f kube/configmaps/configmap.yml -f kube/app/service.yml
+  $kd -f kube/file-vault/file-vault-ingress.yml
+  $kd -f kube/app/ingress-internal.yml -f kube/app/networkpolicy-internal.yml
+  $kd -f kube/redis -f kube/app -f kube/file-vault
 elif [[ ${KUBE_NAMESPACE} == ${PROD_ENV} ]]; then
   $kd -f kube/configmaps/configmap.yml  -f kube/app/service.yml
   $kd -f kube/file-vault/file-vault-ingress.yml -f kube/file-vault
@@ -48,6 +53,10 @@ elif [[ ${KUBE_NAMESPACE} == ${UAT_ENV} ]]; then
   echo "External UAT url - $APP_NAME.uat.sas-notprod.homeoffice.gov.uk"
   echo "Internal UAT url - $APP_NAME.internal.uat.sas-notprod.homeoffice.gov.uk"
   echo "File Vault UAT url - fv-$APP_NAME.uat.sas-notprod.homeoffice.gov.uk"
+elif [[ ${KUBE_NAMESPACE} == ${STG_ENV} ]]; then
+  echo "External UAT url - $APP_NAME.stg.sas-notprod.homeoffice.gov.uk"
+  echo "Internal UAT url - $APP_NAME.internal.stg.sas.homeoffice.gov.uk"
+  echo "File Vault UAT url - fv-$APP_NAME.stg.sas.homeoffice.gov.uk"
 elif [[ ${KUBE_NAMESPACE} == ${PROD_ENV} ]]; then
   echo "External PROD url - $PRODUCTION_URL"
   echo "File Vault Prod url - fv-$APP_NAME.sas.homeoffice.gov.uk"
