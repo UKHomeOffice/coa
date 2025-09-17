@@ -13,10 +13,7 @@
     "build": "hof-build",
     "postinstall": "hof-build",
     "test:lint": "eslint . --config ./node_modules/eslint-config-hof/default.js",
-    "test:unit": "LOG_LEVEL=error nyc _mocha \"test/_unit/**/*.spec.js\"",
-    "test:acceptance": "TAGS=\"${TAGS:=@feature}\" npm run test:cucumber",
-    "test:acceptance_browser": "ACCEPTANCE_WITH_BROWSER=true TAGS=\"${TAGS:=@feature}\" yarn run test:cucumber",
-    "test:cucumber": "cucumber-js -f @cucumber/pretty-formatter \"test/_features/**/*.feature\" --require test/_features/test.setup.js --require \"test/_features/step_definitions/**/*.js\" --tags $TAGS"
+    "test:unit": "LOG_LEVEL=error nyc _mocha \"test/_unit/**/*.spec.js\""
   },
   "repository": {
     "type": "git",
@@ -38,8 +35,6 @@
     "notifications-node-client": "^8.2.0"
   },
   "devDependencies": {
-    "@cucumber/cucumber": "^7.2.1",
-    "@cucumber/pretty-formatter": "^1.0.0-alpha.1",
     "chai": "^4.3.5",
     "eslint": "^8.57.0",
     "eslint-config-hof": "^1.3.4",
@@ -48,7 +43,6 @@
     "lodash": "^4.17.21",
     "mocha": "^10.4.0",
     "nyc": "^15.1.0",
-    "playwright": "^1.2.3",
     "sinon": "^11.1.2",
     "sinon-chai": "^3.7.0",
     "supertest": "^5.0.0",
