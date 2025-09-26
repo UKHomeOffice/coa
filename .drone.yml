@@ -73,7 +73,7 @@ steps:
       event: [push, pull_request]
 
   # Trivy Security Scannner for scanning OS related vulnerabilities in Base image of Dockerfile
-  - name: scan_image_os
+  - name: scan_base_image_os
     pull: always
     image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/trivy/client:latest
     resources:
@@ -83,6 +83,8 @@ steps:
     environment:
       IMAGE_NAME: quay.io/ukhomeofficedigital/hof-nodejs:20.19.0-alpine3.21@sha256:aad584fa26cb2838739527166c8965d95d0d2d9b88cfd5e3e2d3b8647ae03101
       SEVERITY: MEDIUM,HIGH,CRITICAL  --dependency-tree
+      SERVICE_URL: https://acp-trivy-helm.acp-trivy.svc.cluster.local:443
+      SEVERITY: MEDIUM,HIGH,CRITICAL  --dependency-tree
       FAIL_ON_DETECTION: false
       IGNORE_UNFIXED: false
       ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
@@ -90,9 +92,9 @@ steps:
       - name: dockersock
         path: /root/.dockersock
     when:
-      event: [pull_request, push]
+      event: [push, pull_request]
     depends_on:
-      - clone_repos
+      - clone_repos  
 
   - name: setup
     <<: *node_image
@@ -150,29 +152,6 @@ steps:
     depends_on:
       - linting
       - unit_tests
-
-  # Trivy Security Scannner for scanning OS related vulnerabilities in Base image of Dockerfile
-  - name: scan_base_image_os
-    pull: always
-    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/trivy/client:latest
-    resources:
-      limits:
-        cpu: 1000
-        memory: 1024Mi
-    environment:
-      IMAGE_NAME: node:20.18.0-alpine3.20@sha256:d504f23acdda979406cf3bdbff0dff7933e5c4ec183dda404ed24286c6125e60
-      SERVICE_URL: https://acp-trivy-helm.acp-trivy.svc.cluster.local:443
-      SEVERITY: MEDIUM,HIGH,CRITICAL  --dependency-tree
-      FAIL_ON_DETECTION: false
-      IGNORE_UNFIXED: false
-      ALLOW_CVE_LIST_FILE: hof-services-config/infrastructure/trivy/.trivyignore.yaml
-    volumes:
-      - name: dockersock
-        path: /root/.dockersock
-    when:
-      event: [push, pull_request]
-    depends_on:
-      - clone_repos  
 
   - name: image_to_quay
     pull: if-not-exists
@@ -372,7 +351,6 @@ steps:
         from_secret: kube_token_dev
     commands:
       - bin/clean_up.sh $${BRANCH_ENV}
-
     when:
       cron: tear_down_pr_envs
       event: cron
