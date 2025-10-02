@@ -288,7 +288,7 @@ steps:
       event: push
     depends_on:
       - clone_repos
-      - build_image
+      - image_to_quay
 
 
 # Checks a build being promoted has passed, is on master which effectively means a healthy build on UAT
