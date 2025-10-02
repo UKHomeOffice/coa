@@ -17,7 +17,6 @@ environment:
   NON_PROD_AVAILABILITY: Mon-Sun 08:00-23:00 Europe/London
   READY_FOR_TEST_DELAY: 20s
 
-
 include_default_branch: &include_default_branch
   include:
     - master
@@ -93,7 +92,7 @@ steps:
     when:
       event: [push, pull_request]
     depends_on:
-      - clone_repos  
+      - clone_repos 
 
   - name: setup
     <<: *node_image
