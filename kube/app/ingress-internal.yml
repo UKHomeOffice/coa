@@ -13,10 +13,11 @@ spec:
   tls:
     - hosts:
       {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
-        - {{ .DRONE_BUILD_NUMBER }}.internal.{{ .BRANCH_ENV }}.homeoffice.gov.uk
         - {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}.internal.{{ .BRANCH_ENV }}.homeoffice.gov.uk
       {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
         - {{ .APP_NAME }}.internal.uat.sas-notprod.homeoffice.gov.uk
+      {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+        - {{ .APP_NAME }}.internal.stg.sas.homeoffice.gov.uk
       {{ end }}
       {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
       secretName: branch-tls-internal
@@ -26,9 +27,10 @@ spec:
   rules:
     {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
     - host: {{ .APP_NAME }}-{{ .DRONE_SOURCE_BRANCH }}.internal.{{ .BRANCH_ENV }}.homeoffice.gov.uk
-    {{ end }}
-    {{ if eq .KUBE_NAMESPACE .UAT_ENV }}
+    {{ else if eq .KUBE_NAMESPACE .UAT_ENV }}
     - host: {{ .APP_NAME }}.internal.uat.sas-notprod.homeoffice.gov.uk
+    {{ else if eq .KUBE_NAMESPACE .STG_ENV }}
+    - host: {{ .APP_NAME }}.internal.stg.sas.homeoffice.gov.uk
     {{ end }}
       http:
         paths:
