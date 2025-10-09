@@ -334,7 +334,6 @@ steps:
     when:
       target: PROD
       event: promote
-      event: promote
     depends_on:
       - clone_repos_prod
 
