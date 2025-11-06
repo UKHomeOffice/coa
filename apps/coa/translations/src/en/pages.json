@@ -35,7 +35,8 @@
     "upload-identity-requirements": "The identity document must not be expired and the scan must be clear and easy to read."
   },
   "home-address": {
-    "header": "What is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} new home address?"
+    "header": "What is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} new home address?",
+    "title": "What is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}the applicant's{{/values.isApplicant}} new home address?"
   },
   "upload-address": {
     "header": "Upload proof of address",
@@ -44,7 +45,8 @@
     "upload-home-address-requirements": "The document must be dated within the last 3 months. The scan must be clear and easy to read. You must scan and upload the whole document, if it is more than one page."
   },
   "postal-address": {
-    "header": "What is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} new postal address?"
+    "header": "What is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}{{values.nameWithPossession}}{{/values.isApplicant}} new postal address?",
+    "title": "What is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}the applicant's{{/values.isApplicant}} new postal address?"
   },
   "upload-postal-address": {
     "header": "Upload proof of address",
@@ -169,5 +171,8 @@
   },
   "accessibility": {
     "header": "Accessibility statement for Update my details (Change of Address)"
+  },
+  "old-address": {
+    "title": "Is {{#values.isApplicant}}your{{/values.isApplicant}}{{^values.isApplicant}}the applicant's{{/values.isApplicant}} old home address in the UK?"
   }
 }
