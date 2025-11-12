@@ -95,7 +95,7 @@ textarea {
 .heading-large-custom {
   font-size: 36px;
   line-height: 1.11111;
-  margin-top: 0px !important;
+  margin-top: 0 !important;
   font-weight: bold;
 }
 .breadcrumb-custom {
@@ -164,7 +164,6 @@ textarea {
   max-height: 342px;
   overflow-x: hidden;
   padding: 0;
-  width: 100%;
   width: calc(100% - 4px);
 }
 
@@ -177,7 +176,7 @@ textarea {
 }
 
 .autocomplete__menu--overlay {
-  box-shadow: rgba(0, 0, 0, 0.256863) 0px 2px 6px;
+  box-shadow: rgba(0, 0, 0, 0.256863) 0 2px 6px;
   left: 0;
   position: absolute;
   top: 100%;
@@ -254,14 +253,14 @@ textarea {
 }
 
 .ref-number-heading {
-  margin-top: 0px !important;
+  margin-top: 0 !important;
   margin-bottom: 10px !important;
   color: #fff;
 }
 
 .ref-number {
-  margin-top: 0px !important;
-  margin-bottom: 0px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
   padding-bottom: 10px;
   color: #fff;
 }
@@ -271,8 +270,8 @@ textarea {
 }
 
 .section-fields {
-  margin-top: 0px !important;
-  margin-bottom: 0px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .table-details {
@@ -298,9 +297,8 @@ textarea {
 .secondary-link {
   margin-top: 9px;
   display: inline-block;
-  padding: 0px 1em;
+  padding: 0 1em;
 }
-
 
 .govuk-table__cell {
   .govuk-button {
@@ -323,15 +321,6 @@ textarea {
     .list-entry-button {
       margin: 0;
     }
-  }
-}
-
-//Cookie banner styling
-
-#cookie-banner {
-  #cookie-banner-actions {
-    font-size: 65% !important;
-    width: 66.667% !important;
   }
 }
 

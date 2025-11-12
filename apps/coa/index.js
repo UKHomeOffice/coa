@@ -296,7 +296,6 @@ module.exports = {
       sections: require('./sections/change-details-data-sections'),
       backLink: false
     },
-    '/session-timeout': {},
     '/exit': {}
   },
   pages: {
