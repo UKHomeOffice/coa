@@ -279,6 +279,8 @@ steps:
         from_secret: kube_server_prod
       KUBE_TOKEN:
         from_secret: kube_token_prod
+      REDIS_PERSISTENCE_ENABLED: "true"
+      REDIS_PERSISTENCE_SIZE: "1Gi"
     commands:
       - bin/deploy.sh $${STG_ENV}
     when:
@@ -288,7 +290,6 @@ steps:
     depends_on:
       - clone_repos
       - image_to_quay
-
 
 # Checks a build being promoted has passed, is on master which effectively means a healthy build on UAT
   - name: sanity_check_build_prod
@@ -329,6 +330,8 @@ steps:
         from_secret: kube_server_prod
       KUBE_TOKEN:
         from_secret: kube_token_prod
+      REDIS_PERSISTENCE_ENABLED: "true"
+      REDIS_PERSISTENCE_SIZE: "10Gi"
     commands:
       - bin/deploy.sh $${PROD_ENV}
     when:
