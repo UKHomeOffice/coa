@@ -4,7 +4,6 @@
 
 module.exports = {
   maxFileSizeInBytes: 25 * 1024 * 1024, // 25MiB in bytes
-  hostname: process.env.FILE_VAULT_URL,
   allowedMimeTypes: [
     'application/pdf',
     'image/jpeg',

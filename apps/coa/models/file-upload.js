@@ -7,7 +7,6 @@ const uuid = require('uuid').v4;
 const FormData = require('form-data');
 
 const config = require('../../../config');
-const fileUploadConfig = require('../../../assets/js/file-upload-config');
 const logger = require('hof/lib/logger')({ env: config.env });
 
 module.exports = class UploadModel extends Model {
@@ -17,14 +16,14 @@ module.exports = class UploadModel extends Model {
   }
 
   save() {
-    if (!fileUploadConfig.hostname) {
+    if (!config.upload.hostname) {
       const errorMsg = 'File-vault hostname is not defined';
       logger.error(errorMsg);
       throw new Error(errorMsg);
     }
 
     const attributes = {
-      url: fileUploadConfig.hostname
+      url: config.upload.hostname
     };
 
     const formData = new FormData();
