@@ -1,8 +1,12 @@
 const supertestSession = require('supertest-session');
-const jsdom = require('jsdom');
-const { JSDOM } = jsdom;
-const jquery = require('jquery');
-let $;
+
+function createQueryDocument(html) {
+  const { JSDOM } = require('jsdom');
+  const jquery = require('jquery');
+  const dom = new JSDOM(html);
+  const $ = jquery(dom.window);
+  return { dom, $ };
+}
 
 function getUrl(app, url, expectedStatus) {
   return new Promise((resolve, reject) => {
@@ -26,14 +30,13 @@ function postUrl(app, url, data, expectedStatus, token) {
 }
 
 function parseHtml(response) {
-  const dom = new JSDOM(response.text);
-  $ = jquery(dom.window);
+  const { dom, $ } = createQueryDocument(response.text);
   return Promise.resolve($(dom.window.document));
 }
 
 
 function getDom(response) {
-  const dom = new JSDOM(response.text);
+  const { dom } = createQueryDocument(response.text);
   return Promise.resolve(dom.window.document);
 }
 
