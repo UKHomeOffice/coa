@@ -1,6 +1,6 @@
 'use strict';
 
-const config = require('../../../config');
+const fileUploadConfig = require('../../../assets/js/file-upload-config');
 const Model = require('../models/file-upload');
 
 const { sanitiseFilename } = require('../../../utils');
@@ -25,14 +25,14 @@ module.exports = (documentCategory, fieldName) => superclass => class extends su
     } else if (fileToBeValidated) {
       const uploadSize = fileToBeValidated.size;
       const mimetype = fileToBeValidated.mimetype;
-      const uploadSizeTooBig = uploadSize > config.upload.maxFileSizeInBytes;
+      const uploadSizeTooBig = uploadSize > fileUploadConfig.maxFileSizeInBytes;
       const uploadSizeBeyondServerLimits = fileToBeValidated.truncated;
 
       const invalidSize = uploadSizeTooBig || uploadSizeBeyondServerLimits;
-      const invalidMimetype = !config.upload.allowedMimeTypes.includes(mimetype);
+      const invalidMimetype = !fileUploadConfig.allowedMimeTypes.includes(mimetype);
 
       const numberOfDocsUploaded = documentsByCategory.length;
-      const documentCategoryConfig = config.upload.documentCategories[documentCategory];
+      const documentCategoryConfig = fileUploadConfig.documentCategories[documentCategory];
 
       const isDuplicateFile = documentsByCategory.some(file => file.name === req.files[fieldName].name);
 

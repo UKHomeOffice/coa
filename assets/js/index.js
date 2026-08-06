@@ -4,7 +4,7 @@
 require('hof/frontend/themes/gov-uk/client-js');
 
 const accessibleAutocomplete = require('accessible-autocomplete');
-const config = require('../../config.js');
+const fileUploadConfig = require('./file-upload-config');
 
 document.querySelectorAll('.typeahead').forEach(function applyTypeahead(element) {
   accessibleAutocomplete.enhanceSelectElement({
@@ -68,11 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
       fileUploadStatusHandler('ready');
       const fileInfo = fileUpload.files && fileUpload.files.length > 0 ? fileUpload.files[0] : null;
       if (fileInfo) {
-        if (fileInfo.size > config.upload.maxFileSizeInBytes) {
+        if (fileInfo.size > fileUploadConfig.maxFileSizeInBytes) {
           fileUploadStatusHandler('error', 'maxFileSize');
           return;
         }
-        if (!config.upload.allowedMimeTypes.includes(fileInfo.type) ) {
+        if (!fileUploadConfig.allowedMimeTypes.includes(fileInfo.type) ) {
           fileUploadStatusHandler('error', 'fileType');
           return;
         }

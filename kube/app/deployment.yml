@@ -39,6 +39,8 @@ spec:
         service: {{ .APP_NAME }}
         {{ end }}
     spec:
+      securityContext:
+        fsGroup: 999
       containers:
         - name: {{ .APP_NAME }}
           image: {{ .IMAGE_URL }}/{{ .IMAGE_REPO }}:{{.DRONE_COMMIT_SHA}}
