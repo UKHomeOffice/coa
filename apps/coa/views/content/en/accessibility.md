@@ -50,7 +50,7 @@ At this time, we have not made any disproportionate burden claims.
 At this time, this service does not contain any content that is exempt from the regulations.
 
 ## Preparation of this accessibility statement
-This statement was prepared on 9 June 2004. It was last reviewed on 18 March 2025.
+This statement was prepared on 9 June 2004. It was last reviewed on 03 September 2026.
 
 This website was last tested on 3 July 2024. The test was carried out internally by the Home Office. 
 
