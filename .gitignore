@@ -12,6 +12,9 @@ anchore-reports
 .vscode-server
 dump.rdb
 yarn-error.log
+.features-gen/
+playwright-report/
+test-results/
 apps/**/translations/**/*
 !apps/**/translations/src/
 !apps/**/translations/src/**/*
