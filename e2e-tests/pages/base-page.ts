@@ -23,12 +23,7 @@ export class basePage {
   }
 
   async assertPageTitle(page: Page, title: string) {
-    const escapedTitle = title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    await expect(page).toHaveTitle(new RegExp(`^${escapedTitle}( – GOV\\.UK)?$`));
-  }
-
-  async expectedPageTitleFor(title: string): Promise<string> {
-    return (await this.page.title()).startsWith('Error') ? `Error: ${title}` : title;
+    await expect(page).toHaveTitle(title + ' – GOV.UK');
   }
 
   async click(locator: Locator) {
