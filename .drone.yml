@@ -31,7 +31,7 @@ trigger:
   branch:
     - feature/*
     - master
-    
+
 node_image_name: &node_image_name quay.io/ukhomeofficedigital/hof-nodejs:24.19.0-alpine3.24-v3@sha256:20887d4a5a15886deb9653e96dc4393b10ad9c70cd8d134a43da6cee7ddd45f3
 
 node_image: &node_image
@@ -606,7 +606,7 @@ steps:
         path: /root/.dockersock
     commands:
       - npm install -g n
-      - n 24.18.0
+      - n 24.19.0
       - hash -r
       - node --version
       - yarn install --frozen-lockfile
