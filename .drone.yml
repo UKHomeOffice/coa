@@ -16,7 +16,6 @@ environment:
   HOF_CONFIG: hof-services-config/Change_Of_Address
   NON_PROD_AVAILABILITY: Mon-Sun 08:00-23:00 Europe/London
   READY_FOR_TEST_DELAY: 20s
-  NIGHTLY_E2E_BASE_URL: coa.internal.uat.sas-notprod.homeoffice.gov.uk
 
 include_default_branch: &include_default_branch
   include:
@@ -270,6 +269,9 @@ steps:
   - name: e2e_tests
     pull: if-not-exists
     image: mcr.microsoft.com/playwright:v1.63.0-noble
+    environment:
+      SAS_HOF_EMAIL:
+        from_secret: SAS_HOF_EMAIL    
     volumes:
       - name: dockersock
         path: /root/.dockersock
