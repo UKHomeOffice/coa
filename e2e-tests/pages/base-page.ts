@@ -121,7 +121,7 @@ export class basePage {
 
     const dateParts = formattedDate.split('/');
     if (dateParts.length !== 3) {
-      throw new Error('Invalid date format. Expected format: dd/mm/yyyy');
+      throw new Error('Invalid date format. Expected date format to be: dd/mm/yyyy');
     }
 
     const [dayVal, monthVal, yearVal] = dateParts;
