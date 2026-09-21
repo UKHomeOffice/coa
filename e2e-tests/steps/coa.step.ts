@@ -12,7 +12,7 @@ Given('I visit the Change of Address page', async ({ pages }) => {
 
 When('I go through the starter pages', async ({ pages }) => {
     await pages.coaOverviewPage.assertPageTitle(pages.coaOverviewPage.page, await pages.coaOverviewPage.expectedPageTitle());
-    await pages.coaOverviewPage.clickOnWhaYouWillNeedLink();
+    await pages.coaOverviewPage.clickOnWhatYouWillNeedLink();
     await pages.coaWhatYouNeedPage.assertPageTitle(pages.coaWhatYouNeedPage.page, await pages.coaWhatYouNeedPage.expectedPageTitle());
     await pages.coaWhatYouNeedPage.clickOnProofOfIdentityLink();
     await pages.coaProofOfIdentityPage.assertPageTitle(pages.coaProofOfIdentityPage.page, await pages.coaProofOfIdentityPage.expectedPageTitle());

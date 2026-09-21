@@ -13,7 +13,7 @@ export class coaOverviewPage extends basePage {
     return 'Overview – Update address or legal representative';
   }
 
-  async clickOnWhaYouWillNeedLink() {
+  async clickOnWhatYouWillNeedLink() {
     await this.click(this.whatYouWillNeedLink);
   }
 }

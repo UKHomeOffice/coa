@@ -4,7 +4,7 @@ export const ConstantsLib = {
   DOB_11_11_1988: '11/11/1988',
   COUNTRY_OF_NATIONALITY: 'PANAMA',
   TELEPHONE: '01616699548',
-  AGENT_EMAIL: 'Agents.TestEmail@digital.homeoffice.gov.uk',
+  AGENT_EMAIL: 'Agents.TestEmail@test.co.uk',
   CONTACT_TELEPHONE: '01616699548',
   ADDRESS_LINE_1: '100',
   ADDRESS_LINE_2: 'Tenth St',
