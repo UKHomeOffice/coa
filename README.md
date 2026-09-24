@@ -1,3 +1,4 @@
+[![Build Status](https://drone-gh.acp.homeoffice.gov.uk/api/badges/UKHomeOffice/coa/status.svg?ref=refs/heads/test)](https://drone-gh.acp.homeoffice.gov.uk/UKHomeOffice/coa)
 # Change of Address (COA)
 
 Change of Address (COA) used by the public to update their details with UK Visas and Immigration (UKVI) 
