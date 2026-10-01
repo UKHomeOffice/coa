@@ -36,8 +36,8 @@ spec:
     spec:
       containers:
         - name: file-vault
-          # v3.0.1 28th August 2025
-          image: quay.io/ukhomeofficedigital/file-vault:3.0.1@sha256:44f35820701981eeb3371d332e6fd53f697e1bcd60f75731a57e8da6edb7bed5
+          # This is test image. Once tested will be replaced with tagged image before merging to master
+          image: quay.io/ukhomeofficedigital/file-vault:3bef8e3e8cc72e7efab7d86d9035c723fd0f35a8@sha256:3fa20000bb22da5c7969e2094211bc5f673b5547b2a49c15475f5424aa64d53d
           imagePullPolicy: Always
           resources:
             limits:
@@ -65,8 +65,6 @@ spec:
               value: https://fv-{{ .APP_NAME }}.uat.sas-notprod.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
-            - name: DEBUG
-              value: "*"
             {{ end }}
             - name: PORT
               value: "3000"
@@ -120,6 +118,8 @@ spec:
               value: "no"
             - name: ALLOW_GENERATE_LINK_ROUTE
               value: "yes"
+            - name: FILE_EXTENSION_WHITELIST
+              value: jpg,jpeg,png,pdf
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - name: DEBUG
               value: "*"
@@ -191,8 +191,7 @@ spec:
               readOnly: true
 
         - name: nginx-proxy
-          # nginx-proxy-govuk:v4
-          image: quay.io/ukhomeofficedigital/nginx-proxy-govuk@sha256:4470064d0b1d20ae08c5fd85551576cb687f342a22d6cb456fda9b2c4ce8c8df
+          image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/sas/hof-docker-nginx-proxy:v2.1.0@sha256:d0498e46e8eb8f743c6341f4b0d45c8064e1658cda2ae42b2b6c1c62c8b5a02e
           resources:
             limits:
               memory: 1024Mi
