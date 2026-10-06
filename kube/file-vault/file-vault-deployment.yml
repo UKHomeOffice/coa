@@ -37,7 +37,7 @@ spec:
       containers:
         - name: file-vault
           # This is test image. Once tested will be replaced with tagged image before merging to master
-          image: quay.io/ukhomeofficedigital/file-vault:2dfacc1659eef6322937c4512d8e39dded04307d@sha256:bc9cce95bc7918b7badd0a7fd78d3b272f7bb9d8b19f7739b1180d2fbfbe05b9
+          image: quay.io/ukhomeofficedigital/file-vault:0430c65d102674b5fbb210f7961925111d00721b@sha256:6de762f5788c311f562ef02b85dca500925d7238cde2dfe6d7db6a6d46a41bd4
           imagePullPolicy: Always
           resources:
             limits:
