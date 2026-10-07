@@ -36,8 +36,7 @@ spec:
     spec:
       containers:
         - name: file-vault
-          # v3.0.1 28th August 2025
-          image: quay.io/ukhomeofficedigital/file-vault:3.0.1@sha256:44f35820701981eeb3371d332e6fd53f697e1bcd60f75731a57e8da6edb7bed5
+          image: quay.io/ukhomeofficedigital/file-vault:3.3.0@sha256:c33b1ba7b1eabceb4dcc86bfa033af84811cbbc1627a076ec19845cc8a4aafd6
           imagePullPolicy: Always
           resources:
             limits:
@@ -65,8 +64,6 @@ spec:
               value: https://fv-{{ .APP_NAME }}.uat.sas-notprod.homeoffice.gov.uk
             {{ else if eq .KUBE_NAMESPACE .BRANCH_ENV }}
               value: https://fv-{{ .DRONE_SOURCE_BRANCH }}.{{ .BRANCH_ENV }}.homeoffice.gov.uk
-            - name: DEBUG
-              value: "*"
             {{ end }}
             - name: PORT
               value: "3000"
@@ -120,6 +117,8 @@ spec:
               value: "no"
             - name: ALLOW_GENERATE_LINK_ROUTE
               value: "yes"
+            - name: FILE_EXTENSION_WHITELIST
+              value: jpg,jpeg,png,pdf
             {{ if eq .KUBE_NAMESPACE .BRANCH_ENV }}
             - name: DEBUG
               value: "*"
